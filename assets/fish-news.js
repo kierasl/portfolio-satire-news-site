@@ -39,8 +39,6 @@ const CONFIG = {
 
   /* How many tags to show in the rail under the navigation. */
   tagRailSize: 12,
-
-  edition: 47
 };
 
 const SECTIONS = [
