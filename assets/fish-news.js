@@ -43,11 +43,11 @@ const CONFIG = {
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
-  { id: 'reef',       name: 'Reef',       blurb: 'News Close to Home.' },
-  { id: 'open-ocean', name: 'Open Ocean', blurb: 'Random News.' },
-  { id: 'coast',      name: 'Coast',      blurb: 'Conflict.' },
-  { id: 'policy',     name: 'Policy',     blurb: 'Policy News.' },
-  { id: 'science',    name: 'Science',    blurb: 'What we judge to be scientific in nature.' },
+  { id: 'news',       name: 'News',       blurb: 'General news.' },
+  { id: 'conflict',   name: 'Conflict', blurb: 'Reporting from Conflict Zones.' },
+  { id: 'local-news', name: 'Local News',      blurb: 'News straight from your division (we make no promises that it is relevant to YOUR division).' },
+  { id: 'policy',     name: 'Policy',     blurb: 'News on Policy.' },
+  { id: 'development',name: 'Development News',    blurb: 'News about Development items.' },
   { id: 'video',      name: 'Watch',      blurb: 'Dispatches from the boat, the lab and the seabed.' },
   { id: 'archive',    name: 'Archive',    blurb: 'Everything that has come off the front page.' }
 ];
