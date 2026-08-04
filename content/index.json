@@ -1,6 +1,21 @@
 {
-  "generated": "2026-08-04T10:00:00Z",
+  "generated": "2026-08-04T01:41:09Z",
   "items": [
+    {
+      "id": "testnew-2",
+      "type": "article",
+      "section": "open-ocean",
+      "headline": "Testnew",
+      "standfirst": "Testing our new creation tool",
+      "kicker": "TEST",
+      "byline": "slime",
+      "published": "2026-08-04T02:37:45+01:00",
+      "tags": ["test"],
+      "image": {
+        "src": "3cdo.png",
+        "alt": "3 cdo bde logo"
+      }
+    },
     {
       "id": "bluefin-donegal-inshore",
       "type": "article",
@@ -10,11 +25,7 @@
       "kicker": "Cold water surge",
       "byline": "Ríona Casey",
       "published": "2026-08-03T09:14:00Z",
-      "tags": [
-        "bluefin",
-        "upwelling",
-        "fisheries"
-      ],
+      "tags": ["bluefin", "upwelling", "fisheries"],
       "rank": "lead",
       "image": {
         "src": "",
@@ -31,11 +42,7 @@
       "kicker": "Restoration",
       "byline": "Tom Aldridge",
       "published": "2026-08-03T08:50:00Z",
-      "tags": [
-        "kelp",
-        "restoration",
-        "sussex"
-      ],
+      "tags": ["kelp", "restoration", "sussex"],
       "image": {
         "src": "",
         "alt": "Kelp fronds photographed from below in green water",
@@ -51,11 +58,7 @@
       "kicker": "Explainer",
       "byline": "Hannah Voight",
       "published": "2026-08-03T08:02:00Z",
-      "tags": [
-        "quota",
-        "north sea",
-        "policy"
-      ],
+      "tags": ["quota", "north sea", "policy"],
       "image": {
         "src": "",
         "alt": "A small inshore fishing boat alongside a stone quay",
@@ -71,11 +74,7 @@
       "kicker": "Survey data",
       "byline": "Dr Alan Ferris",
       "published": "2026-08-02T17:30:00Z",
-      "tags": [
-        "temperature",
-        "rockall",
-        "climate"
-      ],
+      "tags": ["temperature", "rockall", "climate"],
       "image": {
         "src": "",
         "alt": "A weather buoy in heavy swell under grey sky",
@@ -91,22 +90,7 @@
       "kicker": "Underwater",
       "byline": "Fish News Film",
       "published": "2026-08-02T14:00:00Z",
-      "tags": [
-        "herring",
-        "film",
-        "seabed"
-      ],
-      "image": {
-        "src": "",
-        "alt": "",
-        "credit": ""
-      },
-      "video": {
-        "provider": "link",
-        "url": "https://example.com/fish-news/herring-run",
-        "duration": "8:42",
-        "poster": ""
-      }
+      "tags": ["herring", "film", "seabed"]
     },
     {
       "id": "quota-explained-two-minutes",
@@ -117,21 +101,7 @@
       "kicker": "Explainer",
       "byline": "Hannah Voight",
       "published": "2026-08-02T11:20:00Z",
-      "tags": [
-        "quota",
-        "explainer"
-      ],
-      "image": {
-        "src": "",
-        "alt": "",
-        "credit": ""
-      },
-      "video": {
-        "provider": "link",
-        "url": "https://example.com/fish-news/quota-explained",
-        "duration": "2:11",
-        "poster": ""
-      }
+      "tags": ["quota", "explainer"]
     },
     {
       "id": "ghost-gear-recovery-dive",
@@ -142,21 +112,7 @@
       "kicker": "On the boat",
       "byline": "Fish News Film",
       "published": "2026-08-01T16:45:00Z",
-      "tags": [
-        "ghost gear",
-        "clean-up"
-      ],
-      "image": {
-        "src": "",
-        "alt": "",
-        "credit": ""
-      },
-      "video": {
-        "provider": "link",
-        "url": "https://example.com/fish-news/ghost-gear",
-        "duration": "6:03",
-        "poster": ""
-      }
+      "tags": ["ghost gear", "clean-up"]
     },
     {
       "id": "oyster-beds-strangford",
@@ -167,11 +123,7 @@
       "kicker": "Aquaculture",
       "byline": "Ríona Casey",
       "published": "2026-08-01T07:40:00Z",
-      "tags": [
-        "oysters",
-        "water quality",
-        "strangford"
-      ],
+      "tags": ["oysters", "water quality", "strangford"],
       "image": {
         "src": "",
         "alt": "Oyster trestles exposed at low water",
@@ -187,11 +139,7 @@
       "kicker": "Method",
       "byline": "Tom Aldridge",
       "published": "2026-07-31T15:10:00Z",
-      "tags": [
-        "seagrass",
-        "engineering",
-        "restoration"
-      ],
+      "tags": ["seagrass", "engineering", "restoration"],
       "image": {
         "src": "",
         "alt": "A towed planting frame on the deck of a small workboat",
@@ -207,11 +155,7 @@
       "kicker": "Infrastructure",
       "byline": "Hannah Voight",
       "published": "2026-07-31T10:05:00Z",
-      "tags": [
-        "harbours",
-        "shore power",
-        "funding"
-      ],
+      "tags": ["harbours", "shore power", "funding"],
       "image": {
         "src": "",
         "alt": "Power bollards on a harbour wall",
@@ -227,11 +171,7 @@
       "kicker": "Tagging",
       "byline": "Dr Alan Ferris",
       "published": "2026-07-30T13:25:00Z",
-      "tags": [
-        "sharks",
-        "tagging",
-        "celtic sea"
-      ],
+      "tags": ["sharks", "tagging", "celtic sea"],
       "image": {
         "src": "",
         "alt": "A blue shark alongside a research vessel before release",
@@ -247,22 +187,7 @@
       "kicker": "In the lab",
       "byline": "Dr Alan Ferris",
       "published": "2026-07-29T09:00:00Z",
-      "tags": [
-        "otolith",
-        "science",
-        "method"
-      ],
-      "image": {
-        "src": "",
-        "alt": "",
-        "credit": ""
-      },
-      "video": {
-        "provider": "link",
-        "url": "https://example.com/fish-news/otoliths",
-        "duration": "4:27",
-        "poster": ""
-      }
+      "tags": ["otolith", "science", "method"]
     },
     {
       "id": "crab-processing-closure",
@@ -273,11 +198,7 @@
       "kicker": "Industry",
       "byline": "Ríona Casey",
       "published": "2026-07-18T11:00:00Z",
-      "tags": [
-        "crab",
-        "processing",
-        "jobs"
-      ],
+      "tags": ["crab", "processing", "jobs"],
       "image": {
         "src": "",
         "alt": "Stacked crab pots on a quayside",
@@ -293,22 +214,7 @@
       "kicker": "Engineering",
       "byline": "Fish News Film",
       "published": "2026-06-30T14:15:00Z",
-      "tags": [
-        "tidal",
-        "engineering",
-        "survey"
-      ],
-      "image": {
-        "src": "",
-        "alt": "",
-        "credit": ""
-      },
-      "video": {
-        "provider": "link",
-        "url": "https://example.com/fish-news/tidal-inspection",
-        "duration": "5:38",
-        "poster": ""
-      }
+      "tags": ["tidal", "engineering", "survey"]
     },
     {
       "id": "sandeel-closure-first-year",
@@ -319,11 +225,7 @@
       "kicker": "One year on",
       "byline": "Hannah Voight",
       "published": "2026-06-24T09:30:00Z",
-      "tags": [
-        "sandeel",
-        "seabirds",
-        "closure"
-      ],
+      "tags": ["sandeel", "seabirds", "closure"],
       "image": {
         "src": "",
         "alt": "Kittiwakes nesting on a sea cliff",
