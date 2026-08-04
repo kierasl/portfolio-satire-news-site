@@ -708,7 +708,7 @@ function renderStatic(kind){
   if(kind === 'about'){
     document.title = 'About us — Fish News';
     return '<div class="page-head"><h1>About us</h1>' +
-      '<p>Fish News reports on the sea as a workplace, a habitat and a jurisdiction. We publish from Bangor, County Down.</p></div>' +
+      '<p>Fish News reports on the sea as a workplace, a habitat and a jurisdiction.</p></div>' +
       '<div class="article" style="padding-top:0"><div class="body-copy">' +
       '<p>We cover four things: what is in the water, who is allowed to take it out, what the measurements say, and what it is like to work at the edge of it. Everything else is somebody else\u2019s beat.</p>' +
       '<h3>Corrections</h3><p>We correct errors at the top of the affected story and log them. If we have got something wrong, tell us.</p>' +
@@ -720,7 +720,7 @@ function renderStatic(kind){
     '<p>Tips, corrections and complaints all go to the same inbox and get read by a person.</p></div>' +
     '<div class="article" style="padding-top:0"><div class="body-copy">' +
     '<p><strong>Newsdesk</strong><br>hello@fishnews.example</p>' +
-    '<p><strong>Post</strong><br>Fish News Ltd, Bangor, County Down</p>' +
+    '<p><strong>Post</strong><br>Fish News Ltd, Milky Way</p>' +
     '<h3>Sending something sensitive</h3><p>Use Signal rather than email, and do not send it from a work device or network.</p>' +
     '</div></div>';
 }
