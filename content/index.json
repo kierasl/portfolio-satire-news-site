@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T15:16:57Z",
+  "generated": "2026-08-04T15:20:00Z",
   "items": [
     {
       "id": "welcome",
@@ -12,23 +12,8 @@
       "published": "2026-08-04T16:16:19+01:00",
       "rank": "lead",
       "image": {
-        "src": "",
+        "src": "fish-news-just-the-fish",
         "alt": "Fish News Logo"
-      }
-    },
-    {
-      "id": "testnew-2",
-      "type": "article",
-      "section": "open-ocean",
-      "headline": "Testnew",
-      "standfirst": "Testing our new creation tool",
-      "kicker": "TEST",
-      "byline": "slime",
-      "published": "2026-08-04T02:37:45+01:00",
-      "tags": ["test"],
-      "image": {
-        "src": "3cdo.png",
-        "alt": "3 cdo bde logo"
       }
     }
   ]
