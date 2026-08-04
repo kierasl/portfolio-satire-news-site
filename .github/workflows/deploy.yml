@@ -1,0 +1,26 @@
+name: Deploy to Dreamhost
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+          name: id_ed25519
+          if_key_exists: replace
+          config: |
+            Host *
+              StrictHostKeyChecking no
+              IdentityFile ~/.ssh/id_ed25519
+
+      - name: Deploy with rsync
+        run: |
+          rsync -avz --delete ./ ${{ secrets.DREAMHOST_USER }}@${{ secrets.DREAMHOST_HOST }}:${{ secrets.DREAMHOST_PATH }}
