@@ -861,7 +861,7 @@ function wirePage(){
 (async function init(){
   $('#mastDate').textContent = new Date().toLocaleDateString('en-GB',
     { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  $('#mastEdition').textContent = CONFIG.edition;
+  //$('#mastEdition').textContent = CONFIG.edition;
 
   $('#view').innerHTML = '<div class="loading">Loading Fish News</div>';
 
