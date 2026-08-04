@@ -1,0 +1,33 @@
+{
+  "id": "tidal-turbine-inspection",
+  "type": "video",
+  "section": "video",
+  "headline": "Inspecting a tidal turbine in a four-knot current",
+  "standfirst": "There is a twenty-minute window at slack water. Everything else is holding on.",
+  "kicker": "Engineering",
+  "byline": "Fish News Film",
+  "published": "2026-06-30T14:15:00Z",
+  "tags": [
+    "tidal",
+    "engineering",
+    "survey"
+  ],
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "",
+    "credit": ""
+  },
+  "video": {
+    "provider": "link",
+    "url": "https://example.com/fish-news/tidal-inspection",
+    "duration": "5:38",
+    "poster": ""
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Maintenance on tidal infrastructure happens in the gaps between tides, and the gaps are short."
+    }
+  ]
+}

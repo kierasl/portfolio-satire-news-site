@@ -1,0 +1,31 @@
+{
+  "id": "sandeel-closure-first-year",
+  "type": "article",
+  "section": "policy",
+  "headline": "Twelve months after the sandeel closure, the seabird numbers are the first thing to move",
+  "standfirst": "Kittiwake productivity on two monitored colonies is up sharply. Whether the closure caused it is a harder question.",
+  "kicker": "One year on",
+  "byline": "Hannah Voight",
+  "published": "2026-06-24T09:30:00Z",
+  "tags": [
+    "sandeel",
+    "seabirds",
+    "closure"
+  ],
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "Kittiwakes nesting on a sea cliff",
+    "credit": "Fish News"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Productivity at the two long-monitored colonies rose to 0.81 and 0.74 chicks per pair, against a five-year mean nearer 0.5. Both sit within foraging range of ground closed to sandeel fishing last spring."
+    },
+    {
+      "type": "paragraph",
+      "text": "The caveat is that it was also a good year for sea temperature at exactly the wrong depth for sandeel predators, which muddies the attribution considerably. A second good year would settle a lot of arguments."
+    }
+  ]
+}

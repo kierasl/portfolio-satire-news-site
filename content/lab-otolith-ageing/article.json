@@ -1,0 +1,33 @@
+{
+  "id": "lab-otolith-ageing",
+  "type": "video",
+  "section": "video",
+  "headline": "Reading a fish's age from a bone the size of a grain of rice",
+  "standfirst": "Otoliths lay down growth rings like a tree. Under polarised light, a decade of a cod's life becomes legible.",
+  "kicker": "In the lab",
+  "byline": "Dr Alan Ferris",
+  "published": "2026-07-29T09:00:00Z",
+  "tags": [
+    "otolith",
+    "science",
+    "method"
+  ],
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "",
+    "credit": ""
+  },
+  "video": {
+    "provider": "link",
+    "url": "https://example.com/fish-news/otoliths",
+    "duration": "4:27",
+    "poster": ""
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Every stock assessment in the North Atlantic rests on somebody counting these rings correctly."
+    }
+  ]
+}

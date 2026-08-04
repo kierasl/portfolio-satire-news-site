@@ -1,0 +1,32 @@
+{
+  "id": "crab-processing-closure",
+  "type": "article",
+  "section": "coast",
+  "headline": "Crab processor closes after forty years, and the boats have nowhere else to land",
+  "standfirst": "The nearest alternative buyer is a hundred and ten miles by road, which is further than the margin will stretch.",
+  "kicker": "Industry",
+  "byline": "Ríona Casey",
+  "published": "2026-07-18T11:00:00Z",
+  "tags": [
+    "crab",
+    "processing",
+    "jobs"
+  ],
+  "location": "Portavogie",
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "Stacked crab pots on a quayside",
+    "credit": "Fish News"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Thirty-one jobs go at the end of the month, and around fourteen boats lose their only local market. The company cited energy costs and a collapse in the Asian export price, in that order."
+    },
+    {
+      "type": "paragraph",
+      "text": "Skippers are already talking about switching to live export, which pays better per kilo but requires vivier transport and a buyer prepared to take small, irregular loads. Nobody has found one yet."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "bluefin-donegal-inshore",
+  "type": "article",
+  "section": "open-ocean",
+  "headline": "Bluefin tuna are feeding within sight of the Donegal coast for the first time in living memory",
+  "standfirst": "A cold upwelling off the north-west shelf has pushed baitfish inshore, and the tuna have followed them into water shallow enough to see from the cliffs.",
+  "kicker": "Cold water surge",
+  "byline": "Ríona Casey",
+  "published": "2026-08-03T09:14:00Z",
+  "tags": [
+    "bluefin",
+    "upwelling",
+    "fisheries"
+  ],
+  "location": "Killybegs",
+  "rank": "lead",
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "Fishing boats moored at Killybegs harbour under low cloud",
+    "credit": "Fish News"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Skippers working out of Killybegs have spent the past fortnight watching something they were told they would never see from the harbour wall. Bluefin tuna, a fish that normally holds to deep water well off the shelf edge, have been surfacing inside the eight-mile mark, herding sprat into tight balls and driving them upward until the water boils."
+    },
+    {
+      "type": "paragraph",
+      "text": "The cause is not the fish. It is the water. A cold-water upwelling that usually sits along the shelf break has pushed east, dragging nutrient-rich water up from depth and triggering a plankton bloom that the sprat have followed inshore. The tuna simply came with dinner."
+    },
+    {
+      "type": "heading",
+      "text": "What the survey boats are seeing"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Marine Institute has had a survey vessel on station since the middle of July. Its preliminary figures put surface temperature at the upwelling front around four degrees below the seasonal average for the area, with the sharpest gradient sitting almost exactly where the tuna are working."
+    },
+    {
+      "type": "quote",
+      "text": "We have modelled this happening. We have not had to stand on a pier and watch it happen before.",
+      "attribution": "Dr Maeve Ó Loingsigh, Marine Institute"
+    },
+    {
+      "type": "paragraph",
+      "text": "For the inshore fleet, the arrival is a mixed blessing. Bluefin remain tightly regulated, and Ireland holds only a small bycatch allocation. Boats that encounter them are required to release them, which is straightforward in theory and considerably harder in a net set for something else."
+    },
+    {
+      "type": "heading",
+      "text": "The regulatory problem"
+    },
+    {
+      "type": "paragraph",
+      "text": "Three skippers told Fish News that they have stopped shooting nets in the affected ground entirely rather than risk a bycatch event that could cost them a licence. That is a real loss of fishing days in the middle of the season, and none of them expect compensation."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Bluefin bycatch must be released alive where possible",
+        "Vessels must log any encounter within 24 hours",
+        "The inshore ground is not covered by the tagging scheme"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the upwelling holds is anyone's guess. The last comparable event, in 2019, collapsed after eleven days. This one is on day nineteen."
+    }
+  ]
+}

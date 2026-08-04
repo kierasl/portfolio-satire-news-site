@@ -1,0 +1,33 @@
+{
+  "id": "herring-spawning-run",
+  "type": "video",
+  "section": "video",
+  "headline": "Inside a herring spawning run, filmed at forty metres",
+  "standfirst": "Three nights on the seabed with a low-light rig, waiting for a shoal that arrives without warning and leaves before dawn.",
+  "kicker": "Underwater",
+  "byline": "Fish News Film",
+  "published": "2026-08-02T14:00:00Z",
+  "tags": [
+    "herring",
+    "film",
+    "seabed"
+  ],
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "",
+    "credit": ""
+  },
+  "video": {
+    "provider": "link",
+    "url": "https://example.com/fish-news/herring-run",
+    "duration": "8:42",
+    "poster": ""
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Herring spawn on gravel, at night, in numbers that make the seabed disappear. Our camera team spent three nights waiting on a known ground off the Antrim coast for a run that has become steadily less predictable."
+    }
+  ]
+}

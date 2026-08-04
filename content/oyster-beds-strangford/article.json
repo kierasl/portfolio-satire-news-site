@@ -1,0 +1,37 @@
+{
+  "id": "oyster-beds-strangford",
+  "type": "article",
+  "section": "coast",
+  "headline": "Strangford oyster growers report the cleanest season since the 2018 closure",
+  "standfirst": "Improved catchment management upstream has done what eight years of shellfish-water designations could not.",
+  "kicker": "Aquaculture",
+  "byline": "Ríona Casey",
+  "published": "2026-08-01T07:40:00Z",
+  "tags": [
+    "oysters",
+    "water quality",
+    "strangford"
+  ],
+  "location": "Strangford",
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "Oyster trestles exposed at low water",
+    "credit": "Fish News"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Classification results published this week put every sampled bed in the lough at Class A or B, with none downgraded after rainfall events. Growers have spent most of the past decade managing around temporary closures triggered by run-off."
+    },
+    {
+      "type": "paragraph",
+      "text": "The change is credited to catchment work: fencing watercourses, restoring buffer strips and rebuilding slurry storage on farms well inland of the water itself."
+    },
+    {
+      "type": "quote",
+      "text": "Nobody fixed the lough. They fixed four rivers, and the lough followed.",
+      "attribution": "Declan Moore, Strangford Growers Co-op"
+    }
+  ]
+}

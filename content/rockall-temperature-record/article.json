@@ -1,0 +1,40 @@
+{
+  "id": "rockall-temperature-record",
+  "type": "article",
+  "section": "science",
+  "headline": "Sea temperature at Rockall hits an August record for the third year running",
+  "standfirst": "The buoy has been on station since 1978. The three warmest readings in its history have all come since 2024.",
+  "kicker": "Survey data",
+  "byline": "Dr Alan Ferris",
+  "published": "2026-08-02T17:30:00Z",
+  "tags": [
+    "temperature",
+    "rockall",
+    "climate"
+  ],
+  "assetBase": "",
+  "image": {
+    "src": "",
+    "alt": "A weather buoy in heavy swell under grey sky",
+    "credit": "Fish News"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "The Rockall buoy is not glamorous. It is a yellow cylinder in a bad piece of ocean, and it has been returning the same measurements on the same schedule for forty-eight years. That consistency is precisely what makes this month's figure difficult to argue with."
+    },
+    {
+      "type": "paragraph",
+      "text": "Surface temperature peaked at 16.8°C on 29 July, three-tenths above the 2025 record and a full 1.9°C above the 1978–2008 baseline for the date."
+    },
+    {
+      "type": "quote",
+      "text": "A record is interesting. A record that keeps being broken by the same margin is a trend.",
+      "attribution": "Dr Alan Ferris"
+    },
+    {
+      "type": "paragraph",
+      "text": "The practical consequence is northward range shift. Species that were rare north of the Porcupine Bank a decade ago are now routine in survey hauls, and the species that used to be there are running out of north."
+    }
+  ]
+}
