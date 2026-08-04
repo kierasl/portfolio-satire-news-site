@@ -1,6 +1,21 @@
 {
-  "generated": "2026-08-04T01:41:09Z",
+  "generated": "2026-08-04T15:16:57Z",
   "items": [
+    {
+      "id": "welcome",
+      "type": "article",
+      "section": "reef",
+      "headline": "Welcome to fish news",
+      "standfirst": "Welcome to Fish News",
+      "kicker": "Welcome",
+      "byline": "Chunce Whatney",
+      "published": "2026-08-04T16:16:19+01:00",
+      "rank": "lead",
+      "image": {
+        "src": "",
+        "alt": "Fish News Logo"
+      }
+    },
     {
       "id": "testnew-2",
       "type": "article",
@@ -14,222 +29,6 @@
       "image": {
         "src": "3cdo.png",
         "alt": "3 cdo bde logo"
-      }
-    },
-    {
-      "id": "bluefin-donegal-inshore",
-      "type": "article",
-      "section": "open-ocean",
-      "headline": "Bluefin tuna are feeding within sight of the Donegal coast for the first time in living memory",
-      "standfirst": "A cold upwelling off the north-west shelf has pushed baitfish inshore, and the tuna have followed them into water shallow enough to see from the cliffs.",
-      "kicker": "Cold water surge",
-      "byline": "Ríona Casey",
-      "published": "2026-08-03T09:14:00Z",
-      "tags": ["bluefin", "upwelling", "fisheries"],
-      "rank": "lead",
-      "image": {
-        "src": "",
-        "alt": "Fishing boats moored at Killybegs harbour under low cloud",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "sussex-kelp-fifth-winter",
-      "type": "article",
-      "section": "reef",
-      "headline": "Sussex kelp restoration enters its fifth winter with the first signs of a self-sustaining bed",
-      "standfirst": "Trawling was excluded from 300 square kilometres in 2021. The kelp took three years to show up, and is now reproducing without help.",
-      "kicker": "Restoration",
-      "byline": "Tom Aldridge",
-      "published": "2026-08-03T08:50:00Z",
-      "tags": ["kelp", "restoration", "sussex"],
-      "image": {
-        "src": "",
-        "alt": "Kelp fronds photographed from below in green water",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "north-sea-quota-explainer",
-      "type": "article",
-      "section": "policy",
-      "headline": "What the new North Sea allocation actually changes for a boat under twelve metres",
-      "standfirst": "The headline figure went up. For most of the small-boat fleet, the number that matters went down.",
-      "kicker": "Explainer",
-      "byline": "Hannah Voight",
-      "published": "2026-08-03T08:02:00Z",
-      "tags": ["quota", "north sea", "policy"],
-      "image": {
-        "src": "",
-        "alt": "A small inshore fishing boat alongside a stone quay",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "rockall-temperature-record",
-      "type": "article",
-      "section": "science",
-      "headline": "Sea temperature at Rockall hits an August record for the third year running",
-      "standfirst": "The buoy has been on station since 1978. The three warmest readings in its history have all come since 2024.",
-      "kicker": "Survey data",
-      "byline": "Dr Alan Ferris",
-      "published": "2026-08-02T17:30:00Z",
-      "tags": ["temperature", "rockall", "climate"],
-      "image": {
-        "src": "",
-        "alt": "A weather buoy in heavy swell under grey sky",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "herring-spawning-run",
-      "type": "video",
-      "section": "video",
-      "headline": "Inside a herring spawning run, filmed at forty metres",
-      "standfirst": "Three nights on the seabed with a low-light rig, waiting for a shoal that arrives without warning and leaves before dawn.",
-      "kicker": "Underwater",
-      "byline": "Fish News Film",
-      "published": "2026-08-02T14:00:00Z",
-      "tags": ["herring", "film", "seabed"]
-    },
-    {
-      "id": "quota-explained-two-minutes",
-      "type": "video",
-      "section": "video",
-      "headline": "How fishing quota actually works, in two minutes",
-      "standfirst": "Total allowable catch, track record, leasing and the under-ten pool — drawn out on a whiteboard.",
-      "kicker": "Explainer",
-      "byline": "Hannah Voight",
-      "published": "2026-08-02T11:20:00Z",
-      "tags": ["quota", "explainer"]
-    },
-    {
-      "id": "ghost-gear-recovery-dive",
-      "type": "video",
-      "section": "video",
-      "headline": "A day recovering ghost gear off the Copeland Islands",
-      "standfirst": "Volunteers lifted 1.4 tonnes of abandoned net in a single tide. Most of it was still fishing.",
-      "kicker": "On the boat",
-      "byline": "Fish News Film",
-      "published": "2026-08-01T16:45:00Z",
-      "tags": ["ghost gear", "clean-up"]
-    },
-    {
-      "id": "oyster-beds-strangford",
-      "type": "article",
-      "section": "coast",
-      "headline": "Strangford oyster growers report the cleanest season since the 2018 closure",
-      "standfirst": "Improved catchment management upstream has done what eight years of shellfish-water designations could not.",
-      "kicker": "Aquaculture",
-      "byline": "Ríona Casey",
-      "published": "2026-08-01T07:40:00Z",
-      "tags": ["oysters", "water quality", "strangford"],
-      "image": {
-        "src": "",
-        "alt": "Oyster trestles exposed at low water",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "seagrass-planting-machine",
-      "type": "article",
-      "section": "reef",
-      "headline": "A seagrass planting machine built from a modified potato planter",
-      "standfirst": "Hand-planting seagrass costs about £45 a square metre. This rig, welded together in a shed in Cornwall, does it for under six.",
-      "kicker": "Method",
-      "byline": "Tom Aldridge",
-      "published": "2026-07-31T15:10:00Z",
-      "tags": ["seagrass", "engineering", "restoration"],
-      "image": {
-        "src": "",
-        "alt": "A towed planting frame on the deck of a small workboat",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "harbour-electrification-grants",
-      "type": "article",
-      "section": "coast",
-      "headline": "Shore-power grants open for harbours under 200 berths",
-      "standfirst": "Boats running generators alongside are the largest single source of harbour-side emissions in most small ports.",
-      "kicker": "Infrastructure",
-      "byline": "Hannah Voight",
-      "published": "2026-07-31T10:05:00Z",
-      "tags": ["harbours", "shore power", "funding"],
-      "image": {
-        "src": "",
-        "alt": "Power bollards on a harbour wall",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "shark-tagging-celtic-sea",
-      "type": "article",
-      "section": "science",
-      "headline": "Blue shark tags reveal a Celtic Sea nursery nobody had mapped",
-      "standfirst": "Sixty tags deployed over two summers show juveniles holding in one patch of water for months at a time.",
-      "kicker": "Tagging",
-      "byline": "Dr Alan Ferris",
-      "published": "2026-07-30T13:25:00Z",
-      "tags": ["sharks", "tagging", "celtic sea"],
-      "image": {
-        "src": "",
-        "alt": "A blue shark alongside a research vessel before release",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "lab-otolith-ageing",
-      "type": "video",
-      "section": "video",
-      "headline": "Reading a fish's age from a bone the size of a grain of rice",
-      "standfirst": "Otoliths lay down growth rings like a tree. Under polarised light, a decade of a cod's life becomes legible.",
-      "kicker": "In the lab",
-      "byline": "Dr Alan Ferris",
-      "published": "2026-07-29T09:00:00Z",
-      "tags": ["otolith", "science", "method"]
-    },
-    {
-      "id": "crab-processing-closure",
-      "type": "article",
-      "section": "coast",
-      "headline": "Crab processor closes after forty years, and the boats have nowhere else to land",
-      "standfirst": "The nearest alternative buyer is a hundred and ten miles by road, which is further than the margin will stretch.",
-      "kicker": "Industry",
-      "byline": "Ríona Casey",
-      "published": "2026-07-18T11:00:00Z",
-      "tags": ["crab", "processing", "jobs"],
-      "image": {
-        "src": "",
-        "alt": "Stacked crab pots on a quayside",
-        "credit": "Fish News"
-      }
-    },
-    {
-      "id": "tidal-turbine-inspection",
-      "type": "video",
-      "section": "video",
-      "headline": "Inspecting a tidal turbine in a four-knot current",
-      "standfirst": "There is a twenty-minute window at slack water. Everything else is holding on.",
-      "kicker": "Engineering",
-      "byline": "Fish News Film",
-      "published": "2026-06-30T14:15:00Z",
-      "tags": ["tidal", "engineering", "survey"]
-    },
-    {
-      "id": "sandeel-closure-first-year",
-      "type": "article",
-      "section": "policy",
-      "headline": "Twelve months after the sandeel closure, the seabird numbers are the first thing to move",
-      "standfirst": "Kittiwake productivity on two monitored colonies is up sharply. Whether the closure caused it is a harder question.",
-      "kicker": "One year on",
-      "byline": "Hannah Voight",
-      "published": "2026-06-24T09:30:00Z",
-      "tags": ["sandeel", "seabirds", "closure"],
-      "image": {
-        "src": "",
-        "alt": "Kittiwakes nesting on a sea cliff",
-        "credit": "Fish News"
       }
     }
   ]

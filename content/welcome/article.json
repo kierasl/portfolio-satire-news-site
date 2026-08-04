@@ -1,0 +1,22 @@
+{
+  "id": "welcome",
+  "type": "article",
+  "section": "reef",
+  "rank": "lead",
+  "kicker": "Welcome",
+  "headline": "Welcome to fish news",
+  "standfirst": "Welcome to Fish News",
+  "byline": "Chunce Whatney",
+  "location": "Earth, Milky Way",
+  "published": "2026-08-04T16:16:19+01:00",
+  "image": {
+    "src": "fish-news-just-the-fish",
+    "alt": "Fish News Logo"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Welcome to Fish News"
+    }
+  ]
+}

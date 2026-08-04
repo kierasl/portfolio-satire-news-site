@@ -45,11 +45,11 @@ const CONFIG = {
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
-  { id: 'reef',       name: 'Reef',       blurb: 'Coral, kelp and the shallow systems that hold everything else up.' },
-  { id: 'open-ocean', name: 'Open Ocean', blurb: 'Migration, currents and the fisheries that follow them.' },
-  { id: 'coast',      name: 'Coast',      blurb: 'Harbours, estuaries and the people who work the edge.' },
-  { id: 'policy',     name: 'Policy',     blurb: 'Quotas, treaties, licensing and the arguments underneath.' },
-  { id: 'science',    name: 'Science',    blurb: 'Survey data, new papers and the instruments doing the measuring.' },
+  { id: 'reef',       name: 'Reef',       blurb: 'News Close to Home.' },
+  { id: 'open-ocean', name: 'Open Ocean', blurb: 'Random News.' },
+  { id: 'coast',      name: 'Coast',      blurb: 'Conflict.' },
+  { id: 'policy',     name: 'Policy',     blurb: 'Policy News.' },
+  { id: 'science',    name: 'Science',    blurb: 'What we judge to be scientific in nature.' },
   { id: 'video',      name: 'Watch',      blurb: 'Dispatches from the boat, the lab and the seabed.' },
   { id: 'archive',    name: 'Archive',    blurb: 'Everything that has come off the front page.' }
 ];
