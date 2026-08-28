@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 /* ============================================================
-   FISH NEWS — LINK PREVIEW GENERATOR
+   FISH NEWS — STORY PERMALINK GENERATOR
    ============================================================
-   The site itself uses hash routing (#/item/<id>), which crawlers
-   for Slack/Discord/iMessage/etc. cannot see — they only ever get
-   the same index.html with the same Open Graph tags, whatever the
-   hash says.
+   The site is a client-rendered SPA, so a hash link like
+   #/item/<id> never shows a crawler (Discord, Slack, iMessage…)
+   anything but the homepage — the hash never reaches the server,
+   and crawlers don't run the JavaScript that would read it.
 
-   This script writes a small static stub page per article at
-   story/<id>/index.html, carrying that article's own headline,
-   standfirst and image as Open Graph tags, then redirects a human
-   visitor straight into the app at #/item/<id>.
-
-   Share the /story/<id>/ link instead of the #/item/<id> one and
-   the preview will pull from that article.
+   This script solves that by writing a real static page per
+   article at story/<id>/index.html: an exact copy of the site
+   shell with that article's own <title> and Open Graph tags
+   swapped in between the FISHNEWS:META markers in index.html.
+   A crawler sees the right preview immediately; a browser loads
+   the same app, which recognises the /story/<id>/ path (see
+   parseHash() in assets/fish-news.js) and renders that article
+   directly — no redirect involved.
 
    Run: node scripts/generate-previews.js
    Optional: SITE_URL=https://example.com node scripts/generate-previews.js
@@ -29,6 +30,9 @@ const CONTENT_DIR = path.join(ROOT, 'content');
 const OUT_DIR = path.join(ROOT, 'story');
 const SITE_URL = (process.env.SITE_URL || 'https://fish-news.tacteam.dev/').replace(/\/$/, '');
 const FALLBACK_IMAGE = SITE_URL + '/assets/Fish%20News%20Logo.png';
+
+const META_START = '<!-- FISHNEWS:META:START -->';
+const META_END = '<!-- FISHNEWS:META:END -->';
 
 function esc(s){
   return String(s == null ? '' : s)
@@ -54,38 +58,32 @@ function findArticleIds(){
     .filter(id => fs.existsSync(path.join(CONTENT_DIR, id, 'article.json')));
 }
 
-function pageFor(id, article){
+function metaBlockFor(id, article){
   const headline = article.headline || 'Fish News';
   const desc = article.standfirst || article.kicker || 'Fish News: with Chunce Whatney.';
   const image = resolveImage(id, article);
   const canonical = SITE_URL + '/story/' + encodeURIComponent(id) + '/';
-  const appUrl = SITE_URL + '/#/item/' + encodeURIComponent(id);
 
-  return '<!DOCTYPE html>\n' +
-'<html lang="en-GB">\n' +
-'<head>\n' +
-'<meta charset="utf-8">\n' +
-'<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
-'<title>' + esc(headline) + ' — Fish News</title>\n' +
+  return META_START + '\n' +
 '<meta name="description" content="' + esc(desc) + '">\n' +
 '<link rel="canonical" href="' + esc(canonical) + '">\n' +
 '<meta property="og:site_name" content="Fish News">\n' +
-'<meta property="og:type" content="article">\n' +
 '<meta property="og:title" content="' + esc(headline) + '">\n' +
 '<meta property="og:description" content="' + esc(desc) + '">\n' +
-'<meta property="og:image" content="' + esc(image) + '">\n' +
+'<meta property="og:type" content="article">\n' +
 '<meta property="og:url" content="' + esc(canonical) + '">\n' +
+'<meta property="og:image" content="' + esc(image) + '">\n' +
 '<meta name="twitter:card" content="summary_large_image">\n' +
-'<meta http-equiv="refresh" content="0; url=' + esc(appUrl) + '">\n' +
-'<script>location.replace(' + JSON.stringify(appUrl) + ');</script>\n' +
-'</head>\n' +
-'<body>\n' +
-'<p>Loading <a href="' + esc(appUrl) + '">' + esc(headline) + '</a> on Fish News&hellip;</p>\n' +
-'</body>\n' +
-'</html>\n';
+META_END;
 }
 
 function main(){
+  const template = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const markerRe = new RegExp(META_START + '[\\s\\S]*?' + META_END);
+  if(!markerRe.test(template)){
+    throw new Error('index.html is missing the ' + META_START + ' / ' + META_END + ' markers');
+  }
+
   const ids = findArticleIds();
 
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
@@ -100,13 +98,19 @@ function main(){
       console.warn('Skipping ' + id + ': ' + err.message);
       continue;
     }
+
+    const headline = article.headline || 'Fish News';
+    const page = template
+      .replace(/<title>[\s\S]*?<\/title>/, '<title>' + esc(headline) + ' — Fish News</title>')
+      .replace(markerRe, metaBlockFor(id, article));
+
     const dir = path.join(OUT_DIR, id);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), pageFor(id, article));
+    fs.writeFileSync(path.join(dir, 'index.html'), page);
     count++;
   }
 
-  console.log('Generated ' + count + ' preview page(s) in ' + path.relative(ROOT, OUT_DIR) + '/ for ' + SITE_URL);
+  console.log('Generated ' + count + ' story permalink page(s) in ' + path.relative(ROOT, OUT_DIR) + '/ for ' + SITE_URL);
 }
 
 main();

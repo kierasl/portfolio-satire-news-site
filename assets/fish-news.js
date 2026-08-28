@@ -10,10 +10,11 @@
 
 const CONFIG = {
 
-  /* Where the article folders live.
-     Local:  'content/'
+  /* Where the article folders live. Root-absolute so it still resolves
+     correctly from the per-article pages under /story/<id>/.
+     Local:  '/content/'
      GitHub: 'https://raw.githubusercontent.com/USER/REPO/main/content/' */
-  contentBase: 'content/',
+  contentBase: '/content/',
 
   /* How the site works out what has been published.
 
@@ -36,9 +37,6 @@ const CONFIG = {
 
   /* How much appears on the front page. Everything older goes to the archive. */
   frontPage: { articles: 6, videos: 3 },
-
-  /* How many tags to show in the rail under the navigation. */
-  tagRailSize: 12,
 
   /* The site's own public URL, used to build absolute links for article
      link previews (Open Graph). Include the trailing slash. */
@@ -364,18 +362,6 @@ function frontPageIds(){
 function archiveItems(){
   const front = frontPageIds();
   return byNewest(state.items.filter(i => !front.has(i.id)));
-}
-
-function tagCounts(){
-  const counts = new Map();
-  state.items.forEach(function(i){
-    (i.tags || []).forEach(function(t){
-      counts.set(t, (counts.get(t) || 0) + 1);
-    });
-  });
-  return Array.from(counts.entries()).sort(function(a, b){
-    return b[1] - a[1] || a[0].localeCompare(b[0]);
-  });
 }
 
 function matches(item, term){
@@ -765,7 +751,7 @@ function renderLoadError(){
 }
 
 /* ------------------------------------------------------------
-   9. CHROME: NAV AND TAG RAIL
+   9. CHROME: NAV
    ------------------------------------------------------------ */
 
 function buildNav(active){
@@ -775,27 +761,12 @@ function buildNav(active){
   }).join('');
 }
 
-function buildTagRail(activeTag){
-  const rail = $('#tagRail');
-  const tags = tagCounts().slice(0, CONFIG.tagRailSize);
-  if(!tags.length){ rail.hidden = true; return; }
-  rail.hidden = false;
-  $('#tagRailInner').innerHTML =
-    '<span class="lbl">Tags</span>' +
-    tags.map(function(t){
-      const isActive = activeTag && activeTag.toLowerCase() === t[0].toLowerCase();
-      return '<a href="#/tag/' + encodeURIComponent(t[0]) + '"' + (isActive ? ' aria-current="page"' : '') + '>' +
-        esc(t[0]) + '<span class="n">' + t[1] + '</span></a>';
-    }).join('') +
-    '<a href="#/archive" style="border-style:dashed">All stories</a>';
-}
-
 function buildSponsors(){
   const wrap = $('#sponsors');
   if(!wrap || !SPONSORS.length){ if(wrap) wrap.hidden = true; return; }
   wrap.hidden = false;
   $('#sponsorsRow').innerHTML = SPONSORS.map(function(s){
-    const src = isAbsolute(s.logo) ? s.logo : 'assets/sponsors/' + s.logo;
+    const src = isAbsolute(s.logo) ? s.logo : '/assets/sponsors/' + s.logo;
     const img = '<img src="' + esc(src) + '" alt="' + esc(s.name) + '" loading="lazy">';
     return s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener sponsored">' + img + '</a>' : img;
   }).join('');
@@ -805,7 +776,15 @@ function buildSponsors(){
    10. ROUTER
    ------------------------------------------------------------ */
 
+/* An article's permalink is a real path — /story/<id>/ — rather than a hash,
+   so a shared link, and the address bar while reading it, both show a URL a
+   crawler can actually fetch. Every other page stays hash-routed. When the
+   hash is empty and the path looks like a story permalink, route as if
+   "#/item/<id>" had been requested; otherwise parse the hash as normal. */
 function parseHash(){
+  const storyMatch = !location.hash && location.pathname.match(/^\/story\/([^/]+)\/?$/);
+  if(storyMatch) return { parts: ['item', decodeURIComponent(storyMatch[1])], params: {} };
+
   const raw = (location.hash || '#/').replace(/^#/, '');
   const [path, query] = raw.split('?');
   const parts = path.split('/').filter(Boolean);
@@ -819,8 +798,22 @@ function parseHash(){
   return { parts: parts, params: params };
 }
 
+/* Keeps the address bar matching what parseHash() would produce: a clean
+   /story/<id>/ permalink for an article, "/" plus the hash for everything
+   else. Runs on every route so both a hard load and in-app navigation land
+   on the same URL shape. */
+function normalizeUrl(parts){
+  const target = parts[0] === 'item' && parts[1]
+    ? '/story/' + encodeURIComponent(parts[1]) + '/'
+    : '/' + (location.hash || '#/');
+  if(location.pathname + location.hash !== target){
+    history.replaceState(null, '', target);
+  }
+}
+
 async function route(){
   const { parts, params } = parseHash();
+  normalizeUrl(parts);
   const view = $('#view');
 
   if(state.error){
@@ -831,7 +824,6 @@ async function route(){
 
   let html = '';
   let active = 'home';
-  let activeTag = null;
 
   if(!parts.length){
     html = renderHome();
@@ -840,7 +832,6 @@ async function route(){
     html = parts[1] === 'home' ? renderHome() : renderSection(parts[1]);
   }else if(parts[0] === 'tag'){
     active = '';
-    activeTag = decodeURIComponent(parts[1] || '');
     html = renderTag(parts[1]);
   }else if(parts[0] === 'archive'){
     active = 'archive';
@@ -859,7 +850,6 @@ async function route(){
 
   view.innerHTML = html;
   buildNav(active);
-  buildTagRail(activeTag);
   wirePage();
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
