@@ -4,7 +4,8 @@ A static news site. Three files of code, one folder of content. No framework, no
 
 ```
 fish-news/
-├── index.html                     the shell — masthead, nav, tag rail, footer
+├── index.html                     the shell — masthead, nav, footer
+├── .htaccess                      SPA fallback so real URLs survive a hard reload (Apache)
 ├── assets/
 │   ├── fish-news.css              all styling
 │   └── fish-news.js               loading, routing and rendering
@@ -29,10 +30,20 @@ cd fish-news
 python3 -m http.server 8000      # or: jwebserver -p 8000   (JDK 18+)
 ```
 
-Then open `http://localhost:8000`.
+Then open `http://localhost:8000`. Every page — home, a section, the archive,
+a tag, an article — is a real path rather than a `#hash` (see **URLs and
+routing** below), and in-app navigation (clicking around the site) works
+fine under a plain dev server. A hard reload or a direct link to anything
+other than `/` won't, though: a plain static server has no way to know that
+`/section/news/` should serve `index.html`, and 404s. That's what
+`.htaccess` fixes once the site is deployed to Apache — see below.
 
-For deployment, any static host works — GitHub Pages, S3, Netlify, or a plain
-Apache or nginx directory. Nothing runs on the server.
+For deployment, an Apache host (the `.htaccess` at the repo root needs
+`mod_rewrite`, on by default on Dreamhost) is what this is built for. A host
+that doesn't read `.htaccess` — GitHub Pages, S3, Netlify — needs its own
+equivalent SPA-fallback rule (Netlify: a `_redirects` file; GitHub Pages: a
+`404.html` that's a copy of `index.html`) or only `/` and the pre-generated
+`/story/<id>/` pages will survive a hard reload.
 
 ---
 
@@ -308,24 +319,48 @@ it does not exist.
 Section pages always show everything in that section, front page or not.
 
 **Tags** don't have a nav rail — they exist only as the chips at the bottom of
-an article, generated from its `tags` array, each linking to a page (`#/tag/<name>`)
-of everything else carrying it.
+an article, generated from its `tags` array, each linking to a page
+(`/tag/<name>/`) of everything else carrying it.
 
 ---
 
+## URLs and routing
+
+Every page has a real path, not a `#hash`:
+
+| Page | URL |
+|---|---|
+| Home | `/` |
+| A section | `/section/<id>/` — e.g. `/section/news/` |
+| The archive | `/archive/`, optionally `?q=<search>&section=<id>` |
+| A tag | `/tag/<name>/` |
+| An article | `/story/<id>/` |
+| About / Contact | `/about/`, `/contact/` |
+
+The site is still a client-rendered SPA — one `index.html`, one script — so
+none of these exist as real files on the server except `/` and (see below)
+`/story/<id>/`. `assets/fish-news.js` reads `location.pathname` to decide
+what to render (`parsePath()`), builds every internal link with `pathFor()`,
+and intercepts clicks on same-origin links to navigate via `history.pushState`
+instead of a full page load (`wireNav()`), so browsing the site never
+reloads it. Back/forward work normally through `popstate`.
+
+That leaves a hard reload or a direct link to, say, `/archive/`: the browser
+asks the server for that exact path, and there's no file there. `.htaccess`
+at the repo root handles it — any request that isn't a real file or
+directory falls back to `index.html`, which boots the app and
+`parsePath()` renders the right page from the URL the browser already has.
+See **Running it** above for what this means on a host that isn't Apache.
+
 ## Article permalinks and link previews
 
-Every other page (home, a section, the archive, a tag) is hash-routed —
-`#/section/news` and so on — which is fine for in-app navigation but useless
-for a shared link: a crawler (Slack, Discord, iMessage, WhatsApp, X…) never
-runs the JavaScript that would read the hash, so it only ever sees whatever
-`<meta>` tags happen to be in `index.html` itself.
+A shared link is a harder problem than a hard reload: a link-preview
+crawler (Slack, Discord, iMessage, WhatsApp, X…) fetches the URL but never
+runs the JavaScript that would read it and render the article, so on its
+own the `.htaccess` fallback only gets a crawler the same generic
+`<meta>` tags every page starts with.
 
-Articles are different: every article gets a real, permanent path —
-`https://<site>/story/<id>/` — instead of a hash. That's what shows in the
-address bar while reading one, and it's the link to share.
-
-Run this whenever content changes:
+Articles are worth solving that for. Run this whenever content changes:
 
 ```bash
 node scripts/generate-previews.js
@@ -333,10 +368,11 @@ node scripts/generate-previews.js
 
 It writes `story/<id>/index.html` per article: an exact copy of the site
 shell with that article's own title and Open Graph tags swapped in between
-the `<!-- FISHNEWS:META:START/END -->` markers in `index.html`. A crawler
-sees the right preview immediately from those tags; a real browser loads the
-same app, which recognises the `/story/<id>/` path and renders that article
-directly (see `parseHash()` in `assets/fish-news.js`) — no redirect involved.
+the `<!-- FISHNEWS:META:START/END -->` markers in `index.html`. Because
+that's a real file at the article's own URL, a crawler sees the right
+preview immediately, straight from those tags — no JavaScript required. A
+real browser loads the same app, which renders that article from the path
+exactly as it would via the `.htaccess` fallback.
 
 It runs automatically in `.github/workflows/deploy.yml` before every deploy,
 using `CONFIG.siteUrl` in `assets/fish-news.js` (override per-deploy with a
@@ -435,9 +471,12 @@ folder. Show the problems together rather than one at a time.
 
 ### Two useful extras
 
-- **Preview.** After saving, open `http://localhost:8000/#/item/<id>` with
+- **Preview.** After saving, open `http://localhost:8000/story/<id>/` with
   `Desktop.getDesktop().browse(...)`. Starting a `com.sun.net.httpserver`
-  instance on the content directory from inside the tool makes this one click.
+  instance on the content directory from inside the tool makes this one
+  click — though a plain dev server needs `story/<id>/index.html` to already
+  exist (run `node scripts/generate-previews.js` after saving, or serve `/`
+  and follow a link to the article instead of opening its URL directly).
 - **Rebuild-only mode.** A command-line flag that regenerates `index.json` and
   exits, so it can run in CI or a git hook after someone edits a JSON file by
   hand.
