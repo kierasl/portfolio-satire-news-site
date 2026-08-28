@@ -307,29 +307,36 @@ it does not exist.
 
 Section pages always show everything in that section, front page or not.
 
-**Tags** appear in the rail under the navigation, ordered by how often they are
-used, capped at `CONFIG.tagRailSize`. They are generated from the content — no
-tag list to maintain. Each one links to a page of everything carrying it.
+**Tags** don't have a nav rail — they exist only as the chips at the bottom of
+an article, generated from its `tags` array, each linking to a page (`#/tag/<name>`)
+of everything else carrying it.
 
 ---
 
-## Link previews for a specific article
+## Article permalinks and link previews
 
-The site itself uses hash routing (`#/item/<id>`), and link-preview crawlers
-(Slack, Discord, iMessage, WhatsApp, X…) never run the JavaScript that reads
-the hash — they only ever see the one set of `<meta>` tags in `index.html`.
+Every other page (home, a section, the archive, a tag) is hash-routed —
+`#/section/news` and so on — which is fine for in-app navigation but useless
+for a shared link: a crawler (Slack, Discord, iMessage, WhatsApp, X…) never
+runs the JavaScript that would read the hash, so it only ever sees whatever
+`<meta>` tags happen to be in `index.html` itself.
 
-To make a shared link preview pull from the article itself, run:
+Articles are different: every article gets a real, permanent path —
+`https://<site>/story/<id>/` — instead of a hash. That's what shows in the
+address bar while reading one, and it's the link to share.
+
+Run this whenever content changes:
 
 ```bash
 node scripts/generate-previews.js
 ```
 
-This writes a small static stub page per article to `story/<id>/index.html`,
-carrying that article's own headline, standfirst and image as Open Graph
-tags, then redirecting a human visitor straight into the app. Share
-`https://<site>/story/<id>/` instead of the `#/item/<id>` link and the
-preview will match that story.
+It writes `story/<id>/index.html` per article: an exact copy of the site
+shell with that article's own title and Open Graph tags swapped in between
+the `<!-- FISHNEWS:META:START/END -->` markers in `index.html`. A crawler
+sees the right preview immediately from those tags; a real browser loads the
+same app, which recognises the `/story/<id>/` path and renders that article
+directly (see `parseHash()` in `assets/fish-news.js`) — no redirect involved.
 
 It runs automatically in `.github/workflows/deploy.yml` before every deploy,
 using `CONFIG.siteUrl` in `assets/fish-news.js` (override per-deploy with a
