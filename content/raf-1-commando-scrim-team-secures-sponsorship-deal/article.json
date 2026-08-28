@@ -5,12 +5,12 @@
   "rank": "lead",
   "headline": "RAF 1 Commando Scrim Team Secures Sponsorship Deal",
   "byline": "Chunce Whatney",
-  "published": "2026-08-28T19:21:46+01:00",
+  "published": "2026-08-28T20:06:58+01:00",
+  "tags": ["uniforms"],
   "image": {
-    "src": "RAFCdoSponsors.png",
+    "src": "slimeshop1cdo.png",
     "alt": "Kit Sponsors"
   },
-  "tags": ["uniforms"],
   "body": [
     {
       "type": "paragraph",
@@ -21,7 +21,7 @@
       "text": "In news that has shocked absolutely no one following recent events at Tournament Grounds, RAF 1 Commando's Scrim Team has today announced a landmark sponsorship agreement with Fish News and tacteam, with kit generously supplied by SlimeStore."
     },
     {
-      "type" : "image",
+      "type": "image",
       "src": "RAFCdoSponsors.png",
       "alt": "Kit Sponsors"
     },

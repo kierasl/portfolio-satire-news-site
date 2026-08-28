@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-28T18:24:01Z",
+  "generated": "2026-08-28T19:07:00Z",
   "items": [
     {
       "id": "raf-1-commando-scrim-team-secures-sponsorship-deal",
@@ -7,9 +7,13 @@
       "section": "development",
       "headline": "RAF 1 Commando Scrim Team Secures Sponsorship Deal",
       "byline": "Chunce Whatney",
-      "published": "2026-08-28T19:21:46+01:00",
+      "published": "2026-08-28T20:06:58+01:00",
       "tags": ["uniforms"],
-      "rank": "lead"
+      "rank": "lead",
+      "image": {
+        "src": "RAFCdoSponsors.png",
+        "alt": "Kit Sponsors"
+      }
     },
     {
       "id": "success-against-usar",
