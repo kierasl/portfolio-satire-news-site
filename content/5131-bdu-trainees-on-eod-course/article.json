@@ -23,8 +23,10 @@
       "text": "The announcement was met with a mixture of pride and quiet dread across the MoD Wattleburn, with one training officer describing the group's first attempt at a controlled defusal as \"technically successful, in the sense that a building is still standing.\""
     },
     {
-      "type": "paragraph",
-      "text": "![BDU Trainees defusing devices](2026-08-04 EOD.png \"slimeytac\")"
+      "type": "image",
+      "src": "2026-08-04 EOD.png",
+      "alt": "EOD Trainees defusing devices",
+      "credit": "slimeytac"
     },
     {
       "type": "paragraph",
