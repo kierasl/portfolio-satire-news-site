@@ -394,7 +394,7 @@ function metaLine(item){
 }
 
 function leadCard(item){
-  return '<a class="lead" href="#/item/' + esc(item.id) + '">' +
+  return '<a class="lead" href="' + pathFor('item', item.id) + '">' +
     mediaBlock(item) +
     '<div class="lead-body">' +
       (item.kicker ? '<span class="kicker">' + esc(item.kicker) + '</span>' : '') +
@@ -407,7 +407,7 @@ function leadCard(item){
 
 function card(item, size){
   const h = size === 'large' ? 'h-lg' : (size === 'small' ? 'h-sm' : 'h-md');
-  return '<a class="card' + (item.type === 'video' ? ' video' : '') + '" href="#/item/' + esc(item.id) + '">' +
+  return '<a class="card' + (item.type === 'video' ? ' video' : '') + '" href="' + pathFor('item', item.id) + '">' +
     mediaBlock(item) +
     (item.kicker ? '<span class="kicker">' + esc(item.kicker) + '</span>' : '') +
     '<h3 class="' + h + '">' + esc(item.headline) + '</h3>' +
@@ -418,7 +418,7 @@ function card(item, size){
 
 function latestRail(items){
   const rows = items.slice(0, 9).map(function(it){
-    return '<li><a href="#/item/' + esc(it.id) + '">' +
+    return '<li><a href="' + pathFor('item', it.id) + '">' +
       '<span class="time"><span class="d">' + esc(shortDate(it.published)) + '</span>' +
         '<span class="t">' + esc(timeOf(it.published)) + '</span></span>' +
       '<span class="lt">' + esc(it.headline) +
@@ -438,7 +438,7 @@ function sectionHead(title, count, opts){
 }
 
 function archiveRow(item, flagFrontPage){
-  return '<li><a href="#/item/' + esc(item.id) + '">' +
+  return '<li><a href="' + pathFor('item', item.id) + '">' +
     '<span class="adate">' + esc(shortDate(item.published)) + '</span>' +
     '<span class="at">' + esc(item.headline) +
       (item.standfirst ? '<span class="adek">' + esc(item.standfirst) + '</span>' : '') +
@@ -504,14 +504,14 @@ function renderHome(){
 
   if(videos.length){
     html += sectionHead('Watch', videos.length + (videos.length === 1 ? ' film' : ' films'),
-      { accent: true, link: '#/section/video', linkText: 'All films' }) +
+      { accent: true, link: pathFor('section', 'video'), linkText: 'All films' }) +
       '<div class="video-rail">' + videos.map(i => card(i)).join('') + '</div>';
   }
 
   const archived = archiveItems();
   if(archived.length){
     html += sectionHead('From the archive', archived.length + ' older stories',
-      { link: '#/archive', linkText: 'Search the archive' }) +
+      { link: pathFor('archive'), linkText: 'Search the archive' }) +
       '<ul class="archive-list">' + archived.slice(0, 5).map(i => archiveRow(i)).join('') + '</ul>';
   }
 
@@ -573,7 +573,7 @@ function renderArchive(params){
           '<option value="' + s.id + '"' + (section === s.id ? ' selected' : '') + '>' + esc(s.name) + '</option>').join('') +
       '</select>' +
       '<button class="btn" type="submit">Search</button>' +
-      (q || section ? '<a class="btn ghost" href="#/archive">Clear</a>' : '') +
+      (q || section ? '<a class="btn ghost" href="' + pathFor('archive') + '">Clear</a>' : '') +
     '</form>' +
   '</div>';
 
@@ -601,7 +601,7 @@ async function renderItem(id){
   const img = imageFor(item);
 
   let html = '<article class="article">' +
-    '<a class="back" href="#/section/' + esc(item.section) + '">&larr; ' + esc(sectionName(item.section)) + '</a>' +
+    '<a class="back" href="' + pathFor('section', item.section) + '">&larr; ' + esc(sectionName(item.section)) + '</a>' +
     (item.kicker ? '<span class="kicker">' + esc(item.kicker) + '</span>' : '') +
     '<h1 class="h-xl">' + esc(item.headline) + '</h1>' +
     (item.standfirst ? '<p class="standfirst">' + esc(item.standfirst) + '</p>' : '') +
@@ -630,14 +630,14 @@ async function renderItem(id){
 
   if(item.tags && item.tags.length){
     html += '<div class="tag-row">' + item.tags.map(t =>
-      '<a class="tag" href="#/tag/' + encodeURIComponent(t) + '">' + esc(t) + '</a>').join('') + '</div>';
+      '<a class="tag" href="' + pathFor('tag', t) + '">' + esc(t) + '</a>').join('') + '</div>';
   }
   html += '</article>';
 
   const related = byNewest(state.items.filter(i => i.section === item.section && i.id !== item.id)).slice(0, 4);
   if(related.length){
     html += sectionHead('More from ' + sectionName(item.section), '',
-      { link: '#/section/' + item.section, linkText: 'All ' + sectionName(item.section) }) +
+      { link: pathFor('section', item.section), linkText: 'All ' + sectionName(item.section) }) +
       '<div class="more-grid">' + related.map(i => card(i, 'small')).join('') + '</div>';
   }
   return html;
@@ -733,7 +733,7 @@ function renderNotFound(detail){
   return '<div style="padding-top:40px">' + emptyState('That page is not here',
     '<p>The story may have been removed from the index, or the link may be wrong.</p>' +
     (detail ? '<p><code>' + esc(detail) + '</code></p>' : '') +
-    '<p><a class="btn" href="#/">Back to the front page</a></p>') + '</div>';
+    '<p><a class="btn" href="/">Back to the front page</a></p>') + '</div>';
 }
 
 function renderLoadError(){
@@ -756,7 +756,7 @@ function renderLoadError(){
 
 function buildNav(active){
   $('#navInner').innerHTML = SECTIONS.map(function(s){
-    const href = s.id === 'home' ? '#/' : (s.id === 'archive' ? '#/archive' : '#/section/' + s.id);
+    const href = s.id === 'home' ? '/' : (s.id === 'archive' ? pathFor('archive') : pathFor('section', s.id));
     return '<a href="' + href + '"' + (s.id === active ? ' aria-current="page"' : '') + '>' + esc(s.name) + '</a>';
   }).join('');
 }
@@ -776,44 +776,65 @@ function buildSponsors(){
    10. ROUTER
    ------------------------------------------------------------ */
 
-/* An article's permalink is a real path — /story/<id>/ — rather than a hash,
-   so a shared link, and the address bar while reading it, both show a URL a
-   crawler can actually fetch. Every other page stays hash-routed. When the
-   hash is empty and the path looks like a story permalink, route as if
-   "#/item/<id>" had been requested; otherwise parse the hash as normal. */
-function parseHash(){
-  const storyMatch = !location.hash && location.pathname.match(/^\/story\/([^/]+)\/?$/);
-  if(storyMatch) return { parts: ['item', decodeURIComponent(storyMatch[1])], params: {} };
-
-  const raw = (location.hash || '#/').replace(/^#/, '');
-  const [path, query] = raw.split('?');
-  const parts = path.split('/').filter(Boolean);
+/* Every page has a real path — / for home, /section/news/, /archive/,
+   /tag/<name>/, /story/<id>/, /about/, /contact/ — rather than a hash, so
+   every one of them is a URL a crawler or a hard reload can actually fetch.
+   The server has an .htaccess fallback that serves index.html for any path
+   that isn't a real file, so this is the only place that needs to know the
+   route shape; navigation happens via history.pushState (see wireNav()),
+   with a real link as the fallback for anything that isn't intercepted. */
+function parsePath(){
+  const parts = location.pathname.split('/').filter(Boolean).map(decodeURIComponent);
   const params = {};
+  const query = location.search.replace(/^\?/, '');
   if(query){
     query.split('&').forEach(function(pair){
       const [k, v] = pair.split('=');
       params[decodeURIComponent(k)] = decodeURIComponent((v || '').replace(/\+/g, ' '));
     });
   }
+  if(parts[0] === 'story' && parts[1]) return { parts: ['item', parts[1]], params: params };
   return { parts: parts, params: params };
 }
 
-/* Keeps the address bar matching what parseHash() would produce: a clean
-   /story/<id>/ permalink for an article, "/" plus the hash for everything
-   else. Runs on every route so both a hard load and in-app navigation land
-   on the same URL shape. */
-function normalizeUrl(parts){
-  const target = parts[0] === 'item' && parts[1]
-    ? '/story/' + encodeURIComponent(parts[1]) + '/'
-    : '/' + (location.hash || '#/');
-  if(location.pathname + location.hash !== target){
-    history.replaceState(null, '', target);
-  }
+/* Turns an internal route into the path used to link to it. Kept in sync
+   with parsePath()'s route shape above. */
+function pathFor(){
+  const args = Array.prototype.slice.call(arguments);
+  if(args[0] === 'item') return '/story/' + encodeURIComponent(args[1]) + '/';
+  if(args[0] === 'section') return '/section/' + encodeURIComponent(args[1]) + '/';
+  if(args[0] === 'tag') return '/tag/' + encodeURIComponent(args[1]) + '/';
+  if(args[0] === 'archive') return '/archive/' + (args[1] ? '?' + args[1] : '');
+  if(args[0] === 'about' || args[0] === 'contact') return '/' + args[0] + '/';
+  return '/';
+}
+
+/* Navigates to an internal path via the History API and re-renders, so
+   in-app clicks never trigger a full page reload. Falls back to a normal
+   navigation for anything that isn't a plain left-click on a same-origin
+   link (a new tab, a modified click, an external site, a same-page
+   fragment like the skip link, and — importantly — the browser's own back
+   and forward buttons, which go through popstate instead). */
+function go(url){
+  history.pushState(null, '', url);
+  route();
+}
+
+function wireNav(){
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a[href]');
+    if(!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    const href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#' || a.origin !== location.origin) return;
+    e.preventDefault();
+    go(a.href);
+  });
+  window.addEventListener('popstate', route);
 }
 
 async function route(){
-  const { parts, params } = parseHash();
-  normalizeUrl(parts);
+  const { parts, params } = parsePath();
   const view = $('#view');
 
   if(state.error){
@@ -864,7 +885,7 @@ function wirePage(){
       const parts = [];
       if(q) parts.push('q=' + encodeURIComponent(q));
       if(s) parts.push('section=' + encodeURIComponent(s));
-      location.hash = '#/archive' + (parts.length ? '?' + parts.join('&') : '');
+      go(pathFor('archive', parts.join('&')));
     });
     $('#archiveSection').addEventListener('change', function(){
       form.dispatchEvent(new Event('submit'));
@@ -887,6 +908,6 @@ function wirePage(){
   state.ready = true;
   buildSponsors();
 
-  window.addEventListener('hashchange', route);
+  wireNav();
   route();
 })();

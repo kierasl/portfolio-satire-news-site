@@ -1,0 +1,16 @@
+# Fish News is a client-rendered SPA that now uses real paths for every
+# page (/, /section/news/, /archive/, /tag/<name>/, /story/<id>/, /about/,
+# /contact/) instead of a #hash. In-app clicks are handled by JavaScript
+# (see wireNav() in assets/fish-news.js) and never hit the server, but a
+# hard reload or a link typed/shared directly needs the server to hand
+# back index.html for any of those paths so the app can boot and render
+# the right page client-side.
+#
+# Anything that IS a real file or directory — content/, assets/, a
+# generated story/<id>/ permalink page, favicon.ico — is left alone and
+# served as-is; only paths with no matching file fall back to index.html.
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
