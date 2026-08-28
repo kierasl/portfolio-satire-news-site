@@ -8,6 +8,7 @@
   "video": {
     "provider": "file",
     "url": "fishnewsfinal.mp4",
-    "duration": "0:10"
+    "duration": "0:10",
+    "poster": "finalframe.png"
   }
 }
