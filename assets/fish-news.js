@@ -39,7 +39,16 @@ const CONFIG = {
 
   /* How many tags to show in the rail under the navigation. */
   tagRailSize: 12,
+
+  /* The site's own public URL, used to build absolute links for article
+     link previews (Open Graph). Include the trailing slash. */
+  siteUrl: 'https://fish-news.tacteam.dev/',
 };
+
+/* Sponsor logos shown in the footer strip. Empty by default — add entries
+   like { name: 'Example Co', logo: 'example.png', url: 'https://example.com' }
+   with logo files placed in assets/sponsors/. */
+const SPONSORS = [];
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
@@ -419,7 +428,8 @@ function card(item, size){
 function latestRail(items){
   const rows = items.slice(0, 9).map(function(it){
     return '<li><a href="#/item/' + esc(it.id) + '">' +
-      '<span class="time">' + esc(timeOf(it.published)) + '</span>' +
+      '<span class="time"><span class="d">' + esc(shortDate(it.published)) + '</span>' +
+        '<span class="t">' + esc(timeOf(it.published)) + '</span></span>' +
       '<span class="lt">' + esc(it.headline) +
         '<span class="sec">' + esc(sectionName(it.section)) + (it.type === 'video' ? ' · Video' : '') + '</span>' +
       '</span></a></li>';
@@ -473,7 +483,7 @@ function emptyState(title, body){
    ------------------------------------------------------------ */
 
 function renderHome(){
-  document.title = 'Fish News — All the news that swims';
+  document.title = 'Fish News — With Chunce Whatney';
 
   if(!state.items.length){
     return emptyState('No stories loaded', '<p>The content index is empty. Add an article folder and list its id in ' +
@@ -555,15 +565,14 @@ function renderArchive(params){
   const section = params.section || '';
   const front = frontPageIds();
 
-  /* With no query the archive lists what has come off the front page.
-     With a query it searches everything, and marks anything still on the front. */
-  let pool = term ? byNewest(state.items) : archiveItems();
+  /* The archive lists every story on the site, newest first, until a
+     search term or section filter is used to narrow it down. */
+  let pool = byNewest(state.items);
   if(section) pool = pool.filter(i => i.section === section);
   if(term)    pool = pool.filter(i => matches(i, term));
 
   let html = '<div class="page-head"><h1>Archive</h1>' +
-    '<p>Every story that has come off the front page, newest first. Searching looks through the whole site, ' +
-    'including what is currently on the front.</p>' +
+    '<p>Every story Fish News has ever run, newest first. Search or filter by section to narrow it down.</p>' +
     '<form class="archive-search" id="archiveSearch" role="search">' +
       '<input type="search" id="archiveQ" name="q" value="' + esc(q) + '" ' +
         'placeholder="Search headlines, reporters and tags" aria-label="Search the archive">' +
@@ -586,7 +595,7 @@ function renderArchive(params){
       '<p>Try a shorter search term, or clear the section filter.</p>');
   }
 
-  return html + groupByMonth(pool, term ? front : null);
+  return html + groupByMonth(pool, front);
 }
 
 async function renderItem(id){
@@ -776,6 +785,17 @@ function buildTagRail(activeTag){
     '<a href="#/archive" style="border-style:dashed">All stories</a>';
 }
 
+function buildSponsors(){
+  const wrap = $('#sponsors');
+  if(!wrap || !SPONSORS.length){ if(wrap) wrap.hidden = true; return; }
+  wrap.hidden = false;
+  $('#sponsorsRow').innerHTML = SPONSORS.map(function(s){
+    const src = isAbsolute(s.logo) ? s.logo : 'assets/sponsors/' + s.logo;
+    const img = '<img src="' + esc(src) + '" alt="' + esc(s.name) + '" loading="lazy">';
+    return s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener sponsored">' + img + '</a>' : img;
+  }).join('');
+}
+
 /* ------------------------------------------------------------
    10. ROUTER
    ------------------------------------------------------------ */
@@ -870,6 +890,7 @@ function wirePage(){
 
   await loadContent();
   state.ready = true;
+  buildSponsors();
 
   window.addEventListener('hashchange', route);
   route();

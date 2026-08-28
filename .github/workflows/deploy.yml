@@ -9,6 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Generate article link previews
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://fish-news.tacteam.dev/' }}
+        run: node scripts/generate-previews.js
+
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
