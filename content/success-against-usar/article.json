@@ -7,6 +7,10 @@
   "byline": "Chunce Whatney",
   "location": "Tournament Grounds",
   "published": "2026-08-28T15:25:56+01:00",
+  "image": {
+    "src": "scrim-win.png",
+    "alt": "Winning Team"
+  },
   "body": [
     {
       "type": "paragraph",

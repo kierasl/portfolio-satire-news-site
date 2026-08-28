@@ -8,7 +8,12 @@
       "headline": "Success against USAR",
       "kicker": "combat",
       "byline": "Chunce Whatney",
-      "published": "2026-08-28T15:25:56+01:00"
+      "published": "2026-08-28T15:25:56+01:00",
+      "image": {
+        "src": "scrim-win.png",
+        "alt": "Successful Scrim Team",
+        "credit": "Chunce Whatney"
+      }
     },
     {
       "id": "chunce-escapes-quantanamo-bay-again",
