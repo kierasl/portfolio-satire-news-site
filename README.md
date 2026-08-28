@@ -313,6 +313,48 @@ tag list to maintain. Each one links to a page of everything carrying it.
 
 ---
 
+## Link previews for a specific article
+
+The site itself uses hash routing (`#/item/<id>`), and link-preview crawlers
+(Slack, Discord, iMessage, WhatsApp, X…) never run the JavaScript that reads
+the hash — they only ever see the one set of `<meta>` tags in `index.html`.
+
+To make a shared link preview pull from the article itself, run:
+
+```bash
+node scripts/generate-previews.js
+```
+
+This writes a small static stub page per article to `story/<id>/index.html`,
+carrying that article's own headline, standfirst and image as Open Graph
+tags, then redirecting a human visitor straight into the app. Share
+`https://<site>/story/<id>/` instead of the `#/item/<id>` link and the
+preview will match that story.
+
+It runs automatically in `.github/workflows/deploy.yml` before every deploy,
+using `CONFIG.siteUrl` in `assets/fish-news.js` (override per-deploy with a
+`SITE_URL` repository variable). `story/` is generated output — it is not
+committed, and does not need to be.
+
+---
+
+## Sponsor logos
+
+The footer has a spot for sponsor logos, hidden until you add some. Edit the
+`SPONSORS` array near the top of `assets/fish-news.js`:
+
+```js
+const SPONSORS = [
+  { name: 'Example Co', logo: 'example.png', url: 'https://example.com' }
+];
+```
+
+Logo files go in `assets/sponsors/`. `logo` can also be a full URL if the
+image is hosted elsewhere. `url` is optional — omit it for a logo that isn't
+a link.
+
+---
+
 ## Building the authoring tool
 
 Writing JSON by hand gets old quickly. Here is what a tool needs to do. Java

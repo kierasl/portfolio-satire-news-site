@@ -88,6 +88,7 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
   color:#fff;text-decoration:none;display:inline-flex;align-items:baseline;gap:.1em;
 }
 .wordmark .fin{color:var(--blue);}
+.logo-img{height:clamp(40px,6vw,64px);width:auto;display:block;}
 .masthead-meta{
   text-align:right;font-family:var(--display);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;line-height:1.9;color:rgba(255,255,255,.72);
@@ -191,9 +192,12 @@ main{display:block;padding-bottom:8px;min-height:50vh;}
 .latest a{display:flex;gap:12px;padding:13px 0;text-decoration:none;color:inherit;align-items:baseline;}
 .latest a:hover .lt{color:var(--royal);}
 .latest .time{
-  font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.06em;
-  color:var(--blue);flex:none;width:44px;padding-top:2px;
+  font-family:var(--display);font-weight:800;letter-spacing:.06em;
+  color:var(--blue);flex:none;width:52px;padding-top:2px;
+  display:flex;flex-direction:column;gap:2px;
 }
+.latest .time .d{font-size:10px;text-transform:uppercase;letter-spacing:.08em;}
+.latest .time .t{font-size:11px;}
 .latest .lt{font-family:var(--display);font-weight:600;font-size:14.5px;line-height:1.28;}
 .latest .sec{
   display:block;font-family:var(--display);font-weight:700;font-size:10px;
@@ -364,6 +368,24 @@ footer{background:var(--ink);color:#fff;margin-top:60px;}
   margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);
   font-size:13px;line-height:1.6;color:rgba(255,255,255,.6);
 }
+
+/* ---------- sponsors ---------- */
+.sponsors{
+  margin-top:30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16);
+}
+.sponsors-lbl{
+  display:block;font-family:var(--display);font-weight:800;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);
+  margin-bottom:16px;
+}
+.sponsors-row{display:flex;flex-wrap:wrap;align-items:center;gap:28px;}
+.sponsors-row a{display:inline-flex;align-items:center;}
+.sponsors-row img{
+  max-height:40px;width:auto;max-width:140px;
+  filter:grayscale(1) brightness(0) invert(1);opacity:.6;
+  transition:opacity .15s;
+}
+.sponsors-row a:hover img{opacity:1;}
 
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
