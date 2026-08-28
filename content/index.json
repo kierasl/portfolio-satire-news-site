@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-28T20:20:26Z",
+  "generated": "2026-08-28T20:21:03Z",
   "items": [
     {
       "id": "5131-bdu-trainees-on-eod-course",
@@ -9,6 +9,7 @@
       "kicker": "Who signed off on that waiver!?",
       "byline": "Chunce Whatney",
       "published": "2026-08-28T21:20:22+01:00",
+      "tags": ["rafp", "5131"],
       "rank": "lead",
       "image": {
         "src": "fish-news-eod.png",
