@@ -48,7 +48,12 @@ const CONFIG = {
 /* Sponsor logos shown in the footer strip. Empty by default — add entries
    like { name: 'Example Co', logo: 'example.png', url: 'https://example.com' }
    with logo files placed in assets/sponsors/. */
-const SPONSORS = [];
+const SPONSORS = [
+  {name: 'tacteam', logo: 'tacteam-colour.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
+  {name: 'slimestore', logo: 'slimestore-slimeshop.png', url: 'https://www.roblox.com/communities/15152355/slimestore'},
+  {name: 'RhymeyStudios', logo: 'rhymeystudios.png', url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'},
+  {name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
+];
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
