@@ -714,7 +714,7 @@ function renderStatic(kind){
       '<h3>Corrections</h3><p>We are never wrong.</p>' +
       '<h3>Funding</h3><p>You think we get paid for this?</p>' +
         '<h3>Ownership</h3><p>Part of <a href="https://www.roblox.com/communities/33115459/tacteam">tacteam</a></p>' +
-        '<p>nAlongside <a href="https://www.roblox.com/communities/15152355/slimestore">slimestore</a> and slimestore our clothing and sportswear brands</p>' +
+        '<p>nAlongside <a href="https://www.roblox.com/communities/15152355/slimestore">slimestore</a> and slimeshop our clothing and sportswear brands</p>' +
         '<p>And<a href="https://www.roblox.com/communities/7156667/RhymeyStudios">RhymeyStudios</a> Our milsim development group</p>' +
       '</div></div>';
   }
