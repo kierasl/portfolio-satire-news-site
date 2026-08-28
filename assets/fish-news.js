@@ -719,9 +719,9 @@ function renderStatic(kind){
   return '<div class="page-head"><h1>Contact</h1>' +
     '<p>Tips, corrections and complaints all go to the same inbox and get read by a person.</p></div>' +
     '<div class="article" style="padding-top:0"><div class="body-copy">' +
-    '<p><strong>Newsdesk</strong><br>hello@fishnews.example</p>' +
+    '<p><strong>Newsdesk</strong><br>Do not contact us</p>' +
     '<p><strong>Post</strong><br>Fish News Ltd, Milky Way</p>' +
-    '<h3>Sending something sensitive</h3><p>Use Signal rather than email, and do not send it from a work device or network.</p>' +
+    '<h3>Sending something sensitive</h3><p>See above</p>' +
     '</div></div>';
 }
 
