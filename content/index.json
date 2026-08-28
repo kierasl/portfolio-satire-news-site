@@ -1,6 +1,21 @@
 {
-  "generated": "2026-08-28T19:26:43Z",
+  "generated": "2026-08-28T20:20:26Z",
   "items": [
+    {
+      "id": "5131-bdu-trainees-on-eod-course",
+      "type": "article",
+      "section": "local-news",
+      "headline": "5131 BDU Trainees on EOD Course",
+      "kicker": "Who signed off on that waiver!?",
+      "byline": "Chunce Whatney",
+      "published": "2026-08-28T21:20:22+01:00",
+      "rank": "lead",
+      "image": {
+        "src": "fish-news-eod.png",
+        "alt": "EOD Propaganda",
+        "credit": "RhymeyStudios"
+      }
+    },
     {
       "id": "raf-1-commando-scrim-team-secures-sponsorship-deal",
       "type": "article",
@@ -11,7 +26,7 @@
       "tags": ["uniforms"],
       "rank": "lead",
       "image": {
-        "src": "RAFCdoSponsors.png",
+        "src": "slimeshop1cdo.png",
         "alt": "Kit Sponsors"
       }
     },
