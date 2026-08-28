@@ -708,11 +708,11 @@ function renderStatic(kind){
   if(kind === 'about'){
     document.title = 'About us — Fish News';
     return '<div class="page-head"><h1>About us</h1>' +
-      '<p>Fish News reports on the sea as a workplace, a habitat and a jurisdiction.</p></div>' +
+      '<p>Fish News reports on the sea and other shit we think is important.</p></div>' +
       '<div class="article" style="padding-top:0"><div class="body-copy">' +
-      '<p>We cover four things: what is in the water, who is allowed to take it out, what the measurements say, and what it is like to work at the edge of it. Everything else is somebody else\u2019s beat.</p>' +
-      '<h3>Corrections</h3><p>We correct errors at the top of the affected story and log them. If we have got something wrong, tell us.</p>' +
-      '<h3>Funding</h3><p>Reader subscriptions and a small research grant. We do not take money from fishing companies, processors or aquaculture operators.</p>' +
+      '<p>We report on Chunce\'s continued war crimes trials.</p>' +
+      '<h3>Corrections</h3><p>We are never wrong.</p>' +
+      '<h3>Funding</h3><p>You think we get paid for this?.</p>' +
       '</div></div>';
   }
   document.title = 'Contact — Fish News';
