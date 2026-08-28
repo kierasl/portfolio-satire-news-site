@@ -712,7 +712,7 @@ function renderStatic(kind){
       '<div class="article" style="padding-top:0"><div class="body-copy">' +
       '<p>We report on Chunce\'s continued war crimes trials.</p>' +
       '<h3>Corrections</h3><p>We are never wrong.</p>' +
-      '<h3>Funding</h3><p>You think we get paid for this?.</p>' +
+      '<h3>Funding</h3><p>You think we get paid for this?</p>' +
       '</div></div>';
   }
   document.title = 'Contact — Fish News';
