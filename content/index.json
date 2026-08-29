@@ -1,6 +1,17 @@
 {
-  "generated": "2026-08-29T19:13:55Z",
+  "generated": "2026-08-29T20:36:56Z",
   "items": [
+    {
+      "id": "1tpss-finally-receive-equipment",
+      "type": "article",
+      "section": "development",
+      "headline": "1TPSS finally receive equipment",
+      "standfirst": "tacteam finally comes through",
+      "kicker": "RAF Police Equipment",
+      "byline": "Chunce Whatney",
+      "published": "2026-08-29T21:35:49+01:00",
+      "tags": ["Uniforms", "RAFP", "1TPSS"]
+    },
     {
       "id": "hostage-rescue-exercise-declared-technically-successful",
       "type": "article",
@@ -11,7 +22,11 @@
       "byline": "Chunce Whatney",
       "published": "2026-08-29T19:42:43+01:00",
       "tags": ["1TPSS", "RAFP", "RAFR", "MSB", "4PS", "CPU", "CTU", "II Sqn RAFR"],
-      "rank": "lead"
+      "rank": "lead",
+      "image": {
+        "src": "1.png",
+        "alt": "Picture of the village before attack"
+      }
     },
     {
       "id": "fish-news-intro",
