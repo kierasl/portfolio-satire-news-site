@@ -61,6 +61,7 @@ const SECTIONS = [
   { id: 'policy',     name: 'Policy',     blurb: 'The rules as written, the rules as enforced, and the gap between the two that Fish News declines to comment on.' },
   { id: 'development',name: 'Development News',    blurb: 'Progress, reported faithfully, and defined loosely.' },
   { id: 'video',      name: 'Watch',      blurb: 'Video reporting fronted by Chunce Whatney, who Fish News continues to insist is impartial.'},
+  { id: 'tags',       name: 'Tags',       blurb: 'Every tag Fish News has used, busiest first.' },
   { id: 'archive',    name: 'Archive',    blurb: 'Everything that has come off the front page.' }
 ];
 
@@ -364,6 +365,22 @@ function archiveItems(){
   return byNewest(state.items.filter(i => !front.has(i.id)));
 }
 
+/* Every tag in use, deduped case-insensitively (first-seen casing wins),
+   sorted by how many stories carry it, most used first. */
+function tagCounts(){
+  const counts = new Map();
+  state.items.forEach(function(item){
+    (item.tags || []).forEach(function(t){
+      const key = t.toLowerCase();
+      if(!counts.has(key)) counts.set(key, { name: t, count: 0 });
+      counts.get(key).count++;
+    });
+  });
+  return Array.from(counts.values()).sort(function(a, b){
+    return b.count - a.count || a.name.localeCompare(b.name);
+  });
+}
+
 function matches(item, term){
   const hay = [item.headline, item.standfirst, item.byline, item.kicker, sectionName(item.section)]
     .concat(item.tags || []).join(' ').toLowerCase();
@@ -548,6 +565,24 @@ function renderTag(tag){
       '<p>Add it to the <code>tags</code> array in an article\u2019s JSON.</p>');
   }
   return html + '<div class="listing">' + items.map(i => card(i)).join('') + '</div>';
+}
+
+function renderTagsIndex(){
+  document.title = 'Tags — Fish News';
+  const tags = tagCounts();
+  let html = '<div class="page-head"><h1>Tags</h1>' +
+    '<p>Every tag Fish News has used, busiest first.</p></div>';
+
+  if(!tags.length){
+    return html + emptyState('No tags yet',
+      '<p>Add entries to an article’s <code>tags</code> array to see them here.</p>');
+  }
+
+  html += '<ul class="tag-cloud">' + tags.map(function(t){
+    return '<li><a class="tag" href="' + pathFor('tag', t.name) + '">' + esc(t.name) +
+      '<span class="tag-count">' + t.count + '</span></a></li>';
+  }).join('') + '</ul>';
+  return html;
 }
 
 function renderArchive(params){
@@ -796,7 +831,8 @@ function renderLoadError(){
 
 function buildNav(active){
   $('#navInner').innerHTML = SECTIONS.map(function(s){
-    const href = s.id === 'home' ? '/' : (s.id === 'archive' ? pathFor('archive') : pathFor('section', s.id));
+    const href = s.id === 'home' ? '/' : (s.id === 'archive' ? pathFor('archive') :
+      (s.id === 'tags' ? pathFor('tags') : pathFor('section', s.id)));
     return '<a href="' + href + '"' + (s.id === active ? ' aria-current="page"' : '') + '>' + esc(s.name) + '</a>';
   }).join('');
 }
@@ -845,6 +881,7 @@ function pathFor(){
   if(args[0] === 'section') return '/section/' + encodeURIComponent(args[1]) + '/';
   if(args[0] === 'tag') return '/tag/' + encodeURIComponent(args[1]) + '/';
   if(args[0] === 'archive') return '/archive/' + (args[1] ? '?' + args[1] : '');
+  if(args[0] === 'tags') return '/tags/';
   if(args[0] === 'about' || args[0] === 'contact') return '/' + args[0] + '/';
   return '/';
 }
@@ -894,6 +931,9 @@ async function route(){
   }else if(parts[0] === 'tag'){
     active = '';
     html = renderTag(parts[1]);
+  }else if(parts[0] === 'tags'){
+    active = 'tags';
+    html = renderTagsIndex();
   }else if(parts[0] === 'archive'){
     active = 'archive';
     html = renderArchive(params);
