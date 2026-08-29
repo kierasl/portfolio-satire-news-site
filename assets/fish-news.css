@@ -34,6 +34,9 @@ body{
   font-family:var(--body);
   font-size:17px;
   line-height:1.5;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;}
@@ -110,7 +113,10 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
 .archive-search input[type="search"]:focus{border-color:var(--royal);}
 
 /* ---------- page frame ---------- */
-main{display:block;padding-bottom:8px;min-height:50vh;}
+/* flex:1 0 auto on a flex body pushes the footer to the bottom of the
+   viewport on a short page, leaving spare space above it rather than a gap
+   below — and just scrolls normally once content is taller than the screen. */
+main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 .section-head{
   display:flex;align-items:baseline;gap:14px;
   border-top:3px solid var(--ink);padding-top:10px;margin:44px 0 20px;
