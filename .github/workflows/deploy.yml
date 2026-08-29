@@ -28,4 +28,4 @@ jobs:
 
       - name: Deploy with rsync
         run: |
-          rsync -avz --delete ./ ${{ secrets.DREAMHOST_USER }}@${{ secrets.DREAMHOST_HOST }}:${{ secrets.DREAMHOST_PATH }}
+          rsync -avz --delete --exclude=content/views.json ./ ${{ secrets.DREAMHOST_USER }}@${{ secrets.DREAMHOST_HOST }}:${{ secrets.DREAMHOST_PATH }}

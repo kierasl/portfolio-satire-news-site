@@ -609,6 +609,7 @@ async function renderItem(id){
       '<span class="byline">' + (item.byline ? '<b>' + esc(item.byline) + '</b>' : 'Fish News') + '</span>' +
       (item.location ? '<span class="byline">' + esc(item.location) + '</span>' : '') +
       '<span class="byline">' + esc(dateOf(item.published)) + ', ' + esc(timeOf(item.published)) + '</span>' +
+      '<span class="byline" id="viewCount"></span>' +
     '</div>';
 
   if(item.type === 'video'){
@@ -641,6 +642,21 @@ async function renderItem(id){
       '<div class="more-grid">' + related.map(i => card(i, 'small')).join('') + '</div>';
   }
   return html;
+}
+
+/* Counts this page load against the article's visit total (content/views.json,
+   served through api/visit.php) and fills in #viewCount once it responds.
+   Fails silently — a dev server with no PHP, or the endpoint being offline,
+   should never break the article itself. */
+function recordVisit(id){
+  fetch('/api/visit.php?id=' + encodeURIComponent(id))
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if(!data || typeof data.views !== 'number') return;
+      const el = $('#viewCount');
+      if(el) el.textContent = data.views.toLocaleString() + (data.views === 1 ? ' view' : ' views');
+    })
+    .catch(() => {});
 }
 
 function renderBlock(item, b){
@@ -862,6 +878,7 @@ async function route(){
     html = await renderItem(parts[1]);
     const meta = state.items.find(i => i.id === parts[1]);
     if(meta) active = meta.section;
+    recordVisit(parts[1]);
   }else if(parts[0] === 'about' || parts[0] === 'contact'){
     active = '';
     html = renderStatic(parts[0]);

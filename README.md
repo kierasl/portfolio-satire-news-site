@@ -6,11 +6,14 @@ A static news site. Three files of code, one folder of content. No framework, no
 fish-news/
 ├── index.html                     the shell — masthead, nav, footer
 ├── .htaccess                      SPA fallback so real URLs survive a hard reload (Apache)
+├── api/
+│   └── visit.php                  increments and returns an article's view count
 ├── assets/
 │   ├── fish-news.css              all styling
 │   └── fish-news.js               loading, routing and rendering
 ├── content/
 │   ├── index.json                 the list of everything published
+│   ├── views.json                 view counts per article id, written by api/visit.php
 │   ├── bluefin-donegal-inshore/
 │   │   ├── article.json           the story
 │   │   └── (images live here)
@@ -378,6 +381,35 @@ It runs automatically in `.github/workflows/deploy.yml` before every deploy,
 using `CONFIG.siteUrl` in `assets/fish-news.js` (override per-deploy with a
 `SITE_URL` repository variable). `story/` is generated output — it is not
 committed, and does not need to be.
+
+---
+
+## Visit counts
+
+Every article page records a visit and shows a running total ("142 views")
+next to the byline. No database — counts live in `content/views.json`, a
+single `{ "article-id": count, ... }` file, updated by `api/visit.php` on
+each page load.
+
+- `assets/fish-news.js` calls `GET /api/visit.php?id=<article-id>` when an
+  article renders (`recordVisit()`); the response fills in the view count
+  once it arrives, and a failed or missing endpoint (e.g. a plain
+  `python3 -m http.server` with no PHP) just leaves the count blank rather
+  than breaking the page.
+- `api/visit.php` validates the id, locks `content/views.json` with
+  `flock()`, increments that id's count, writes the file back and returns
+  the new total. `?peek=1` reads the count without incrementing it.
+- This needs a PHP-capable host — Dreamhost runs PHP by default, which is
+  why this works with no extra setup on the existing deploy. A static-only
+  host (GitHub Pages, S3, Netlify) can't run `visit.php`; the count will
+  just stay blank there.
+- **Deploys must not overwrite live counts.** `.github/workflows/deploy.yml`
+  rsyncs with `--delete`, mirroring the repo onto the server, so
+  `content/views.json` is excluded from that sync (`--exclude=content/views.json`)
+  — otherwise every deploy would reset every article back to whatever count
+  is committed in git. The file in the repo is just a `{}` starting point
+  for local dev; `visit.php` creates it on the server automatically if it's
+  ever missing.
 
 ---
 
