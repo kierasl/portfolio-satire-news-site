@@ -10,7 +10,7 @@
   "published": "2026-08-04T22:20:45+01:00",
   "tags": ["Doors", "Development"],
   "image": {
-    "src": "1.png",
+    "src": "door.png",
     "alt": "The New Door"
   },
   "body": [
@@ -25,6 +25,11 @@
     {
       "type": "paragraph",
       "text": "The door, described by engineering staff as \"structurally a door\" and \"technically successful\" in its primary function of separating one space from another, was fitted following what Fish News understands to have been a lengthy and largely uneventful procurement process."
+    },
+    {
+      "type": "image",
+      "src": "1.png",
+      "alt": "The New Door in Situ"
     },
     {
       "type": "paragraph",
