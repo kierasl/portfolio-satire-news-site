@@ -390,6 +390,7 @@ function metaLine(item){
   return '<div class="meta byline">' +
     (item.byline ? '<b>' + esc(item.byline) + '</b> · ' : '') +
     esc(sectionName(item.section)) + ' · ' + esc(relative(item.published)) +
+    '<span class="view-count" data-id="' + esc(item.id) + '"></span>' +
   '</div>';
 }
 
@@ -659,6 +660,29 @@ function recordVisit(id){
     .catch(() => {});
 }
 
+function viewLabel(n){
+  return n.toLocaleString() + (n === 1 ? ' view' : ' views');
+}
+
+/* Fills in the view counts on every card/lead on the current page in one
+   request, reading content/views.json directly rather than hitting
+   api/visit.php per card (which would also increment them). Silently does
+   nothing if the file can't be fetched. */
+function hydrateViewCounts(){
+  const spots = $$('.view-count[data-id]');
+  if(!spots.length) return;
+  fetch('/content/views.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(counts => {
+      if(!counts) return;
+      spots.forEach(el => {
+        const n = counts[el.dataset.id];
+        if(typeof n === 'number' && n > 0) el.textContent = ' · ' + viewLabel(n);
+      });
+    })
+    .catch(() => {});
+}
+
 function renderBlock(item, b){
   const type = b.type || (b.text ? 'paragraph' : '');
   switch(type){
@@ -889,6 +913,7 @@ async function route(){
   view.innerHTML = html;
   buildNav(active);
   wirePage();
+  hydrateViewCounts();
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
