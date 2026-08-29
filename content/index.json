@@ -1,6 +1,18 @@
 {
-  "generated": "2026-08-28T20:48:45Z",
+  "generated": "2026-08-29T19:13:55Z",
   "items": [
+    {
+      "id": "hostage-rescue-exercise-declared-technically-successful",
+      "type": "article",
+      "section": "news",
+      "headline": "Hostage Rescue Exercise Declared \"Technically Successful,\" Definition of Success Under Urgent Review",
+      "standfirst": "Who could've expected that?",
+      "kicker": "Combat Exercise Gone Wrong",
+      "byline": "Chunce Whatney",
+      "published": "2026-08-29T19:42:43+01:00",
+      "tags": ["1TPSS", "RAFP", "RAFR", "MSB", "4PS", "CPU", "CTU", "II Sqn RAFR"],
+      "rank": "lead"
+    },
     {
       "id": "fish-news-intro",
       "type": "video",
@@ -17,7 +29,7 @@
       "kicker": "Who signed off on that waiver!?",
       "byline": "Chunce Whatney",
       "published": "2026-08-28T21:20:22+01:00",
-      "tags": ["rafp", "5131"],
+      "tags": ["RAFP", "5131"],
       "rank": "lead",
       "image": {
         "src": "fish-news-eod.png",
@@ -30,9 +42,10 @@
       "type": "article",
       "section": "development",
       "headline": "RAF 1 Commando Scrim Team Secures Sponsorship Deal",
+      "kicker": "Local news company sponsoring",
       "byline": "Chunce Whatney",
       "published": "2026-08-28T20:06:58+01:00",
-      "tags": ["uniforms"],
+      "tags": ["Uniforms", "Commandos"],
       "rank": "lead",
       "image": {
         "src": "slimeshop1cdo.png",
@@ -44,9 +57,10 @@
       "type": "article",
       "section": "conflict",
       "headline": "Success against USAR",
-      "kicker": "combat",
+      "kicker": "Scrim Win for the Commandos",
       "byline": "Chunce Whatney",
       "published": "2026-08-28T15:25:56+01:00",
+      "tags": ["Commandos", "USAR", "Scrims"],
       "image": {
         "src": "scrim-win.png",
         "alt": "Winning Team"
@@ -56,7 +70,7 @@
       "id": "chunce-escapes-quantanamo-bay-again",
       "type": "article",
       "section": "news",
-      "headline": "Chunce Escapes Quantanamo Bay... Again...",
+      "headline": "Chunce Escapes Guantanamo Bay... Again...",
       "standfirst": "How does he keep doing this?",
       "kicker": "BREAKING FISH NEWS",
       "byline": "Chundeho Wutnay",
