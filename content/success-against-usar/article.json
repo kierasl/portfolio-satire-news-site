@@ -2,10 +2,11 @@
   "id": "success-against-usar",
   "type": "article",
   "section": "conflict",
-  "kicker": "combat",
+  "kicker": "Scrim Win for the Commandos",
   "headline": "Success against USAR",
   "byline": "Chunce Whatney",
   "location": "Tournament Grounds",
+  "tags": ["Commandos", "USAR", "Scrims"],
   "published": "2026-08-28T15:25:56+01:00",
   "image": {
     "src": "scrim-win.png",
