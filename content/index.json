@@ -96,20 +96,6 @@
         "alt": "Guantanamo Bay Camp Delta",
         "credit": "Britannica.com"
       }
-    },
-    {
-      "id": "welcome",
-      "type": "article",
-      "section": "news",
-      "headline": "Welcome to fish news",
-      "standfirst": "Welcome to Fish News",
-      "kicker": "Welcome",
-      "byline": "Chunce Whatney",
-      "published": "2026-08-04T16:16:19+01:00",
-      "image": {
-        "src": "fish-news-just-the-fish.png",
-        "alt": "Fish News Logo"
-      }
     }
   ]
 }
