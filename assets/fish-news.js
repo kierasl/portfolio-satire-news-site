@@ -55,12 +55,12 @@ const SPONSORS = [
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
-  { id: 'news',       name: 'News',       blurb: 'General news.' },
-  { id: 'conflict',   name: 'Conflict', blurb: 'Reporting from Conflict Zones.' },
-  { id: 'local-news', name: 'Local News',      blurb: 'News straight from your division (we make no promises that it is relevant to YOUR division).' },
-  { id: 'policy',     name: 'Policy',     blurb: 'News on Policy.' },
-  { id: 'development',name: 'Development News',    blurb: 'News about Development items.' },
-  { id: 'video',      name: 'Watch',      blurb: 'Dispatches from the boat, the lab and the seabed.' },
+  { id: 'news',       name: 'News',       blurb: 'The stories that matter, selected by whoever was on shift.' },
+  { id: 'conflict',   name: 'Conflict', blurb: 'Balanced reporting from both sides, whenever both sides return our calls.' },
+  { id: 'local-news', name: 'Local News',      blurb: 'Division news, reported as if we know which one you\'re in.' },
+  { id: 'policy',     name: 'Policy',     blurb: 'The rules as written, the rules as enforced, and the gap between the two that Fish News declines to comment on.' },
+  { id: 'development',name: 'Development News',    blurb: 'Progress, reported faithfully, and defined loosely.' },
+  { id: 'video',      name: 'Watch',      blurb: 'Video reporting fronted by Chunce Whatney, who Fish News continues to insist is impartial.'},
   { id: 'archive',    name: 'Archive',    blurb: 'Everything that has come off the front page.' }
 ];
 
