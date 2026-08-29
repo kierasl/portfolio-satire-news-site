@@ -314,6 +314,13 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
   padding:5px 10px;border-radius:2px;text-decoration:none;
 }
 .tag:hover{border-color:var(--magenta);color:var(--magenta);}
+.tag-cloud{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:6px 0 0;}
+.tag-cloud .tag{font-size:13px;padding:8px 12px;display:inline-flex;align-items:center;gap:8px;}
+.tag-cloud .tag-count{
+  font-family:var(--display);font-weight:700;font-size:11px;color:var(--white);
+  background:var(--muted);border-radius:10px;padding:1px 7px;line-height:1.5;
+}
+.tag-cloud .tag:hover .tag-count{background:var(--magenta);}
 
 /* ---------- states ---------- */
 .empty{text-align:center;padding:70px 20px;border:1px dashed var(--rule);background:var(--white);}
