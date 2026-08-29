@@ -442,7 +442,7 @@ function archiveRow(item, flagFrontPage){
   return '<li><a href="' + pathFor('item', item.id) + '">' +
     '<span class="adate">' + esc(shortDate(item.published)) + '</span>' +
     '<span class="at">' + esc(item.headline) +
-      (item.standfirst ? '<span class="adek">' + esc(item.standfirst) + '</span>' : '') +
+      (item.standfirst ? ' <span class="adek">' + esc(item.standfirst) + '</span>' : '') +
     '</span>' +
     '<span class="asec">' +
       (flagFrontPage ? 'Front page · ' : '') +
