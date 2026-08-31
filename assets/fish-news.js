@@ -387,10 +387,16 @@ function allSponsoredItems(){
   return items;
 }
 
-function randomSponsoredItem(){
+/* Up to n distinct deals, chosen at random (partial Fisher-Yates) — fewer
+   than n if the sponsors don't have that many between them. */
+function randomSponsoredItems(n){
   const items = allSponsoredItems();
-  if(!items.length) return null;
-  return items[Math.floor(Math.random() * items.length)];
+  const take = Math.min(n, items.length);
+  for(let i = 0; i < take; i++){
+    const j = i + Math.floor(Math.random() * (items.length - i));
+    const tmp = items[i]; items[i] = items[j]; items[j] = tmp;
+  }
+  return items.slice(0, take);
 }
 
 /* ------------------------------------------------------------
@@ -568,10 +574,10 @@ function renderHome(){
       '<div class="more-grid">' + remainder.map(i => card(i, 'small')).join('') + '</div>';
   }
 
-  const ad = randomSponsoredItem();
-  if(ad){
+  const ads = randomSponsoredItems(3);
+  if(ads.length){
     html += sectionHead('Sponsored', '') +
-      '<div class="ad-slot">' + adCard(ad.deal, ad.section) + '</div>';
+      '<div class="ad-slot">' + ads.map(a => adCard(a.deal, a.section)).join('') + '</div>';
   }
 
   if(videos.length){
