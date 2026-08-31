@@ -203,8 +203,21 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 }
 
 /* ---------- sponsored deals ---------- */
-.deal-card .media{background:var(--white);display:flex;align-items:center;justify-content:center;}
-.deal-card .media img{width:100%;height:100%;object-fit:contain;padding:20px;box-sizing:border-box;}
+.deal-section{margin-top:44px;}
+.deal-section:first-child{margin-top:0;}
+.deal-section-head{display:flex;justify-content:center;align-items:center;margin-bottom:22px;}
+.deal-section-head img{max-height:56px;max-width:220px;width:auto;height:auto;object-fit:contain;}
+.deal-section-head a{display:inline-flex;}
+.deal-section-name{
+  font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--royal);
+}
+/* auto-fill instead of the fixed 3-column .listing so a section with only
+   one or two deals doesn't leave a wall of empty grid columns beside them */
+.deal-grid{grid-template-columns:repeat(auto-fill,minmax(230px,max-content));justify-content:start;}
+.deal-card{width:230px;}
+.deal-card .media{aspect-ratio:1/1;background:var(--white);display:flex;align-items:center;justify-content:center;}
+.deal-card .media img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box;}
 
 /* ---------- page heads ---------- */
 .page-head{padding:36px 0 4px;border-bottom:1px solid var(--rule);margin-bottom:26px;}

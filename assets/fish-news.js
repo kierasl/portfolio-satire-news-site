@@ -54,33 +54,62 @@ const SPONSORS = [
 ];
 
 /* Sponsored deal cards shown on the Sponsored Deals page (linked from the
-   footer). Each entry needs a title, description, and url to hyperlink to;
-   image is optional — omit it to fall back to the generated cover art.
-   Images live in assets/sponsors/ alongside the sponsor logos above. */
+   footer), grouped into sections. Each section gets its own centred logo
+   header above a grid of its deal cards — add or remove as many sections,
+   and as many deals within each, as you like; a section with no deals is
+   skipped automatically, so there's no minimum.
+
+   Section fields: name (used as alt text/fallback heading), logo (optional
+   — filename in assets/sponsors/, or omit for a plain text heading), url
+   (optional — makes the logo/heading a link).
+
+   Deal fields: title, description, url (required — where the card links),
+   image (optional square/1:1 image, filename in assets/sponsors/ or an
+   absolute URL — omit to fall back to generated cover art). */
 const SPONSORED_DEALS = [
   {
-    title: 'tacteam — Join the community',
-    description: 'The group behind Fish News. Milsim operations, events and a place to hang out.',
-    image: 'tacteam-colour.png',
-    url: 'https://www.roblox.com/communities/33115459/tacteam'
+    section: { name: 'tacteam', logo: 'tacteam-colour.png', url: 'https://www.roblox.com/communities/33115459/tacteam' },
+    deals: [
+      {
+        title: 'Join the community',
+        description: 'The group behind Fish News. Milsim operations, events and a place to hang out.',
+        image: 'tacteam-colour.png',
+        url: 'https://www.roblox.com/communities/33115459/tacteam'
+      }
+    ]
   },
   {
-    title: 'slimestore & slimeshop',
-    description: 'Our clothing and sportswear brand. New drops posted regularly.',
-    image: 'slimestore-slimeshop.png',
-    url: 'https://www.roblox.com/communities/15152355/slimestore'
+    section: { name: 'slimestore & slimeshop', logo: 'slimestore-slimeshop.png', url: 'https://www.roblox.com/communities/15152355/slimestore' },
+    deals: [
+      {
+        title: 'New drops',
+        description: 'Our clothing and sportswear brand. New drops posted regularly.',
+        image: 'slimestore-slimeshop.png',
+        url: 'https://www.roblox.com/communities/15152355/slimestore'
+      }
+    ]
   },
   {
-    title: 'RhymeyStudios',
-    description: 'Our milsim development group, building the gear and maps you play on.',
-    image: 'rhymeystudios.png',
-    url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'
+    section: { name: 'RhymeyStudios', logo: 'rhymeystudios.png', url: 'https://www.roblox.com/communities/7156667/RhymeyStudios' },
+    deals: [
+      {
+        title: 'Join the studio',
+        description: 'Our milsim development group, building the gear and maps you play on.',
+        image: 'rhymeystudios.png',
+        url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'
+      }
+    ]
   },
   {
-    title: 'OSA Fried Chicken',
-    description: 'A Fish News sponsor. Ask them what that has to do with the sea.',
-    image: 'osaFriedChicken.png',
-    url: 'https://www.roblox.com/communities/33115459/tacteam'
+    section: { name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam' },
+    deals: [
+      {
+        title: 'OSA Fried Chicken',
+        description: 'A Fish News sponsor. Ask them what that has to do with the sea.',
+        image: 'osaFriedChicken.png',
+        url: 'https://www.roblox.com/communities/33115459/tacteam'
+      }
+    ]
   }
 ];
 
@@ -820,15 +849,34 @@ function dealCard(deal){
   '</a>';
 }
 
+/* Centred logo (or plain text) heading for one deal section. Falls back to
+   a text heading when the section has no logo, and to a bare span (rather
+   than a link) when it has no url — so every field beyond name is optional. */
+function dealSectionHead(section){
+  const inner = section.logo
+    ? '<img src="' + esc(isAbsolute(section.logo) ? section.logo : '/assets/sponsors/' + section.logo) + '" alt="' + esc(section.name || '') + '">'
+    : '<span class="deal-section-name">' + esc(section.name || '') + '</span>';
+  return '<div class="deal-section-head">' +
+    (section.url ? '<a href="' + esc(section.url) + '" target="_blank" rel="noopener sponsored">' + inner + '</a>' : inner) +
+  '</div>';
+}
+
 function renderSponsoredDeals(){
   document.title = 'Sponsored Deals — Fish News';
   let html = '<div class="page-head"><h1>Sponsored Deals</h1>' +
     '<p>Offers and links from the people who keep the lights on at Fish News.</p></div>';
 
-  if(!SPONSORED_DEALS.length){
+  const sections = (SPONSORED_DEALS || []).filter(s => s.deals && s.deals.length);
+  if(!sections.length){
     return html + emptyState('No deals right now', '<p>Check back later.</p>');
   }
-  return html + '<div class="listing deal-grid">' + SPONSORED_DEALS.map(dealCard).join('') + '</div>';
+
+  return html + sections.map(function(s){
+    return '<div class="deal-section">' +
+      (s.section ? dealSectionHead(s.section) : '') +
+      '<div class="listing deal-grid">' + s.deals.map(dealCard).join('') + '</div>' +
+    '</div>';
+  }).join('');
 }
 
 function renderStatic(kind){
