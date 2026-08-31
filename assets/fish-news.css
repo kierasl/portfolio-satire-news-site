@@ -300,7 +300,7 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 .deal-card .media img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box;}
 
 /* ---------- front-page ad slot ---------- */
-.ad-slot{display:flex;}
+.ad-slot{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--gut);}
 .ad-card{
   display:flex;flex-direction:column;width:100%;max-width:340px;
   border:1px solid var(--rule);border-radius:var(--radius-md);
