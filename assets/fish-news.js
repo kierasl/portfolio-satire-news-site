@@ -577,7 +577,7 @@ function renderHome(){
   const ads = randomSponsoredItems(3);
   if(ads.length){
     html += sectionHead('Sponsored', '') +
-      '<div class="sponsor-slot">' + ads.map(a => sponsorCard(a.deal, a.section)).join('') + '</div>';
+      '<div class="ad-slot">' + ads.map(a => adCard(a.deal, a.section)).join('') + '</div>';
   }
 
   if(videos.length){
@@ -852,17 +852,17 @@ function dealCard(deal){
 /* A single sponsored deal, presented on the front page as an "ad" card —
    same shape as a deal-page card, plus a "Sponsored" label up top and the
    sponsor's own logo along the bottom so it's never mistaken for a story. */
-function sponsorCard(deal, section){
+function adCard(deal, section){
   const fallback = coverArt(deal.title, false);
   const src = deal.image ? (isAbsolute(deal.image) ? deal.image : '/assets/sponsors/' + deal.image) : fallback;
   const logo = section && section.logo
-    ? '<div class="sponsor-card-foot">' +
+    ? '<div class="ad-sponsor-foot">' +
         imgTag(isAbsolute(section.logo) ? section.logo : '/assets/sponsors/' + section.logo,
           section.name || '', coverArt(section.name || 'sponsor', false)) +
       '</div>'
     : '';
-  return '<a class="card sponsor-card" href="' + esc(deal.url) + '" target="_blank" rel="noopener sponsored">' +
-    '<span class="kicker sponsor-kicker">Sponsored</span>' +
+  return '<a class="card ad-card" href="' + esc(deal.url) + '" target="_blank" rel="noopener sponsored">' +
+    '<span class="kicker ad-kicker">Sponsored</span>' +
     '<div class="media">' + imgTag(src, deal.title, fallback) + '</div>' +
     '<h3 class="h-md">' + esc(deal.title) + '</h3>' +
     (deal.description ? '<p class="dek">' + esc(deal.description) + '</p>' : '') +
