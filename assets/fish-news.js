@@ -372,6 +372,27 @@ async function loadSponsoredDeals(){
   return state.sponsoredDeals;
 }
 
+/* Every sponsored deal across every section, flattened, each one counting
+   as a single equally-weighted entry — a section with five deals is five
+   times as likely to turn up as one with a single deal, deliberately, so
+   the front-page ad slot isn't picking sponsors, it's picking deals. */
+function allSponsoredItems(){
+  const sections = state.sponsoredDeals || [];
+  const items = [];
+  sections.forEach(function(s){
+    (s.deals || []).forEach(function(d){
+      items.push({ deal: d, section: s.section || {} });
+    });
+  });
+  return items;
+}
+
+function randomSponsoredItem(){
+  const items = allSponsoredItems();
+  if(!items.length) return null;
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 /* ------------------------------------------------------------
    6. FRONT PAGE / ARCHIVE SPLIT
    ------------------------------------------------------------ */
@@ -545,6 +566,12 @@ function renderHome(){
   if(remainder.length){
     html += sectionHead('Also this week', remainder.length + ' stories') +
       '<div class="more-grid">' + remainder.map(i => card(i, 'small')).join('') + '</div>';
+  }
+
+  const ad = randomSponsoredItem();
+  if(ad){
+    html += sectionHead('Sponsored', '') +
+      '<div class="ad-slot">' + adCard(ad.deal, ad.section) + '</div>';
   }
 
   if(videos.length){
@@ -816,6 +843,27 @@ function dealCard(deal){
   '</a>';
 }
 
+/* A single sponsored deal, presented on the front page as an "ad" card —
+   same shape as a deal-page card, plus a "Sponsored" label up top and the
+   sponsor's own logo along the bottom so it's never mistaken for a story. */
+function adCard(deal, section){
+  const fallback = coverArt(deal.title, false);
+  const src = deal.image ? (isAbsolute(deal.image) ? deal.image : '/assets/sponsors/' + deal.image) : fallback;
+  const logo = section && section.logo
+    ? '<div class="ad-sponsor-foot">' +
+        imgTag(isAbsolute(section.logo) ? section.logo : '/assets/sponsors/' + section.logo,
+          section.name || '', coverArt(section.name || 'sponsor', false)) +
+      '</div>'
+    : '';
+  return '<a class="card ad-card" href="' + esc(deal.url) + '" target="_blank" rel="noopener sponsored">' +
+    '<span class="kicker ad-kicker">Sponsored</span>' +
+    '<div class="media">' + imgTag(src, deal.title, fallback) + '</div>' +
+    '<h3 class="h-md">' + esc(deal.title) + '</h3>' +
+    (deal.description ? '<p class="dek">' + esc(deal.description) + '</p>' : '') +
+    logo +
+  '</a>';
+}
+
 /* Centred logo (or plain text) heading for one deal section. Falls back to
    a text heading when the section has no logo, and to a bare span (rather
    than a link) when it has no url — so every field beyond name is optional. */
@@ -1083,7 +1131,10 @@ function wirePage(){
 
   $('#view').innerHTML = '<div class="loading">Loading Fish News</div>';
 
-  await loadContent();
+  await Promise.all([
+    loadContent(),
+    loadSponsoredDeals().catch(err => console.warn('Sponsored deals unavailable: ' + err.message))
+  ]);
   state.ready = true;
   buildSponsors();
 
