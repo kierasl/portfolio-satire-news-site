@@ -36,7 +36,15 @@
 <hr class="tie-rule">
 
 <nav class="nav" aria-label="Sections">
-  <div class="wrap nav-inner" id="navInner"></div>
+  <div class="wrap nav-inner">
+    <div class="nav-links" id="navInner"></div>
+    <form class="nav-search" id="topSearch" role="search">
+      <input type="search" id="topSearchQ" name="q" placeholder="Search Fish News" aria-label="Search Fish News">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M13.3 13.3 18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </div>
 </nav>
 
 <main id="main"><div class="wrap" id="view"></div></main>

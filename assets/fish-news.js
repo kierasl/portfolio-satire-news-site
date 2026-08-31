@@ -985,6 +985,19 @@ function wireNav(){
     go(a.href);
   });
   window.addEventListener('popstate', route);
+
+  /* The top-bar search lives outside #view (it's part of the permanent
+     chrome, not re-rendered per route), so it's wired once here rather
+     than in wirePage(). It always sends to the archive, which does the
+     actual filtering. */
+  const topSearch = $('#topSearch');
+  if(topSearch){
+    topSearch.addEventListener('submit', function(e){
+      e.preventDefault();
+      const q = $('#topSearchQ').value.trim();
+      go(pathFor('archive', q ? 'q=' + encodeURIComponent(q) : ''));
+    });
+  }
 }
 
 async function route(){
@@ -1036,6 +1049,9 @@ async function route(){
   wirePage();
   hydrateViewCounts();
   window.scrollTo({ top: 0, behavior: 'auto' });
+
+  const topSearchQ = $('#topSearchQ');
+  if(topSearchQ) topSearchQ.value = parts[0] === 'archive' ? (params.q || '') : '';
 }
 
 function wirePage(){
