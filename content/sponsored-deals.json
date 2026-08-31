@@ -11,6 +11,12 @@
         "description": "Milsim experience used for training.",
         "image": "tacteam/Bavaria.png",
         "url": "https://www.roblox.com/games/14832913941/Krottenkopf-Bavaria-Germany"
+      },
+      {
+        "title": "MoD Wattleburn",
+        "description": "General map used for conducting training.",
+        "image": "tacteam/Bavaria.png",
+        "url": "https://www.roblox.com/games/138640140018829/MOD-Wattleburn"
       }
     ]
   },
@@ -23,9 +29,15 @@
     "deals": [
       {
         "title": "Pride Shirt 2026",
-        "description": "Show your colours with our 2026 Pride shirt!.",
+        "description": "Show your colours with our 2026 Pride shirt!",
         "image": "slimestore/PrideShirt.png",
         "url": "https://www.roblox.com/catalog/85087879169066/SLIMESHOP-Pride-Shirt"
+      },
+      {
+        "title": "Fish News Shirt",
+        "description": "Support everyone's favourite unbias news organisation with this shirt! (Sample size: 2)",
+        "image": "slimestore/FishNewsShirt.png",
+        "url": "https://www.roblox.com/catalog/78384735017384/SLIMESHOP-Fish-News-Jersey"
       }
     ]
   },
@@ -47,7 +59,7 @@
   {
     "section": {
       "name": "OSA Fried Chicken",
-      "logo": "osaFriedChicken.png",
+      "logo": "osaFriedChicken/Chicken Coloured.png",
       "url": "https://www.roblox.com/communities/33115459/tacteam"
     },
     "deals": [
