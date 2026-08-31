@@ -52,7 +52,7 @@ const CONFIG = {
    with logo files placed in assets/sponsors/. */
 const SPONSORS = [
   {name: 'tacteam', logo: 'tacteam-colour.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
-  {name: 'slimestore', logo: 'slimestore-slimeshop.png', url: 'https://www.roblox.com/communities/15152355/slimestore'},
+  {name: 'slimestore', logo: 'slimestore.png', url: 'https://www.roblox.com/communities/15152355/slimestore'},
   {name: 'RhymeyStudios', logo: 'rhymeystudios.png', url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'},
   {name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
 ];
