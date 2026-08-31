@@ -53,6 +53,37 @@ const SPONSORS = [
   {name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
 ];
 
+/* Sponsored deal cards shown on the Sponsored Deals page (linked from the
+   footer). Each entry needs a title, description, and url to hyperlink to;
+   image is optional — omit it to fall back to the generated cover art.
+   Images live in assets/sponsors/ alongside the sponsor logos above. */
+const SPONSORED_DEALS = [
+  {
+    title: 'tacteam — Join the community',
+    description: 'The group behind Fish News. Milsim operations, events and a place to hang out.',
+    image: 'tacteam-colour.png',
+    url: 'https://www.roblox.com/communities/33115459/tacteam'
+  },
+  {
+    title: 'slimestore & slimeshop',
+    description: 'Our clothing and sportswear brand. New drops posted regularly.',
+    image: 'slimestore-slimeshop.png',
+    url: 'https://www.roblox.com/communities/15152355/slimestore'
+  },
+  {
+    title: 'RhymeyStudios',
+    description: 'Our milsim development group, building the gear and maps you play on.',
+    image: 'rhymeystudios.png',
+    url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'
+  },
+  {
+    title: 'OSA Fried Chicken',
+    description: 'A Fish News sponsor. Ask them what that has to do with the sea.',
+    image: 'osaFriedChicken.png',
+    url: 'https://www.roblox.com/communities/33115459/tacteam'
+  }
+];
+
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
   { id: 'news',       name: 'News',       blurb: 'The stories that matter, selected by whoever was on shift.' },
@@ -779,6 +810,27 @@ function videoPlayer(item){
   '</div></div>';
 }
 
+function dealCard(deal){
+  const fallback = coverArt(deal.title, false);
+  const src = deal.image ? (isAbsolute(deal.image) ? deal.image : '/assets/sponsors/' + deal.image) : fallback;
+  return '<a class="card deal-card" href="' + esc(deal.url) + '" target="_blank" rel="noopener sponsored">' +
+    '<div class="media">' + imgTag(src, deal.title, fallback) + '</div>' +
+    '<h3 class="h-md">' + esc(deal.title) + '</h3>' +
+    (deal.description ? '<p class="dek">' + esc(deal.description) + '</p>' : '') +
+  '</a>';
+}
+
+function renderSponsoredDeals(){
+  document.title = 'Sponsored Deals — Fish News';
+  let html = '<div class="page-head"><h1>Sponsored Deals</h1>' +
+    '<p>Offers and links from the people who keep the lights on at Fish News.</p></div>';
+
+  if(!SPONSORED_DEALS.length){
+    return html + emptyState('No deals right now', '<p>Check back later.</p>');
+  }
+  return html + '<div class="listing deal-grid">' + SPONSORED_DEALS.map(dealCard).join('') + '</div>';
+}
+
 function renderStatic(kind){
   if(kind === 'about'){
     document.title = 'About us — Fish News';
@@ -882,6 +934,7 @@ function pathFor(){
   if(args[0] === 'tag') return '/tag/' + encodeURIComponent(args[1]) + '/';
   if(args[0] === 'archive') return '/archive/' + (args[1] ? '?' + args[1] : '');
   if(args[0] === 'tags') return '/tags/';
+  if(args[0] === 'sponsored-deals') return '/sponsored-deals/';
   if(args[0] === 'about' || args[0] === 'contact') return '/' + args[0] + '/';
   return '/';
 }
@@ -943,6 +996,9 @@ async function route(){
     const meta = state.items.find(i => i.id === parts[1]);
     if(meta) active = meta.section;
     recordVisit(parts[1]);
+  }else if(parts[0] === 'sponsored-deals'){
+    active = '';
+    html = renderSponsoredDeals();
   }else if(parts[0] === 'about' || parts[0] === 'contact'){
     active = '';
     html = renderStatic(parts[0]);
