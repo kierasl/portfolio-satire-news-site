@@ -7,6 +7,12 @@
     },
     "deals": [
       {
+        "title": "tacplank",
+        "description": "The greatest (citation needed) plank game on Roblox.",
+        "image": "tacteam/tacplank.png",
+        "url": "https://www.roblox.com/games/70936273267700/tacplank"
+      },
+      {
         "title": "Krottenkopf, Bavaria",
         "description": "Milsim experience used for training.",
         "image": "tacteam/Bavaria.png",
@@ -28,16 +34,34 @@
     },
     "deals": [
       {
+        "title": "Fish News Shirt",
+        "description": "Support everyone's favourite unbias news organisation with this shirt! (Sample size: 2)",
+        "image": "slimestore/FishNewsShirt.png",
+        "url": "https://www.roblox.com/catalog/78384735017384/SLIMESHOP-Fish-News-Jersey"
+      },
+      {
         "title": "Pride Shirt 2026",
         "description": "Show your colours with our 2026 Pride shirt!",
         "image": "slimestore/PrideShirt.png",
         "url": "https://www.roblox.com/catalog/85087879169066/SLIMESHOP-Pride-Shirt"
       },
       {
-        "title": "Fish News Shirt",
-        "description": "Support everyone's favourite unbias news organisation with this shirt! (Sample size: 2)",
-        "image": "slimestore/FishNewsShirt.png",
-        "url": "https://www.roblox.com/catalog/78384735017384/SLIMESHOP-Fish-News-Jersey"
+        "title": "Royal Air Force Jersey",
+        "description": "Royal Air Force themed sports jersey.",
+        "image": "slimestore/RAF Jersey.png",
+        "url": "https://www.roblox.com/catalog/129702046628381/SLIMESHOP-RAF-Jersey"
+      },
+      {
+        "title": "1TPSS Supporters Jersey",
+        "description": "The Official supporters jersey for 1TPSS teams.",
+        "image": "slimestore/TPSS Jersey.png",
+        "url": "https://www.roblox.com/catalog/70441806275520/SLIMESHOP-1TPSS-Jersey"
+      },
+      {
+        "title": "1CD Supporters Jersey",
+        "description": "The Official supporters jersey for the 1CD Scrim Team.",
+        "image": "slimestore/1CD Jersey.png",
+        "url": "https://www.roblox.com/catalog/129101639432540/SLIMESHOP-RAF-1CD-Supporter-Jersey"
       }
     ]
   },
