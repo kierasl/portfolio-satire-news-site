@@ -33,8 +33,14 @@
   --radius-md: 8px;
   --radius-lg: 14px;
 
+  /* One sans-serif family site-wide — --body and --display used to point
+     at different fonts (a serif body face alongside the sans display
+     face); both now resolve to the same Archivo stack so every element,
+     prose included, renders consistently. Kept as two variables since
+     call sites still reach for them semantically (body copy vs. UI/
+     headings) even though the value is shared. */
   --display: 'Archivo','Helvetica Neue',Arial,sans-serif;
-  --body:    'Newsreader',Georgia,'Times New Roman',serif;
+  --body:    'Archivo','Helvetica Neue',Arial,sans-serif;
 
   --gut: 28px;
   --pad: 32px;
