@@ -1,0 +1,62 @@
+[
+  {
+    "section": {
+      "name": "tacteam",
+      "logo": "tacteam-colour.png",
+      "url": "https://www.roblox.com/communities/33115459/tacteam"
+    },
+    "deals": [
+      {
+        "title": "Join the community",
+        "description": "The group behind Fish News. Milsim operations, events and a place to hang out.",
+        "image": "tacteam-colour.png",
+        "url": "https://www.roblox.com/communities/33115459/tacteam"
+      }
+    ]
+  },
+  {
+    "section": {
+      "name": "slimestore & slimeshop",
+      "logo": "slimestore-slimeshop.png",
+      "url": "https://www.roblox.com/communities/15152355/slimestore"
+    },
+    "deals": [
+      {
+        "title": "New drops",
+        "description": "Our clothing and sportswear brand. New drops posted regularly.",
+        "image": "slimestore-slimeshop.png",
+        "url": "https://www.roblox.com/communities/15152355/slimestore"
+      }
+    ]
+  },
+  {
+    "section": {
+      "name": "RhymeyStudios",
+      "logo": "rhymeystudios.png",
+      "url": "https://www.roblox.com/communities/7156667/RhymeyStudios"
+    },
+    "deals": [
+      {
+        "title": "Join the studio",
+        "description": "Our milsim development group, building the gear and maps you play on.",
+        "image": "rhymeystudios.png",
+        "url": "https://www.roblox.com/communities/7156667/RhymeyStudios"
+      }
+    ]
+  },
+  {
+    "section": {
+      "name": "OSA Fried Chicken",
+      "logo": "osaFriedChicken.png",
+      "url": "https://www.roblox.com/communities/33115459/tacteam"
+    },
+    "deals": [
+      {
+        "title": "OSA Fried Chicken",
+        "description": "A Fish News sponsor. Ask them what that has to do with the sea.",
+        "image": "osaFriedChicken.png",
+        "url": "https://www.roblox.com/communities/33115459/tacteam"
+      }
+    ]
+  }
+]

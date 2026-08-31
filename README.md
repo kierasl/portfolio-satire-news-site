@@ -430,6 +430,40 @@ a link.
 
 ---
 
+## Sponsored deals
+
+The footer also links to `/sponsored-deals/`, a page of sponsor deal cards
+grouped into sections — each section gets a centred logo above a grid of its
+own cards. It's read from `content/sponsored-deals.json`
+(`CONFIG.sponsoredDealsUrl` in `assets/fish-news.js` if you want it
+elsewhere), so it can be edited on its own without touching any JS:
+
+```json
+[
+  {
+    "section": { "name": "Example Co", "logo": "example.png", "url": "https://example.com" },
+    "deals": [
+      {
+        "title": "20% off everything",
+        "description": "One line on what the deal actually is.",
+        "image": "example-deal.png",
+        "url": "https://example.com/deal"
+      }
+    ]
+  }
+]
+```
+
+Add as many sections as you like, and as many `deals` within each as you
+like — the grid wraps to fit. A section with an empty `deals` array is
+skipped. `section.logo` and `section.url` are optional (falls back to a
+plain text heading, and a non-linked heading, respectively); `deal.image` is
+optional too (falls back to generated cover art) but should be roughly
+square — cards crop it to 1:1. Image filenames resolve against
+`assets/sponsors/`, same as sponsor logos above; a full URL also works.
+
+---
+
 ## Building the authoring tool
 
 Writing JSON by hand gets old quickly. Here is what a tool needs to do. Java

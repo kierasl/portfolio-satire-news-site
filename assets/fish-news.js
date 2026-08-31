@@ -41,6 +41,10 @@ const CONFIG = {
   /* The site's own public URL, used to build absolute links for article
      link previews (Open Graph). Include the trailing slash. */
   siteUrl: 'https://fish-news.tacteam.dev/',
+
+  /* Where the Sponsored Deals page reads its sections/cards from. See the
+     SPONSORED_DEALS comment below for the shape of that file. */
+  sponsoredDealsUrl: '/content/sponsored-deals.json',
 };
 
 /* Sponsor logos shown in the footer strip. Empty by default — add entries
@@ -54,10 +58,11 @@ const SPONSORS = [
 ];
 
 /* Sponsored deal cards shown on the Sponsored Deals page (linked from the
-   footer), grouped into sections. Each section gets its own centred logo
-   header above a grid of its deal cards — add or remove as many sections,
-   and as many deals within each, as you like; a section with no deals is
-   skipped automatically, so there's no minimum.
+   footer) are read from CONFIG.sponsoredDealsUrl, grouped into sections.
+   Each section gets its own centred logo header above a grid of its deal
+   cards — add or remove as many sections, and as many deals within each,
+   as you like in that JSON file; a section with no deals is skipped
+   automatically, so there's no minimum.
 
    Section fields: name (used as alt text/fallback heading), logo (optional
    — filename in assets/sponsors/, or omit for a plain text heading), url
@@ -66,52 +71,6 @@ const SPONSORS = [
    Deal fields: title, description, url (required — where the card links),
    image (optional square/1:1 image, filename in assets/sponsors/ or an
    absolute URL — omit to fall back to generated cover art). */
-const SPONSORED_DEALS = [
-  {
-    section: { name: 'tacteam', logo: 'tacteam-colour.png', url: 'https://www.roblox.com/communities/33115459/tacteam' },
-    deals: [
-      {
-        title: 'Join the community',
-        description: 'The group behind Fish News. Milsim operations, events and a place to hang out.',
-        image: 'tacteam-colour.png',
-        url: 'https://www.roblox.com/communities/33115459/tacteam'
-      }
-    ]
-  },
-  {
-    section: { name: 'slimestore & slimeshop', logo: 'slimestore-slimeshop.png', url: 'https://www.roblox.com/communities/15152355/slimestore' },
-    deals: [
-      {
-        title: 'New drops',
-        description: 'Our clothing and sportswear brand. New drops posted regularly.',
-        image: 'slimestore-slimeshop.png',
-        url: 'https://www.roblox.com/communities/15152355/slimestore'
-      }
-    ]
-  },
-  {
-    section: { name: 'RhymeyStudios', logo: 'rhymeystudios.png', url: 'https://www.roblox.com/communities/7156667/RhymeyStudios' },
-    deals: [
-      {
-        title: 'Join the studio',
-        description: 'Our milsim development group, building the gear and maps you play on.',
-        image: 'rhymeystudios.png',
-        url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'
-      }
-    ]
-  },
-  {
-    section: { name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam' },
-    deals: [
-      {
-        title: 'OSA Fried Chicken',
-        description: 'A Fish News sponsor. Ask them what that has to do with the sea.',
-        image: 'osaFriedChicken.png',
-        url: 'https://www.roblox.com/communities/33115459/tacteam'
-      }
-    ]
-  }
-];
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
@@ -132,6 +91,7 @@ const SECTIONS = [
 const state = {
   items: [],        // index metadata for every item
   full: {},         // id -> complete article, cached after first fetch
+  sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
   ready: false,
   error: null
 };
@@ -403,6 +363,13 @@ async function loadItem(id){
   if(!data.id) data.id = id;
   state.full[id] = data;
   return data;
+}
+
+async function loadSponsoredDeals(){
+  if(state.sponsoredDeals) return state.sponsoredDeals;
+  const data = await fetchJson(CONFIG.sponsoredDealsUrl);
+  state.sponsoredDeals = Array.isArray(data) ? data : [];
+  return state.sponsoredDeals;
 }
 
 /* ------------------------------------------------------------
@@ -861,12 +828,21 @@ function dealSectionHead(section){
   '</div>';
 }
 
-function renderSponsoredDeals(){
+async function renderSponsoredDeals(){
   document.title = 'Sponsored Deals — Fish News';
   let html = '<div class="page-head"><h1>Sponsored Deals</h1>' +
     '<p>Offers and links from the people who keep the lights on at Fish News.</p></div>';
 
-  const sections = (SPONSORED_DEALS || []).filter(s => s.deals && s.deals.length);
+  let all;
+  try{
+    all = await loadSponsoredDeals();
+  }catch(err){
+    return html + emptyState('Could not load the deals',
+      '<p>Nothing came back from <code>' + esc(CONFIG.sponsoredDealsUrl) + '</code>.</p>' +
+      '<p><code>' + esc(err.message) + '</code></p>');
+  }
+
+  const sections = (all || []).filter(s => s.deals && s.deals.length);
   if(!sections.length){
     return html + emptyState('No deals right now', '<p>Check back later.</p>');
   }
@@ -1046,7 +1022,8 @@ async function route(){
     recordVisit(parts[1]);
   }else if(parts[0] === 'sponsored-deals'){
     active = '';
-    html = renderSponsoredDeals();
+    view.innerHTML = '<div class="loading">Loading</div>';
+    html = await renderSponsoredDeals();
   }else if(parts[0] === 'about' || parts[0] === 'contact'){
     active = '';
     html = renderStatic(parts[0]);
