@@ -214,7 +214,7 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 }
 /* auto-fill instead of the fixed 3-column .listing so a section with only
    one or two deals doesn't leave a wall of empty grid columns beside them */
-.deal-grid{grid-template-columns:repeat(auto-fill,minmax(230px,max-content));justify-content:start;}
+.deal-grid{grid-template-columns:repeat(auto-fill,minmax(230px,max-content));justify-content:center;}
 .deal-card{width:230px;}
 .deal-card .media{aspect-ratio:1/1;background:var(--white);display:flex;align-items:center;justify-content:center;}
 .deal-card .media img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box;}
