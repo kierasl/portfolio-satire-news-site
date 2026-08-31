@@ -779,6 +779,17 @@ function hydrateViewCounts(){
     .catch(() => {});
 }
 
+/* Keeps the sponsored-ad grid to a single row: the CSS grid already works
+   out how many cards fit the current width, so this just hides whatever
+   spilled into a second row by comparing each card's offsetTop to the
+   first one's. Re-run on resize so it grows back as space returns. */
+function layoutSponsoredRow(){
+  const cards = $$('.ad-card');
+  if(!cards.length) return;
+  const top = cards[0].offsetTop;
+  cards.forEach(c => { c.hidden = c.offsetTop !== top; });
+}
+
 function renderBlock(item, b){
   const type = b.type || (b.text ? 'paragraph' : '');
   switch(type){
@@ -1041,6 +1052,12 @@ function wireNav(){
   });
   window.addEventListener('popstate', route);
 
+  let resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layoutSponsoredRow, 120);
+  });
+
   /* The top-bar search lives outside #view (it's part of the permanent
      chrome, not re-rendered per route), so it's wired once here rather
      than in wirePage(). It always sends to the archive, which does the
@@ -1103,6 +1120,7 @@ async function route(){
   buildNav(active);
   wirePage();
   hydrateViewCounts();
+  layoutSponsoredRow();
   window.scrollTo({ top: 0, behavior: 'auto' });
 
   const topSearchQ = $('#topSearchQ');
