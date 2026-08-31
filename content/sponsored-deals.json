@@ -7,25 +7,25 @@
     },
     "deals": [
       {
-        "title": "Join the community",
-        "description": "The group behind Fish News. Milsim operations, events and a place to hang out.",
-        "image": "tacteam-colour.png",
-        "url": "https://www.roblox.com/communities/33115459/tacteam"
+        "title": "Krottenkopf, Bavaria",
+        "description": "Milsim experience used for training.",
+        "image": "tacteam/Bavaria.png",
+        "url": "https://www.roblox.com/games/14832913941/Krottenkopf-Bavaria-Germany"
       }
     ]
   },
   {
     "section": {
-      "name": "slimestore & slimeshop",
+      "name": "slimestore",
       "logo": "slimestore-slimeshop.png",
       "url": "https://www.roblox.com/communities/15152355/slimestore"
     },
     "deals": [
       {
-        "title": "New drops",
-        "description": "Our clothing and sportswear brand. New drops posted regularly.",
-        "image": "slimestore-slimeshop.png",
-        "url": "https://www.roblox.com/communities/15152355/slimestore"
+        "title": "Pride Shirt 2026",
+        "description": "Show your colours with our 2026 Pride shirt!.",
+        "image": "slimestore/PrideShirt.png",
+        "url": "https://www.roblox.com/catalog/85087879169066/SLIMESHOP-Pride-Shirt"
       }
     ]
   },
@@ -54,7 +54,7 @@
       {
         "title": "OSA Fried Chicken",
         "description": "A Fish News sponsor. Ask them what that has to do with the sea.",
-        "image": "osaFriedChicken.png",
+        "image": "osaFriedChicken/osaFCChicken.png",
         "url": "https://www.roblox.com/communities/33115459/tacteam"
       }
     ]
