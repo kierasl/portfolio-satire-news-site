@@ -112,6 +112,17 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
 }
 .archive-search input[type="search"]:focus{border-color:var(--royal);}
 
+.archive-search select,.archive-bar select{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.02em;
+  padding:11px 34px 11px 14px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--white) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="%23121862" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 13px center;
+  color:var(--ink);cursor:pointer;transition:border-color .15s;
+}
+.archive-search select{font-size:15px;padding:13px 36px 13px 15px;}
+.archive-search select:hover,.archive-bar select:hover{border-color:var(--peri);}
+.archive-search select:focus,.archive-bar select:focus{border-color:var(--royal);}
+
 /* ---------- page frame ---------- */
 /* flex:1 0 auto on a flex body pushes the footer to the bottom of the
    viewport on a short page, leaving spare space above it rather than a gap
@@ -232,10 +243,6 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 .archive-bar label{
   font-family:var(--display);font-weight:700;font-size:10.5px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-}
-.archive-bar select{
-  font-family:var(--display);font-size:13px;padding:9px 12px;
-  border:1px solid var(--rule);background:var(--white);color:var(--ink);border-radius:2px;
 }
 .archive-bar .tally{
   margin-left:auto;font-family:var(--display);font-size:11px;
