@@ -41,6 +41,10 @@ const CONFIG = {
   /* The site's own public URL, used to build absolute links for article
      link previews (Open Graph). Include the trailing slash. */
   siteUrl: 'https://fish-news.tacteam.dev/',
+
+  /* Where the Sponsored Deals page reads its sections/cards from. See the
+     SPONSORED_DEALS comment below for the shape of that file. */
+  sponsoredDealsUrl: '/content/sponsored-deals.json',
 };
 
 /* Sponsor logos shown in the footer strip. Empty by default — add entries
@@ -52,6 +56,21 @@ const SPONSORS = [
   {name: 'RhymeyStudios', logo: 'rhymeystudios.png', url: 'https://www.roblox.com/communities/7156667/RhymeyStudios'},
   {name: 'OSA Fried Chicken', logo: 'osaFriedChicken.png', url: 'https://www.roblox.com/communities/33115459/tacteam'},
 ];
+
+/* Sponsored deal cards shown on the Sponsored Deals page (linked from the
+   footer) are read from CONFIG.sponsoredDealsUrl, grouped into sections.
+   Each section gets its own centred logo header above a grid of its deal
+   cards — add or remove as many sections, and as many deals within each,
+   as you like in that JSON file; a section with no deals is skipped
+   automatically, so there's no minimum.
+
+   Section fields: name (used as alt text/fallback heading), logo (optional
+   — filename in assets/sponsors/, or omit for a plain text heading), url
+   (optional — makes the logo/heading a link).
+
+   Deal fields: title, description, url (required — where the card links),
+   image (optional square/1:1 image, filename in assets/sponsors/ or an
+   absolute URL — omit to fall back to generated cover art). */
 
 const SECTIONS = [
   { id: 'home',       name: 'Home',       blurb: '' },
@@ -72,6 +91,7 @@ const SECTIONS = [
 const state = {
   items: [],        // index metadata for every item
   full: {},         // id -> complete article, cached after first fetch
+  sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
   ready: false,
   error: null
 };
@@ -343,6 +363,13 @@ async function loadItem(id){
   if(!data.id) data.id = id;
   state.full[id] = data;
   return data;
+}
+
+async function loadSponsoredDeals(){
+  if(state.sponsoredDeals) return state.sponsoredDeals;
+  const data = await fetchJson(CONFIG.sponsoredDealsUrl);
+  state.sponsoredDeals = Array.isArray(data) ? data : [];
+  return state.sponsoredDeals;
 }
 
 /* ------------------------------------------------------------
@@ -779,6 +806,55 @@ function videoPlayer(item){
   '</div></div>';
 }
 
+function dealCard(deal){
+  const fallback = coverArt(deal.title, false);
+  const src = deal.image ? (isAbsolute(deal.image) ? deal.image : '/assets/sponsors/' + deal.image) : fallback;
+  return '<a class="card deal-card" href="' + esc(deal.url) + '" target="_blank" rel="noopener sponsored">' +
+    '<div class="media">' + imgTag(src, deal.title, fallback) + '</div>' +
+    '<h3 class="h-md">' + esc(deal.title) + '</h3>' +
+    (deal.description ? '<p class="dek">' + esc(deal.description) + '</p>' : '') +
+  '</a>';
+}
+
+/* Centred logo (or plain text) heading for one deal section. Falls back to
+   a text heading when the section has no logo, and to a bare span (rather
+   than a link) when it has no url — so every field beyond name is optional. */
+function dealSectionHead(section){
+  const inner = section.logo
+    ? '<img src="' + esc(isAbsolute(section.logo) ? section.logo : '/assets/sponsors/' + section.logo) + '" alt="' + esc(section.name || '') + '">'
+    : '<span class="deal-section-name">' + esc(section.name || '') + '</span>';
+  return '<div class="deal-section-head">' +
+    (section.url ? '<a href="' + esc(section.url) + '" target="_blank" rel="noopener sponsored">' + inner + '</a>' : inner) +
+  '</div>';
+}
+
+async function renderSponsoredDeals(){
+  document.title = 'Sponsored Deals — Fish News';
+  let html = '<div class="page-head"><h1>Sponsored Deals</h1>' +
+    '<p>Offers and links from the people who keep the lights on at Fish News.</p></div>';
+
+  let all;
+  try{
+    all = await loadSponsoredDeals();
+  }catch(err){
+    return html + emptyState('Could not load the deals',
+      '<p>Nothing came back from <code>' + esc(CONFIG.sponsoredDealsUrl) + '</code>.</p>' +
+      '<p><code>' + esc(err.message) + '</code></p>');
+  }
+
+  const sections = (all || []).filter(s => s.deals && s.deals.length);
+  if(!sections.length){
+    return html + emptyState('No deals right now', '<p>Check back later.</p>');
+  }
+
+  return html + sections.map(function(s){
+    return '<div class="deal-section">' +
+      (s.section ? dealSectionHead(s.section) : '') +
+      '<div class="listing deal-grid">' + s.deals.map(dealCard).join('') + '</div>' +
+    '</div>';
+  }).join('');
+}
+
 function renderStatic(kind){
   if(kind === 'about'){
     document.title = 'About us — Fish News';
@@ -882,6 +958,7 @@ function pathFor(){
   if(args[0] === 'tag') return '/tag/' + encodeURIComponent(args[1]) + '/';
   if(args[0] === 'archive') return '/archive/' + (args[1] ? '?' + args[1] : '');
   if(args[0] === 'tags') return '/tags/';
+  if(args[0] === 'sponsored-deals') return '/sponsored-deals/';
   if(args[0] === 'about' || args[0] === 'contact') return '/' + args[0] + '/';
   return '/';
 }
@@ -943,6 +1020,10 @@ async function route(){
     const meta = state.items.find(i => i.id === parts[1]);
     if(meta) active = meta.section;
     recordVisit(parts[1]);
+  }else if(parts[0] === 'sponsored-deals'){
+    active = '';
+    view.innerHTML = '<div class="loading">Loading</div>';
+    html = await renderSponsoredDeals();
   }else if(parts[0] === 'about' || parts[0] === 'contact'){
     active = '';
     html = renderStatic(parts[0]);
