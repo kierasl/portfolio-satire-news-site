@@ -387,16 +387,17 @@ function allSponsoredItems(){
   return items;
 }
 
-/* Up to n distinct deals, chosen at random (partial Fisher-Yates) — fewer
-   than n if the sponsors don't have that many between them. */
-function randomSponsoredItems(n){
+/* Every sponsored deal, shuffled (full Fisher-Yates). The front page shows
+   the whole shuffled set — the ad slot is a CSS grid that wraps onto as
+   many rows as it needs, so it always fills the available width and simply
+   grows as more sponsors or deals are added to sponsored-deals.json. */
+function shuffledSponsoredItems(){
   const items = allSponsoredItems();
-  const take = Math.min(n, items.length);
-  for(let i = 0; i < take; i++){
-    const j = i + Math.floor(Math.random() * (items.length - i));
+  for(let i = items.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
     const tmp = items[i]; items[i] = items[j]; items[j] = tmp;
   }
-  return items.slice(0, take);
+  return items;
 }
 
 /* ------------------------------------------------------------
@@ -574,7 +575,7 @@ function renderHome(){
       '<div class="more-grid">' + remainder.map(i => card(i, 'small')).join('') + '</div>';
   }
 
-  const ads = randomSponsoredItems(3);
+  const ads = shuffledSponsoredItems();
   if(ads.length){
     html += sectionHead('Sponsored', '') +
       '<div class="ad-slot">' + ads.map(a => adCard(a.deal, a.section)).join('') + '</div>';
