@@ -387,16 +387,17 @@ function allSponsoredItems(){
   return items;
 }
 
-/* Up to n distinct deals, chosen at random (partial Fisher-Yates) — fewer
-   than n if the sponsors don't have that many between them. */
-function randomSponsoredItems(n){
+/* Every sponsored deal, shuffled (full Fisher-Yates). The front page shows
+   the whole shuffled set — the ad slot is a CSS grid that wraps onto as
+   many rows as it needs, so it always fills the available width and simply
+   grows as more sponsors or deals are added to sponsored-deals.json. */
+function shuffledSponsoredItems(){
   const items = allSponsoredItems();
-  const take = Math.min(n, items.length);
-  for(let i = 0; i < take; i++){
-    const j = i + Math.floor(Math.random() * (items.length - i));
+  for(let i = items.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
     const tmp = items[i]; items[i] = items[j]; items[j] = tmp;
   }
-  return items.slice(0, take);
+  return items;
 }
 
 /* ------------------------------------------------------------
@@ -574,7 +575,7 @@ function renderHome(){
       '<div class="more-grid">' + remainder.map(i => card(i, 'small')).join('') + '</div>';
   }
 
-  const ads = randomSponsoredItems(3);
+  const ads = shuffledSponsoredItems();
   if(ads.length){
     html += sectionHead('Sponsored', '') +
       '<div class="ad-slot">' + ads.map(a => adCard(a.deal, a.section)).join('') + '</div>';
@@ -776,6 +777,17 @@ function hydrateViewCounts(){
       });
     })
     .catch(() => {});
+}
+
+/* Keeps the sponsored-ad grid to a single row: the CSS grid already works
+   out how many cards fit the current width, so this just hides whatever
+   spilled into a second row by comparing each card's offsetTop to the
+   first one's. Re-run on resize so it grows back as space returns. */
+function layoutSponsoredRow(){
+  const cards = $$('.ad-card');
+  if(!cards.length) return;
+  const top = cards[0].offsetTop;
+  cards.forEach(c => { c.hidden = c.offsetTop !== top; });
 }
 
 function renderBlock(item, b){
@@ -1040,6 +1052,12 @@ function wireNav(){
   });
   window.addEventListener('popstate', route);
 
+  let resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layoutSponsoredRow, 120);
+  });
+
   /* The top-bar search lives outside #view (it's part of the permanent
      chrome, not re-rendered per route), so it's wired once here rather
      than in wirePage(). It always sends to the archive, which does the
@@ -1102,6 +1120,7 @@ async function route(){
   buildNav(active);
   wirePage();
   hydrateViewCounts();
+  layoutSponsoredRow();
   window.scrollTo({ top: 0, behavior: 'auto' });
 
   const topSearchQ = $('#topSearchQ');
