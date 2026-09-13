@@ -1,6 +1,17 @@
 {
-  "generated": "2026-09-13T13:50:54Z",
+  "generated": "2026-09-13T18:55:02Z",
   "items": [
+    {
+      "id": "double-feature-in-tournament-grounds",
+      "type": "article",
+      "section": "conflict",
+      "headline": "Double Feature in Tournament Grounds",
+      "standfirst": "Rangers really love losing",
+      "byline": "Chunce Whatney",
+      "published": "2026-09-13T19:42:44+01:00",
+      "tags": ["Commandos", "TPSS", "Scrims", "Rangers", "Foreign Office"],
+      "rank": "lead"
+    },
     {
       "id": "commandos-beat-us-military-police",
       "type": "article",
@@ -10,7 +21,12 @@
       "byline": "Chunce Whatney",
       "published": "2026-09-13T14:36:48+01:00",
       "tags": ["commandos", "scrims"],
-      "rank": "lead"
+      "rank": "lead",
+      "image": {
+        "src": "scrim2.png",
+        "alt": "The Winning Team",
+        "credit": "Commando #14892"
+      }
     },
     {
       "id": "mysterious-land-changes-council-says-not-emergency",
