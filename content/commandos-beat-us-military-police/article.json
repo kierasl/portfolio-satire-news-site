@@ -1,0 +1,47 @@
+{
+  "id": "commandos-beat-us-military-police",
+  "type": "article",
+  "section": "conflict",
+  "rank": "lead",
+  "headline": "Commandos beat US Military Police",
+  "standfirst": "Terrible server, Roblox broke things",
+  "byline": "Chunce Whatney",
+  "location": "Tournament Grounds",
+  "published": "2026-09-13T14:36:48+01:00",
+  "tags": ["commandos", "scrims"],
+  "image": {
+    "src": "scrim2.png",
+    "alt": "The winning scrim team",
+    "credit": "Someone of the commandos"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "RAF Commandos edge out US 14 Military Police, on a server that inconvenienced everyone equally"
+    },
+    {
+      "type": "paragraph",
+      "text": "In a single-round fixture concluded within the hour, the RAF Commandos scrim team defeated the US 14 Military Police unit, having first defeated the rather more pressing problem of fielding five people at the same time on the same afternoon."
+    },
+    {
+      "type": "paragraph",
+      "text": "Fish News understands the roster was finalised late. Asked whether this had affected preparation, a Commandos section lead was measured. \"We had the players we had,\" he said. \"Everyone was present. I would not be drawn on when they learned they were playing.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "The match was hosted in the United States, a detail which proved less decisive than anticipated, as most of the 14MP are not based there either. Both sides played on 80 to 100 milliseconds. A 14MP representative described the conditions as fair. \"It was equally bad,\" he said. \"That is not the same as good, but it is the thing I was asked about.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "Neutral observers credit the 14MP with the sharper flanks of the afternoon, several of which landed cleanly and one of which is still being discussed in Commandos circles with more respect than is customary. The difference, by broad agreement, came on main, where the Commandos held position with the patience of a team who had not been told the plan and were therefore unable to deviate from it."
+    },
+    {
+      "type": "paragraph",
+      "text": "This correspondent has covered contested ground before. I filed from the Milvian Bridge on worse latency than this. Yesterday's engagement — or rather this afternoon's, the ink scarcely dry — was tight, honest, and settled in the middle, as most of them are."
+    },
+    {
+      "type": "paragraph",
+      "text": "Fish News congratulates both units, and records that neither side blamed the server, a restraint we are proud to recognise in ourselves."
+    }
+  ]
+}

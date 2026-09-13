@@ -1,6 +1,17 @@
 {
-  "generated": "2026-08-29T21:22:40Z",
+  "generated": "2026-09-13T13:46:08Z",
   "items": [
+    {
+      "id": "commandos-beat-us-military-police",
+      "type": "article",
+      "section": "conflict",
+      "headline": "Commandos beat US Military Police",
+      "standfirst": "Terrible server, Roblox broke things",
+      "byline": "Chunce Whatney",
+      "published": "2026-09-13T14:36:48+01:00",
+      "tags": ["commandos", "scrims"],
+      "rank": "lead"
+    },
     {
       "id": "mysterious-land-changes-council-says-not-emergency",
       "type": "article",
@@ -66,9 +77,9 @@
       "tags": ["RAFP", "5131"],
       "rank": "lead",
       "image": {
-        "src": "fish-news-eod.png",
-        "alt": "EOD Propaganda",
-        "credit": "RhymeyStudios"
+        "src": "2026-08-04 EOD.png",
+        "alt": "EOD Trainees defusing devices",
+        "credit": "slimeytac"
       }
     },
     {
@@ -109,7 +120,11 @@
       "kicker": "Huge for Base Infrastructure",
       "byline": "Chunce Whatney",
       "published": "2026-08-04T22:20:45+01:00",
-      "tags": ["Doors", "Development"]
+      "tags": ["Doors", "Development"],
+      "image": {
+        "src": "door.png",
+        "alt": "The New Door"
+      }
     },
     {
       "id": "chunce-escapes-quantanamo-bay-again",
