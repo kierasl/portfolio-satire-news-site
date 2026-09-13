@@ -9,6 +9,11 @@
   "location": "Tournament Grounds",
   "published": "2026-09-13T14:36:48+01:00",
   "tags": ["commandos", "scrims"],
+  "image": {
+    "src": "scrim2.png",
+    "alt": "The Winning Team",
+    "credit": "Commando #14892"
+  },
   "body": [
     {
       "type": "paragraph",
