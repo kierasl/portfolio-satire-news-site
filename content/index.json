@@ -1,16 +1,31 @@
 {
-  "generated": "2026-09-13T18:55:02Z",
+  "generated": "2026-09-13T21:24:42Z",
   "items": [
+    {
+      "id": "information-board-appears-at-waterfall",
+      "type": "article",
+      "section": "local-news",
+      "headline": "Information board appears at waterfall",
+      "standfirst": "Mysterious Plumbing Squadron",
+      "kicker": "Mysterious Infrastructure",
+      "byline": "Chunce Whatney",
+      "published": "2026-09-13T22:21:14+01:00",
+      "tags": ["Development", "Council", "Landscape"]
+    },
     {
       "id": "double-feature-in-tournament-grounds",
       "type": "article",
       "section": "conflict",
       "headline": "Double Feature in Tournament Grounds",
-      "standfirst": "Rangers really love losing",
+      "standfirst": "Rangers Feed the Way",
       "byline": "Chunce Whatney",
       "published": "2026-09-13T19:42:44+01:00",
       "tags": ["Commandos", "TPSS", "Scrims", "Rangers", "Foreign Office"],
-      "rank": "lead"
+      "rank": "lead",
+      "image": {
+        "src": "tpss and cdo wins.png",
+        "alt": "Commando and TPSS Logos"
+      }
     },
     {
       "id": "commandos-beat-us-military-police",
