@@ -9,11 +9,6 @@
   "location": "Tournament Grounds",
   "published": "2026-09-13T14:36:48+01:00",
   "tags": ["commandos", "scrims"],
-  "image": {
-    "src": "scrim2.png",
-    "alt": "The winning scrim team",
-    "credit": "Someone of the commandos"
-  },
   "body": [
     {
       "type": "paragraph",
