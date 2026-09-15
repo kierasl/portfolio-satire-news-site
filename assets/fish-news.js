@@ -45,7 +45,23 @@ const CONFIG = {
   /* Where the Sponsored Deals page reads its sections/cards from. See the
      SPONSORED_DEALS comment below for the shape of that file. */
   sponsoredDealsUrl: '/content/sponsored-deals.json',
+
+  /* Where the front-page Testimonials section reads its quotes from. See
+     the TESTIMONIALS comment below for the shape of that file. */
+  testimonialsUrl: '/content/testimonials.json',
 };
+
+/* Testimonials shown in their own section on the front page, read from
+   CONFIG.testimonialsUrl — a plain array, newest/most-flattering first,
+   in content/testimonials.json:
+
+   [
+     { "quote": "Fish News changed my life.", "author": "A. Reader",
+       "role": "Local resident" }
+   ]
+
+   Fields: quote (required), author (optional — falls back to
+   "Anonymous"), role (optional, shown under the author's name). */
 
 /* Sponsor logos shown in the footer strip. Empty by default — add entries
    like { name: 'Example Co', logo: 'example.png', url: 'https://example.com' }
@@ -92,6 +108,7 @@ const state = {
   items: [],        // index metadata for every item
   full: {},         // id -> complete article, cached after first fetch
   sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
+  testimonials: null,   // cached after first fetch of CONFIG.testimonialsUrl
   ready: false,
   error: null
 };
@@ -372,15 +389,27 @@ async function loadSponsoredDeals(){
   return state.sponsoredDeals;
 }
 
+async function loadTestimonials(){
+  if(state.testimonials) return state.testimonials;
+  const data = await fetchJson(CONFIG.testimonialsUrl);
+  state.testimonials = Array.isArray(data) ? data : [];
+  return state.testimonials;
+}
+
 /* Every sponsored deal across every section, flattened, each one counting
    as a single equally-weighted entry — a section with five deals is five
    times as likely to turn up as one with a single deal, deliberately, so
-   the front-page ad slot isn't picking sponsors, it's picking deals. */
+   the front-page ad slot isn't picking sponsors, it's picking deals.
+
+   A deal with "frontPage": false in sponsored-deals.json is left out of
+   this list — it still shows on the Sponsored Deals page, it just never
+   gets pulled into the front-page ad slot. */
 function allSponsoredItems(){
   const sections = state.sponsoredDeals || [];
   const items = [];
   sections.forEach(function(s){
     (s.deals || []).forEach(function(d){
+      if(d.frontPage === false) return;
       items.push({ deal: d, section: s.section || {} });
     });
   });
@@ -592,6 +621,12 @@ function renderHome(){
     html += sectionHead('From the archive', archived.length + ' older stories',
       { link: pathFor('archive'), linkText: 'Search the archive' }) +
       '<ul class="archive-list">' + archived.slice(0, 5).map(i => archiveRow(i)).join('') + '</ul>';
+  }
+
+  const testimonials = state.testimonials || [];
+  if(testimonials.length){
+    html += sectionHead('What people say', '') +
+      '<div class="testimonial-row">' + testimonials.map(testimonialCard).join('') + '</div>';
   }
 
   return html;
@@ -849,6 +884,15 @@ function videoPlayer(item){
         : '<p style="color:#fff;margin:0">No video URL set on this item.</p>') +
     '</div>' +
   '</div></div>';
+}
+
+function testimonialCard(t){
+  return '<figure class="testimonial-card">' +
+    '<blockquote>&ldquo;' + esc(t.quote || '') + '&rdquo;</blockquote>' +
+    '<figcaption>' + esc(t.author || 'Anonymous') +
+      (t.role ? '<span class="testimonial-role">' + esc(t.role) + '</span>' : '') +
+    '</figcaption>' +
+  '</figure>';
 }
 
 function dealCard(deal){
@@ -1158,7 +1202,8 @@ function wirePage(){
 
   await Promise.all([
     loadContent(),
-    loadSponsoredDeals().catch(err => console.warn('Sponsored deals unavailable: ' + err.message))
+    loadSponsoredDeals().catch(err => console.warn('Sponsored deals unavailable: ' + err.message)),
+    loadTestimonials().catch(err => console.warn('Testimonials unavailable: ' + err.message))
   ]);
   state.ready = true;
   buildSponsors();
