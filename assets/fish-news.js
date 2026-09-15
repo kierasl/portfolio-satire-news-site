@@ -35,8 +35,12 @@ const CONFIG = {
      'https://cdn.example.com/fish-news/' */
   assetBase: '',
 
-  /* How much appears on the front page. Everything older goes to the archive. */
-  frontPage: { articles: 6, videos: 3 },
+  /* How much appears on the front page. Everything older goes to the archive.
+     testimonials is how many of content/testimonials.json's entries are
+     picked at random for the front-page "What people say" section — add
+     as many testimonials as you like to that file, only this many show
+     at a time, and they reshuffle on every page load. */
+  frontPage: { articles: 6, videos: 3, testimonials: 3 },
 
   /* The site's own public URL, used to build absolute links for article
      link previews (Open Graph). Include the trailing slash. */
@@ -421,12 +425,26 @@ function allSponsoredItems(){
    many rows as it needs, so it always fills the available width and simply
    grows as more sponsors or deals are added to sponsored-deals.json. */
 function shuffledSponsoredItems(){
-  const items = allSponsoredItems();
+  return shuffled(allSponsoredItems());
+}
+
+/* Full Fisher-Yates shuffle, shared by the sponsored-deals ad slot and the
+   front-page testimonials picker. */
+function shuffled(list){
+  const items = list.slice();
   for(let i = items.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
     const tmp = items[i]; items[i] = items[j]; items[j] = tmp;
   }
   return items;
+}
+
+/* A random pick of CONFIG.frontPage.testimonials entries from
+   content/testimonials.json, reshuffled on every page load — so with
+   more testimonials than the cap, a different handful shows each time. */
+function frontPageTestimonials(){
+  const all = state.testimonials || [];
+  return shuffled(all).slice(0, CONFIG.frontPage.testimonials);
 }
 
 /* ------------------------------------------------------------
@@ -623,7 +641,7 @@ function renderHome(){
       '<ul class="archive-list">' + archived.slice(0, 5).map(i => archiveRow(i)).join('') + '</ul>';
   }
 
-  const testimonials = state.testimonials || [];
+  const testimonials = frontPageTestimonials();
   if(testimonials.length){
     html += sectionHead('What people say', '') +
       '<div class="testimonial-row">' + testimonials.map(testimonialCard).join('') + '</div>';
