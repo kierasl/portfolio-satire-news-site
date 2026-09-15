@@ -464,6 +464,48 @@ square — cards crop it to 1:1. Image filenames resolve against
 
 ---
 
+## On This Day, Corrections, the Market Index, Careers and Most Read
+
+A handful of front-page/footer widgets exist purely for Chunce Whatney lore
+and satire. All are optional, fail silently if their file is missing, and
+are configured entirely through JSON — no code changes needed to edit them.
+
+| Feature | Where it shows | File | `CONFIG` key |
+|---|---|---|---|
+| On This Day | Front-page sidebar | `content/on-this-day.json` | `onThisDayUrl` |
+| Most Read | Front-page sidebar | `content/most-read.json` | `mostReadUrl` |
+| Fish Market Index | Ticker under the top nav, every page | `content/market-index.json` | `marketIndexUrl` |
+| Government Comment Status | Badge in the footer, every page | `content/gov-comment-status.json` | `govCommentStatusUrl` |
+| Corrections & Clarifications | `/corrections/` (linked from the footer) | `content/corrections.json` | `correctionsUrl` |
+| Careers at Fish News | `/careers/` (linked from the footer) | `content/careers.json` | `careersUrl` |
+
+**On This Day** always shows today's real date. Add entries to
+`content/on-this-day.json` as `{ "year": 1066, "text": "..." }` — no month/day
+needed, since Chunce is immortal and was there every day. Which entry runs
+is picked deterministically from the day of the year, so it's stable across
+reloads on the same day and rotates daily.
+
+**Most Read** entries are `{ "title": "...", "reads": 1284003, "storyId":
+"some-article-id" }`, shown in file order (not sorted by reads — the
+implausibility is the point). `storyId` is optional; when it doesn't match
+a published article the title just shows unlinked.
+
+**Fish Market Index** entries are `{ "name": "Haddock", "symbol": "HAD",
+"price": 3.15, "change": -3.0, "note": "..." }`. `change` is a percentage;
+negative shows a red down arrow, zero or positive a green up arrow.
+
+**Government Comment Status** is a single object,
+`{ "days": 4127, "label": "..." }`.
+
+**Corrections & Clarifications** entries are `{ "complaint": "...", "reply":
+"..." }`, shown in file order.
+
+**Careers at Fish News** entries are `{ "title": "...", "description": "...",
+"qualifications": ["...", "..."] }`; `description` and `qualifications` are
+optional.
+
+---
+
 ## Building the authoring tool
 
 Writing JSON by hand gets old quickly. Here is what a tool needs to do. Java
