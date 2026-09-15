@@ -610,12 +610,6 @@ function renderHome(){
       '<div class="ad-slot">' + ads.map(a => adCard(a.deal, a.section)).join('') + '</div>';
   }
 
-  const testimonials = state.testimonials || [];
-  if(testimonials.length){
-    html += sectionHead('What people say', '') +
-      '<div class="testimonial-row">' + testimonials.map(testimonialCard).join('') + '</div>';
-  }
-
   if(videos.length){
     html += sectionHead('Watch', videos.length + (videos.length === 1 ? ' film' : ' films'),
       { accent: true, link: pathFor('section', 'video'), linkText: 'All films' }) +
@@ -627,6 +621,12 @@ function renderHome(){
     html += sectionHead('From the archive', archived.length + ' older stories',
       { link: pathFor('archive'), linkText: 'Search the archive' }) +
       '<ul class="archive-list">' + archived.slice(0, 5).map(i => archiveRow(i)).join('') + '</ul>';
+  }
+
+  const testimonials = state.testimonials || [];
+  if(testimonials.length){
+    html += sectionHead('What people say', '') +
+      '<div class="testimonial-row">' + testimonials.map(testimonialCard).join('') + '</div>';
   }
 
   return html;
