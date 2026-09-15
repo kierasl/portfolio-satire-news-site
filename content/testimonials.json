@@ -1,17 +1,107 @@
 [
   {
-    "quote": "I read Fish News every morning and I have never once understood what happened.",
-    "author": "A. Reader",
-    "role": "Local resident"
+    "name": "Sgt. R. Dacted",
+    "role": "Records Clerk",
+    "quote": "I read Fish News every morning. I am not permitted to say why."
   },
   {
-    "quote": "Chunce Whatney is either the bravest man in the division or the unluckiest. Possibly both.",
-    "author": "Anonymous RAFP Officer",
-    "role": "Serving member"
+    "name": "P. Remonition",
+    "role": "Personnel Officer",
+    "quote": "Fish News reported my promotion two days before I applied for it. I have since stopped applying for things."
   },
   {
-    "quote": "Balanced, fair, and somehow always about a minivan.",
-    "author": "M. Carp",
-    "role": "Subscriber"
+    "name": "Cpl. N. O'Comment",
+    "role": "Media Liaison",
+    "quote": "I was quoted accurately. I've asked them to stop."
+  },
+  {
+    "name": "D. Brief",
+    "role": "Training Coordinator",
+    "quote": "The coverage of the training exercise was thorough, balanced, and filed before the exercise began."
+  },
+  {
+    "name": "E. Scape",
+    "role": "Custody Assistant",
+    "quote": "Mr Whatney interviewed me for four hours. I was only in the room for twenty minutes."
+  },
+  {
+    "name": "Wg Cdr. S. Pinn",
+    "role": "Head of Public Relations",
+    "quote": "I declined to comment on Fish News, and Fish News has already published it."
+  },
+  {
+    "name": "D. Tained",
+    "role": "Awaiting Review",
+    "quote": "Mr Whatney told me he had covered the fall of Rome, and that my disciplinary hearing was comparable in scale. I found this reassuring, briefly."
+  },
+  {
+    "name": "Gp Capt. B. Ias",
+    "role": "Editorial Standards Adviser",
+    "quote": "Genuinely balanced reporting. Both sides of the story were Chunce's."
+  },
+  {
+    "name": "A. Pology",
+    "role": "Complaints Department",
+    "quote": "I asked Fish News for a correction. They issued a longer version of the original."
+  },
+  {
+    "name": "WO I. Gnored",
+    "role": "Deputy Spokesperson",
+    "quote": "Fish News has never once contacted my commanding officer for comment. My commanding officer has asked me to pass that on."
+  },
+  {
+    "name": "H. Earsay",
+    "role": "Intelligence Analyst",
+    "quote": "I was described as a source close to the matter. I was the matter."
+  },
+  {
+    "name": "L. E. Gal",
+    "role": "Solicitor",
+    "quote": "Reliable, consistent, and legally distinct from defamation."
+  },
+  {
+    "name": "U. R. Wrong",
+    "role": "Former Recruit",
+    "quote": "My mother reads it. She has not spoken to me since the March edition."
+  },
+  {
+    "name": "FS C. C. Teavee",
+    "role": "Surveillance Operator",
+    "quote": "Fish News arrived at the scene before the incident. We are still reviewing the footage."
+  },
+  {
+    "name": "I. N. Cognito",
+    "role": "Undercover Operative",
+    "quote": "I told Mr Whatney I'd rather not be named. He has addressed me by my initials ever since, loudly, in corridors."
+  },
+  {
+    "name": "T. Ruth",
+    "role": "Former Fish News Fact-Checker",
+    "quote": "The article about me was largely accurate, which I have found to be the most upsetting part."
+  },
+  {
+    "name": "Sqn Ldr. N. Quiry",
+    "role": "Board of Inquiry Chair",
+    "quote": "Mr Whatney assured me he was present at Agincourt. He then asked where the car park was."
+  },
+  {
+    "name": "O. B. Fuscate",
+    "role": "Communications Director",
+    "quote": "I would describe their reporting as operationally adjacent to the truth."
+  },
+  {
+    "name": "E. Cho",
+    "role": "Sound Technician",
+    "quote": "An important voice. Frequently several important voices, all of them Chunce's."
+  },
+  {
+    "name": "D. D. Bitt",
+    "role": "Subscriber (Disputed)",
+    "quote": "I have subscribed to Fish News three times. I have never subscribed to Fish News."
+  },
+  {
+    "name": "C. W.",
+    "role": "Independent Reader, No Affiliation",
+    "quote": "The finest publication in human history, and I would know, I have read all of it. Some of it was on clay tablets. I CARVED THE TABLETS."
   }
 ]

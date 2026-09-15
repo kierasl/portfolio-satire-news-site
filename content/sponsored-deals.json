@@ -10,19 +10,22 @@
         "title": "tacplank",
         "description": "The greatest (citation needed) plank game on Roblox.",
         "image": "tacteam/tacplank.png",
-        "url": "https://www.roblox.com/games/70936273267700/tacplank"
+        "url": "https://www.roblox.com/games/70936273267700/tacplank",
+        "frontPage": false
       },
       {
         "title": "Krottenkopf, Bavaria",
         "description": "Milsim experience used for training.",
         "image": "tacteam/Bavaria.png",
-        "url": "https://www.roblox.com/games/14832913941/Krottenkopf-Bavaria-Germany"
+        "url": "https://www.roblox.com/games/14832913941/Krottenkopf-Bavaria-Germany",
+        "frontPage": false
       },
       {
         "title": "MoD Wattleburn",
         "description": "General map used for conducting training.",
         "image": "tacteam/Wattleburn.png",
-        "url": "https://www.roblox.com/games/138640140018829/MOD-Wattleburn"
+        "url": "https://www.roblox.com/games/138640140018829/MOD-Wattleburn",
+        "frontPage": false
       }
     ]
   },
@@ -82,7 +85,8 @@
         "title": "Join the studio",
         "description": "Our milsim development group, building the gear and maps you play on.",
         "image": "rhymeystudios.png",
-        "url": "https://www.roblox.com/communities/7156667/RhymeyStudios"
+        "url": "https://www.roblox.com/communities/7156667/RhymeyStudios",
+        "frontPage": false
       }
     ]
   },
