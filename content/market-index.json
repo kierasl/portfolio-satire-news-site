@@ -29,7 +29,7 @@
   { "name": "Catfish",     "symbol": "CAT", "price": 2.90,   "change": -4.4,  "note": "Catfish down 4.4% after its chief executive was found to be a different fish entirely." },
   { "name": "Minnow",      "symbol": "MNW", "price": 0.08,   "change": 22.0,  "note": "Minnow up 22% from a very modest base. Minnow has asked to be taken seriously." },
   { "name": "Fish Finger", "symbol": "FFG", "price": 1.99,   "change": -1.9,  "note": "Fish Finger down 1.9%. Regulators are still unable to establish which fish it is." },
-  { "name": "Coelacanth",  "symbol": "CLC", "price": 912.00, "change": 0.0,   "note": "Coelacanth unmoved. Chunce Whatney, who claims to have held shares since the Devonian, called today's session 'nothing compared to the Permian.'" }
+  { "name": "Coelacanth",  "symbol": "CLC", "price": 912.00, "change": 0.0,   "note": "Coelacanth unmoved. Chunce Whatney, who claims to have held shares since the Devonian, called today's session 'nothing compared to the Permian.'" },
   { "name": "Skate",       "symbol": "SKT", "price": 5.10,   "change": -2.6,  "note": "Skate slips 2.6%. The board maintains this was a planned manoeuvre." },
   { "name": "Hake",        "symbol": "HKE", "price": 3.45,   "change": 1.4,   "note": "Hake up 1.4%. Nobody could say why, and nobody asked." },
   { "name": "Whiting",     "symbol": "WHT", "price": 2.20,   "change": 0.0,   "note": "Whiting flat pending a decision it describes as imminent. It has been whiting since March." },
