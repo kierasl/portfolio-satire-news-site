@@ -53,7 +53,83 @@ const CONFIG = {
   /* Where the front-page Testimonials section reads its quotes from. See
      the TESTIMONIALS comment below for the shape of that file. */
   testimonialsUrl: '/content/testimonials.json',
+
+  /* Where the front-page "On This Day" sidebar widget reads its entries
+     from. See the ON THIS DAY comment below for the shape of that file. */
+  onThisDayUrl: '/content/on-this-day.json',
+
+  /* Where the /corrections/ page reads its complaints-and-replies from. */
+  correctionsUrl: '/content/corrections.json',
+
+  /* Where the top-of-page Fish Market Index ticker reads its prices from. */
+  marketIndexUrl: '/content/market-index.json',
+
+  /* Where the footer's Government Comment Status badge reads its count from. */
+  govCommentStatusUrl: '/content/gov-comment-status.json',
+
+  /* Where the /careers/ page reads its job listings from. */
+  careersUrl: '/content/careers.json',
+
+  /* Where the front-page "Most Read" sidebar widget reads its entries from. */
+  mostReadUrl: '/content/most-read.json',
 };
+
+/* On This Day entries shown in a front-page sidebar widget, read from
+   CONFIG.onThisDayUrl — a plain array in content/on-this-day.json:
+
+   [ { "year": 1066, "text": "Chunce files a pre-emptive piece on Norman
+       intentions. Editor dismisses it as speculation." } ]
+
+   The widget always shows today's real date; which entry runs against it
+   is picked deterministically from the day of the year, so it changes
+   daily but stays the same across reloads on the same day. */
+
+/* Corrections & Clarifications entries, read from CONFIG.correctionsUrl —
+   a plain array in content/corrections.json:
+
+   [ { "complaint": "A reader notes...", "reply": "Fish News stands by
+       its reporting." } ]
+
+   Fields: complaint (required), reply (required). Shown newest-first, in
+   file order. */
+
+/* Fish Market Index entries for the top-of-page ticker, read from
+   CONFIG.marketIndexUrl — a plain array in content/market-index.json:
+
+   [ { "name": "Haddock", "symbol": "HAD", "price": 3.15, "change": -3.0,
+       "note": "Haddock down 3% amid unspecified concerns." } ]
+
+   Fields: name, price (required), symbol (optional, shown before the
+   price), change (optional, a percentage — negative shows a red down
+   arrow, positive or zero a green up arrow), note (optional deadpan
+   commentary shown after the price). */
+
+/* Government Comment Status badge, read from CONFIG.govCommentStatusUrl —
+   a single object in content/gov-comment-status.json:
+
+   { "days": 4127, "label": "Days since the Government last commented" }
+
+   Fields: days (required), label (optional, falls back to a default). */
+
+/* Careers listings for the /careers/ page, read from CONFIG.careersUrl —
+   a plain array in content/careers.json:
+
+   [ { "title": "Government Liaison (Replacement)", "description": "...",
+       "qualifications": ["Own transport (one-way)", "..."] } ]
+
+   Fields: title (required), description (optional), qualifications
+   (optional array of strings). */
+
+/* Most Read sidebar entries, read from CONFIG.mostReadUrl — a plain array
+   in content/most-read.json:
+
+   [ { "title": "Chunce Escapes Guantanamo Bay... Again...",
+       "reads": 1284003, "storyId": "chunce-escapes-quantanamo-bay-again" } ]
+
+   Fields: title (required), reads (required), storyId (optional — links
+   to that article if it still exists in the loaded index, otherwise the
+   title shows unlinked). Shown in file order, not resorted by reads, so
+   the implausibility is deliberate rather than sorted into a leaderboard. */
 
 /* Testimonials shown in their own section on the front page, read from
    CONFIG.testimonialsUrl — a plain array, newest/most-flattering first,
@@ -113,6 +189,12 @@ const state = {
   full: {},         // id -> complete article, cached after first fetch
   sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
   testimonials: null,   // cached after first fetch of CONFIG.testimonialsUrl
+  onThisDay: null,       // cached after first fetch of CONFIG.onThisDayUrl
+  corrections: null,     // cached after first fetch of CONFIG.correctionsUrl
+  marketIndex: null,     // cached after first fetch of CONFIG.marketIndexUrl
+  govCommentStatus: null,// cached after first fetch of CONFIG.govCommentStatusUrl
+  careers: null,         // cached after first fetch of CONFIG.careersUrl
+  mostRead: null,        // cached after first fetch of CONFIG.mostReadUrl
   ready: false,
   error: null
 };
@@ -400,6 +482,48 @@ async function loadTestimonials(){
   return state.testimonials;
 }
 
+async function loadOnThisDay(){
+  if(state.onThisDay) return state.onThisDay;
+  const data = await fetchJson(CONFIG.onThisDayUrl);
+  state.onThisDay = Array.isArray(data) ? data : [];
+  return state.onThisDay;
+}
+
+async function loadCorrections(){
+  if(state.corrections) return state.corrections;
+  const data = await fetchJson(CONFIG.correctionsUrl);
+  state.corrections = Array.isArray(data) ? data : [];
+  return state.corrections;
+}
+
+async function loadMarketIndex(){
+  if(state.marketIndex) return state.marketIndex;
+  const data = await fetchJson(CONFIG.marketIndexUrl);
+  state.marketIndex = Array.isArray(data) ? data : [];
+  return state.marketIndex;
+}
+
+async function loadGovCommentStatus(){
+  if(state.govCommentStatus) return state.govCommentStatus;
+  const data = await fetchJson(CONFIG.govCommentStatusUrl);
+  state.govCommentStatus = (data && typeof data.days === 'number') ? data : null;
+  return state.govCommentStatus;
+}
+
+async function loadCareers(){
+  if(state.careers) return state.careers;
+  const data = await fetchJson(CONFIG.careersUrl);
+  state.careers = Array.isArray(data) ? data : [];
+  return state.careers;
+}
+
+async function loadMostRead(){
+  if(state.mostRead) return state.mostRead;
+  const data = await fetchJson(CONFIG.mostReadUrl);
+  state.mostRead = Array.isArray(data) ? data : [];
+  return state.mostRead;
+}
+
 /* Every sponsored deal across every section, flattened, each one counting
    as a single equally-weighted entry — a section with five deals is five
    times as likely to turn up as one with a single deal, deliberately, so
@@ -548,6 +672,90 @@ function latestRail(items){
   return '<aside class="latest" aria-label="Latest updates"><h2>Latest</h2><ol>' + rows + '</ol></aside>';
 }
 
+/* Day of the year, 1-365(6), used to deterministically rotate the "On
+   This Day" widget so it changes daily without needing 365 dated entries. */
+function dayOfYear(d){
+  const start = new Date(d.getFullYear(), 0, 0);
+  return Math.floor((d - start) / 86400000);
+}
+
+function onThisDayWidget(){
+  const entries = state.onThisDay || [];
+  if(!entries.length) return '';
+  const today = new Date();
+  const pick = entries[dayOfYear(today) % entries.length];
+  const dateLabel = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+  return '<aside class="side-widget on-this-day" aria-label="On this day">' +
+    '<h2>On This Day</h2>' +
+    '<p class="otd-entry"><b>' + esc(dateLabel) + ', ' + esc(pick.year) + ':</b> ' + esc(pick.text) + '</p>' +
+  '</aside>';
+}
+
+function mostReadWidget(){
+  const entries = state.mostRead || [];
+  if(!entries.length) return '';
+  const known = new Map(state.items.map(i => [i.id, i]));
+  const rows = entries.map(function(e){
+    const item = e.storyId ? known.get(e.storyId) : null;
+    const label = esc(e.title) + '<span class="mr-reads">' +
+      (e.reads === 1 ? '1 read' : Number(e.reads || 0).toLocaleString() + ' reads') + '</span>';
+    return '<li>' + (item ? '<a href="' + pathFor('item', item.id) + '">' + label + '</a>' : '<span>' + label + '</span>') + '</li>';
+  }).join('');
+  return '<aside class="side-widget most-read" aria-label="Most read"><h2>Most Read</h2><ol>' + rows + '</ol></aside>';
+}
+
+function marketArrow(change){
+  const up = Number(change) >= 0;
+  return '<span class="mi-arrow ' + (up ? 'up' : 'down') + '" aria-hidden="true">' +
+    (up ? '&#9650;' : '&#9660;') + '</span>';
+}
+
+function buildMarketTicker(){
+  const wrap = $('#marketTicker');
+  if(!wrap) return;
+  const entries = state.marketIndex || [];
+  if(!entries.length){ wrap.hidden = true; return; }
+  wrap.hidden = false;
+  const cells = entries.map(function(e){
+    const sign = Number(e.change) > 0 ? '+' : '';
+    return '<span class="mi-item">' +
+      '<span class="mi-name">' + esc(e.symbol || e.name) + '</span>' +
+      '<span class="mi-price">&pound;' + esc(Number(e.price).toFixed(2)) + '</span>' +
+      marketArrow(e.change) +
+      (typeof e.change === 'number' ? '<span class="mi-change">' + sign + esc(e.change) + '%</span>' : '') +
+      (e.note ? '<span class="mi-note">' + esc(e.note) + '</span>' : '') +
+    '</span>';
+  }).join('');
+  wrap.innerHTML = '<span class="mi-label">Fish Market Index</span><div class="mi-row">' + cells + '</div>';
+}
+
+function buildGovCommentBadge(){
+  const wrap = $('#govCommentStatus');
+  if(!wrap) return;
+  const status = state.govCommentStatus;
+  if(!status){ wrap.hidden = true; return; }
+  wrap.hidden = false;
+  wrap.innerHTML = '<span class="gcs-days">' + esc(Number(status.days).toLocaleString()) + '</span>' +
+    '<span class="gcs-label">' + esc(status.label || 'Days since the Government last commented') + '</span>';
+}
+
+function correctionCard(c){
+  return '<div class="correction-card">' +
+    '<p class="correction-complaint"><b>Reader complaint:</b> ' + esc(c.complaint) + '</p>' +
+    '<p class="correction-reply"><b>Fish News replies:</b> ' + esc(c.reply) + '</p>' +
+  '</div>';
+}
+
+function careerCard(job){
+  return '<div class="career-card">' +
+    '<h3 class="h-lg">' + esc(job.title) + '</h3>' +
+    (job.description ? '<p class="dek">' + esc(job.description) + '</p>' : '') +
+    (job.qualifications && job.qualifications.length
+      ? '<ul class="career-quals">' + job.qualifications.map(q => '<li>' + esc(q) + '</li>').join('') + '</ul>'
+      : '') +
+  '</div>';
+}
+
 function sectionHead(title, count, opts){
   opts = opts || {};
   return '<div class="section-head' + (opts.accent ? ' accent' : '') + '">' +
@@ -614,7 +822,11 @@ function renderHome(){
     '<div>' + leadCard(lead) +
       (secondary.length ? '<div class="sub-grid">' + secondary.map(i => card(i, 'large')).join('') + '</div>' : '') +
     '</div>' +
-    latestRail(byNewest(state.items)) +
+    '<div class="side-col">' +
+      latestRail(byNewest(state.items)) +
+      onThisDayWidget() +
+      mostReadWidget() +
+    '</div>' +
   '</div>';
 
   if(remainder.length){
@@ -983,6 +1195,44 @@ async function renderSponsoredDeals(){
   }).join('');
 }
 
+async function renderCorrections(){
+  document.title = 'Corrections & Clarifications — Fish News';
+  let html = '<div class="page-head"><h1>Corrections &amp; Clarifications</h1>' +
+    '<p>Fish News takes reader feedback seriously. Here it is, alongside our replies.</p></div>';
+
+  let all;
+  try{
+    all = await loadCorrections();
+  }catch(err){
+    return html + emptyState('Could not load corrections',
+      '<p>Nothing came back from <code>' + esc(CONFIG.correctionsUrl) + '</code>.</p>');
+  }
+
+  if(!all.length){
+    return html + emptyState('No corrections on file', '<p>Fish News has never been wrong.</p>');
+  }
+  return html + '<div class="corrections-list">' + all.map(correctionCard).join('') + '</div>';
+}
+
+async function renderCareers(){
+  document.title = 'Careers at Fish News — Fish News';
+  let html = '<div class="page-head"><h1>Careers at Fish News</h1>' +
+    '<p>Join a team that has never once needed to advertise a position twice for the same reason.</p></div>';
+
+  let all;
+  try{
+    all = await loadCareers();
+  }catch(err){
+    return html + emptyState('Could not load vacancies',
+      '<p>Nothing came back from <code>' + esc(CONFIG.careersUrl) + '</code>.</p>');
+  }
+
+  if(!all.length){
+    return html + emptyState('No vacancies right now', '<p>Check back later.</p>');
+  }
+  return html + '<div class="career-list">' + all.map(careerCard).join('') + '</div>';
+}
+
 function renderStatic(kind){
   if(kind === 'about'){
     document.title = 'About us — Fish News';
@@ -1087,6 +1337,8 @@ function pathFor(){
   if(args[0] === 'archive') return '/archive/' + (args[1] ? '?' + args[1] : '');
   if(args[0] === 'tags') return '/tags/';
   if(args[0] === 'sponsored-deals') return '/sponsored-deals/';
+  if(args[0] === 'corrections') return '/corrections/';
+  if(args[0] === 'careers') return '/careers/';
   if(args[0] === 'about' || args[0] === 'contact') return '/' + args[0] + '/';
   return '/';
 }
@@ -1171,6 +1423,14 @@ async function route(){
     active = '';
     view.innerHTML = '<div class="loading">Loading</div>';
     html = await renderSponsoredDeals();
+  }else if(parts[0] === 'corrections'){
+    active = '';
+    view.innerHTML = '<div class="loading">Loading</div>';
+    html = await renderCorrections();
+  }else if(parts[0] === 'careers'){
+    active = '';
+    view.innerHTML = '<div class="loading">Loading</div>';
+    html = await renderCareers();
   }else if(parts[0] === 'about' || parts[0] === 'contact'){
     active = '';
     html = renderStatic(parts[0]);
@@ -1221,10 +1481,16 @@ function wirePage(){
   await Promise.all([
     loadContent(),
     loadSponsoredDeals().catch(err => console.warn('Sponsored deals unavailable: ' + err.message)),
-    loadTestimonials().catch(err => console.warn('Testimonials unavailable: ' + err.message))
+    loadTestimonials().catch(err => console.warn('Testimonials unavailable: ' + err.message)),
+    loadOnThisDay().catch(err => console.warn('On This Day unavailable: ' + err.message)),
+    loadMarketIndex().catch(err => console.warn('Market index unavailable: ' + err.message)),
+    loadGovCommentStatus().catch(err => console.warn('Gov comment status unavailable: ' + err.message)),
+    loadMostRead().catch(err => console.warn('Most read unavailable: ' + err.message))
   ]);
   state.ready = true;
   buildSponsors();
+  buildMarketTicker();
+  buildGovCommentBadge();
 
   wireNav();
   route();

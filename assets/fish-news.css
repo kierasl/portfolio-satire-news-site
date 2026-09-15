@@ -171,6 +171,42 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
 .archive-search select:hover,.archive-bar select:hover{border-color:var(--peri);}
 .archive-search select:focus,.archive-bar select:focus{border-color:var(--royal);}
 
+/* ---------- market ticker ---------- */
+.market-ticker{
+  background:var(--ink);color:#fff;overflow:hidden;
+  display:flex;align-items:center;gap:16px;padding:8px var(--pad);
+  font-family:var(--display);font-size:12px;white-space:nowrap;
+}
+.market-ticker[hidden]{display:none;}
+.mi-label{
+  flex:none;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  font-size:10px;color:var(--blue);padding-right:14px;border-right:1px solid rgba(255,255,255,.2);
+}
+.mi-row{display:flex;align-items:center;gap:22px;overflow-x:auto;scrollbar-width:none;}
+.mi-row::-webkit-scrollbar{display:none;}
+.mi-item{display:inline-flex;align-items:center;gap:7px;flex:none;}
+.mi-name{font-weight:800;letter-spacing:.06em;}
+.mi-price{color:rgba(255,255,255,.85);}
+.mi-arrow{font-size:9px;}
+.mi-arrow.up{color:#3ED598;}
+.mi-arrow.down{color:#FF6B6B;}
+.mi-change{font-weight:700;}
+.mi-note{color:rgba(255,255,255,.55);font-weight:400;font-style:italic;}
+
+/* ---------- gov comment status badge ---------- */
+.gov-comment-status{
+  margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.gov-comment-status[hidden]{display:none;}
+.gcs-days{
+  font-family:var(--display);font-weight:900;font-size:20px;color:var(--magenta);
+}
+.gcs-label{
+  font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);
+}
+
 /* ---------- page frame ---------- */
 /* flex:1 0 auto on a flex body pushes the footer to the bottom of the
    viewport on a short page, leaving spare space above it rather than a gap
@@ -259,6 +295,34 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
   letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);margin-top:5px;
 }
 
+/* ---------- side column widgets ---------- */
+.side-col{display:flex;flex-direction:column;gap:var(--gut);align-self:start;}
+.side-widget{
+  position:relative;background:var(--white);padding:3px 18px 16px;
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-md);overflow:hidden;
+}
+.side-widget::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-tie);
+}
+.side-widget h2{
+  font-family:var(--display);font-weight:900;font-size:14px;letter-spacing:.2em;
+  text-transform:uppercase;margin:14px 0 10px;
+}
+.otd-entry{font-size:14.5px;line-height:1.5;color:var(--muted);margin:0;}
+.otd-entry b{color:var(--ink);}
+.most-read ol{list-style:decimal;margin:0;padding:0 0 0 18px;}
+.most-read li{padding:7px 0;border-top:1px solid var(--rule-soft);}
+.most-read li:first-child{border-top:0;}
+.most-read a,.most-read span{
+  display:block;font-family:var(--display);font-weight:600;font-size:14px;
+  line-height:1.3;color:inherit;text-decoration:none;
+}
+.most-read a:hover{color:var(--royal);}
+.mr-reads{
+  display:block;font-family:var(--display);font-weight:700;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--magenta);margin-top:3px;
+}
+
 /* ---------- video + grids ---------- */
 .video-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);}
 .more-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut);}
@@ -340,6 +404,29 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 .testimonial-role{
   display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:2px;
 }
+
+/* ---------- corrections & clarifications ---------- */
+.corrections-list{display:flex;flex-direction:column;gap:18px;}
+.correction-card{
+  border:1px solid var(--rule);border-radius:var(--radius-md);
+  padding:20px 22px;background:var(--white);
+}
+.correction-complaint{margin:0 0 10px;font-size:16px;line-height:1.5;color:var(--muted);}
+.correction-reply{margin:0;font-size:16px;line-height:1.5;color:var(--ink);}
+.correction-complaint b,.correction-reply b{
+  font-family:var(--display);font-weight:800;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--magenta);display:block;margin-bottom:4px;
+}
+
+/* ---------- careers ---------- */
+.career-list{display:flex;flex-direction:column;gap:22px;}
+.career-card{
+  border:1px solid var(--rule);border-radius:var(--radius-md);
+  padding:24px 26px;background:var(--white);
+}
+.career-card .dek{font-size:16px;line-height:1.5;color:var(--muted);margin:8px 0 0;}
+.career-quals{margin:16px 0 0;padding-left:20px;}
+.career-quals li{margin-bottom:6px;font-size:15px;line-height:1.5;color:var(--ink);}
 
 /* ---------- page heads ---------- */
 .page-head{padding:36px 0 4px;border-bottom:1px solid var(--rule);margin-bottom:26px;}

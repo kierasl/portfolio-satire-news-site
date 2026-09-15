@@ -1,0 +1,5 @@
+[
+  { "name": "Cod",      "symbol": "COD", "price": 4.82, "change": -0.4, "note": "Cod broadly flat. Markets unmoved, as is traditional." },
+  { "name": "Haddock",  "symbol": "HAD", "price": 3.15, "change": -3.0, "note": "Haddock down 3% amid unspecified concerns." },
+  { "name": "Mackerel", "symbol": "MKL", "price": 2.40, "change": 1.7,  "note": "Mackerel up slightly. Analysts declined to elaborate." }
+]
