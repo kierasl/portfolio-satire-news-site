@@ -316,18 +316,6 @@ main{display:block;flex:1 0 auto;padding-bottom:8px;min-height:50vh;}
 }
 .otd-entry{font-size:14.5px;line-height:1.5;color:var(--muted);margin:0;}
 .otd-entry b{color:var(--ink);}
-.most-read ol{list-style:decimal;margin:0;padding:0 0 0 18px;}
-.most-read li{padding:7px 0;border-top:1px solid var(--rule-soft);}
-.most-read li:first-child{border-top:0;}
-.most-read a,.most-read span{
-  display:block;font-family:var(--display);font-weight:600;font-size:14px;
-  line-height:1.3;color:inherit;text-decoration:none;
-}
-.most-read a:hover{color:var(--royal);}
-.mr-reads{
-  display:block;font-family:var(--display);font-weight:700;font-size:10.5px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--magenta);margin-top:3px;
-}
 
 /* ---------- video + grids ---------- */
 .video-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);}
