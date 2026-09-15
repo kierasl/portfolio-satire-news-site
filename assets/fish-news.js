@@ -69,9 +69,6 @@ const CONFIG = {
 
   /* Where the /careers/ page reads its job listings from. */
   careersUrl: '/content/careers.json',
-
-  /* Where the front-page "Most Read" sidebar widget reads its entries from. */
-  mostReadUrl: '/content/most-read.json',
 };
 
 /* On This Day entries shown in a front-page sidebar widget, read from
@@ -119,20 +116,6 @@ const CONFIG = {
 
    Fields: title (required), description (optional), qualifications
    (optional array of strings). */
-
-/* Most Read sidebar entries, read from CONFIG.mostReadUrl — a plain array
-   in content/most-read.json:
-
-   [ { "title": "Chunce Escapes Guantanamo Bay... Again...",
-       "storyId": "chunce-escapes-quantanamo-bay-again" } ]
-
-   Fields: title (required), storyId (required for a real count — its
-   read count is pulled live from content/views.json, the same total shown
-   on the article page). Give an entry no storyId only when there's
-   deliberately nothing to link to (e.g. an unpublished piece); it then
-   falls back to a hand-written "reads" number instead. Shown in file
-   order, not resorted by reads, so the implausibility is deliberate
-   rather than sorted into a leaderboard. */
 
 /* Testimonials shown in their own section on the front page, read from
    CONFIG.testimonialsUrl — a plain array, newest/most-flattering first,
@@ -192,13 +175,11 @@ const state = {
   full: {},         // id -> complete article, cached after first fetch
   sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
   testimonials: null,   // cached after first fetch of CONFIG.testimonialsUrl
-  viewCounts: null,      // cached after first fetch of content/views.json
   onThisDay: null,       // cached after first fetch of CONFIG.onThisDayUrl
   corrections: null,     // cached after first fetch of CONFIG.correctionsUrl
   marketIndex: null,     // cached after first fetch of CONFIG.marketIndexUrl
   govCommentStatus: null,// cached after first fetch of CONFIG.govCommentStatusUrl
   careers: null,         // cached after first fetch of CONFIG.careersUrl
-  mostRead: null,        // cached after first fetch of CONFIG.mostReadUrl
   ready: false,
   error: null
 };
@@ -521,24 +502,6 @@ async function loadCareers(){
   return state.careers;
 }
 
-async function loadMostRead(){
-  if(state.mostRead) return state.mostRead;
-  const data = await fetchJson(CONFIG.mostReadUrl);
-  state.mostRead = Array.isArray(data) ? data : [];
-  return state.mostRead;
-}
-
-/* content/views.json — the same file api/visit.php writes to and
-   hydrateViewCounts() reads for the per-article byline count — read once
-   more here so the Most Read widget can show an article's real total
-   rather than a number typed into most-read.json. */
-async function loadViewCounts(){
-  if(state.viewCounts) return state.viewCounts;
-  const data = await fetchJson('/content/views.json');
-  state.viewCounts = (data && typeof data === 'object') ? data : {};
-  return state.viewCounts;
-}
-
 /* Every sponsored deal across every section, flattened, each one counting
    as a single equally-weighted entry — a section with five deals is five
    times as likely to turn up as one with a single deal, deliberately, so
@@ -706,26 +669,6 @@ function onThisDayWidget(){
   '</aside>';
 }
 
-/* An entry's read count is its article's real total from content/views.json
-   whenever it has a storyId — the same count shown on the article page
-   itself. Only an entry with no storyId (nothing to look a real count up
-   against) falls back to a "reads" number written by hand in
-   most-read.json — that's the joke entry, not the norm. */
-function mostReadWidget(){
-  const entries = state.mostRead || [];
-  if(!entries.length) return '';
-  const known = new Map(state.items.map(i => [i.id, i]));
-  const counts = state.viewCounts || {};
-  const rows = entries.map(function(e){
-    const item = e.storyId ? known.get(e.storyId) : null;
-    const reads = e.storyId ? Number(counts[e.storyId] || 0) : Number(e.reads || 0);
-    const label = esc(e.title) + '<span class="mr-reads">' +
-      (reads === 1 ? '1 read' : reads.toLocaleString() + ' reads') + '</span>';
-    return '<li>' + (item ? '<a href="' + pathFor('item', item.id) + '">' + label + '</a>' : '<span>' + label + '</span>') + '</li>';
-  }).join('');
-  return '<aside class="side-widget most-read" aria-label="Most read"><h2>Most Read</h2><ol>' + rows + '</ol></aside>';
-}
-
 function marketArrow(change){
   const up = Number(change) >= 0;
   return '<span class="mi-arrow ' + (up ? 'up' : 'down') + '" aria-hidden="true">' +
@@ -860,7 +803,6 @@ function renderHome(){
     '<div class="side-col">' +
       latestRail(byNewest(state.items)) +
       onThisDayWidget() +
-      mostReadWidget() +
     '</div>' +
   '</div>';
 
@@ -1519,9 +1461,7 @@ function wirePage(){
     loadTestimonials().catch(err => console.warn('Testimonials unavailable: ' + err.message)),
     loadOnThisDay().catch(err => console.warn('On This Day unavailable: ' + err.message)),
     loadMarketIndex().catch(err => console.warn('Market index unavailable: ' + err.message)),
-    loadGovCommentStatus().catch(err => console.warn('Gov comment status unavailable: ' + err.message)),
-    loadMostRead().catch(err => console.warn('Most read unavailable: ' + err.message)),
-    loadViewCounts().catch(err => console.warn('View counts unavailable: ' + err.message))
+    loadGovCommentStatus().catch(err => console.warn('Gov comment status unavailable: ' + err.message))
   ]);
   state.ready = true;
   buildSponsors();

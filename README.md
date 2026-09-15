@@ -464,7 +464,7 @@ square — cards crop it to 1:1. Image filenames resolve against
 
 ---
 
-## On This Day, Corrections, the Market Index, Careers and Most Read
+## On This Day, Corrections, the Market Index and Careers
 
 A handful of front-page/footer widgets exist purely for Chunce Whatney lore
 and satire. All are optional, fail silently if their file is missing, and
@@ -473,7 +473,6 @@ are configured entirely through JSON — no code changes needed to edit them.
 | Feature | Where it shows | File | `CONFIG` key |
 |---|---|---|---|
 | On This Day | Front-page sidebar | `content/on-this-day.json` | `onThisDayUrl` |
-| Most Read | Front-page sidebar | `content/most-read.json` | `mostReadUrl` |
 | Fish Market Index | Ticker under the top nav, every page | `content/market-index.json` | `marketIndexUrl` |
 | Government Comment Status | Badge in the footer, every page | `content/gov-comment-status.json` | `govCommentStatusUrl` |
 | Corrections & Clarifications | `/corrections/` (linked from the footer) | `content/corrections.json` | `correctionsUrl` |
@@ -484,14 +483,6 @@ are configured entirely through JSON — no code changes needed to edit them.
 needed, since Chunce is immortal and was there every day. Which entry runs
 is picked deterministically from the day of the year, so it's stable across
 reloads on the same day and rotates daily.
-
-**Most Read** entries are `{ "title": "...", "storyId": "some-article-id" }`,
-shown in file order (not sorted by reads — the implausibility is the
-point). The read count shown is the article's real total, pulled live from
-`content/views.json` — the same number shown next to the byline on the
-article itself — so it is never made up. Only omit `storyId` for an entry
-with nothing to link to (nothing published, nothing counted), in which
-case it falls back to a hand-written `"reads"` number instead.
 
 **Fish Market Index** entries are `{ "name": "Haddock", "symbol": "HAD",
 "price": 3.15, "change": -3.0, "note": "..." }`. `change` is a percentage;
