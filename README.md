@@ -485,14 +485,19 @@ needed, since Chunce is immortal and was there every day. Which entry runs
 is picked deterministically from the day of the year, so it's stable across
 reloads on the same day and rotates daily.
 
-**Most Read** entries are `{ "title": "...", "reads": 1284003, "storyId":
-"some-article-id" }`, shown in file order (not sorted by reads — the
-implausibility is the point). `storyId` is optional; when it doesn't match
-a published article the title just shows unlinked.
+**Most Read** entries are `{ "title": "...", "storyId": "some-article-id" }`,
+shown in file order (not sorted by reads — the implausibility is the
+point). The read count shown is the article's real total, pulled live from
+`content/views.json` — the same number shown next to the byline on the
+article itself — so it is never made up. Only omit `storyId` for an entry
+with nothing to link to (nothing published, nothing counted), in which
+case it falls back to a hand-written `"reads"` number instead.
 
 **Fish Market Index** entries are `{ "name": "Haddock", "symbol": "HAD",
 "price": 3.15, "change": -3.0, "note": "..." }`. `change` is a percentage;
-negative shows a red down arrow, zero or positive a green up arrow.
+negative shows a red down arrow, zero or positive a green up arrow. The
+ticker scrolls continuously right-to-left, pauses on hover so a note can
+actually be read, and respects `prefers-reduced-motion`.
 
 **Government Comment Status** is a single object,
 `{ "days": 4127, "label": "..." }`.

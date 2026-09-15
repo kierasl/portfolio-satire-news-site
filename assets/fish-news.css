@@ -182,8 +182,14 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
   flex:none;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
   font-size:10px;color:var(--blue);padding-right:14px;border-right:1px solid rgba(255,255,255,.2);
 }
-.mi-row{display:flex;align-items:center;gap:22px;overflow-x:auto;scrollbar-width:none;}
-.mi-row::-webkit-scrollbar{display:none;}
+.mi-viewport{flex:1;min-width:0;overflow:hidden;}
+.mi-track{
+  display:inline-flex;align-items:center;gap:22px;width:max-content;
+  animation-name:mi-scroll;animation-timing-function:linear;animation-iteration-count:infinite;
+}
+/* Paused on hover/focus so a reader can actually read a note before it
+   scrolls past, and whenever the tab isn't visible to save a background tick. */
+.market-ticker:hover .mi-track,.market-ticker:focus-within .mi-track{animation-play-state:paused;}
 .mi-item{display:inline-flex;align-items:center;gap:7px;flex:none;}
 .mi-name{font-weight:800;letter-spacing:.06em;}
 .mi-price{color:rgba(255,255,255,.85);}
@@ -633,4 +639,11 @@ footer{background:var(--grad-dark);color:#fff;margin-top:60px;}
   *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important;}
   .lead:hover .media,.card:hover .media,.deal-card:hover .media,
   .lead:hover .media img,.card:hover .media img,.btn:hover{transform:none;}
+  .mi-track{animation-play-state:paused;}
+  .mi-viewport{overflow-x:auto;}
+}
+
+@keyframes mi-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
 }

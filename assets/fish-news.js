@@ -124,12 +124,15 @@ const CONFIG = {
    in content/most-read.json:
 
    [ { "title": "Chunce Escapes Guantanamo Bay... Again...",
-       "reads": 1284003, "storyId": "chunce-escapes-quantanamo-bay-again" } ]
+       "storyId": "chunce-escapes-quantanamo-bay-again" } ]
 
-   Fields: title (required), reads (required), storyId (optional — links
-   to that article if it still exists in the loaded index, otherwise the
-   title shows unlinked). Shown in file order, not resorted by reads, so
-   the implausibility is deliberate rather than sorted into a leaderboard. */
+   Fields: title (required), storyId (required for a real count — its
+   read count is pulled live from content/views.json, the same total shown
+   on the article page). Give an entry no storyId only when there's
+   deliberately nothing to link to (e.g. an unpublished piece); it then
+   falls back to a hand-written "reads" number instead. Shown in file
+   order, not resorted by reads, so the implausibility is deliberate
+   rather than sorted into a leaderboard. */
 
 /* Testimonials shown in their own section on the front page, read from
    CONFIG.testimonialsUrl — a plain array, newest/most-flattering first,
@@ -189,6 +192,7 @@ const state = {
   full: {},         // id -> complete article, cached after first fetch
   sponsoredDeals: null, // cached after first fetch of CONFIG.sponsoredDealsUrl
   testimonials: null,   // cached after first fetch of CONFIG.testimonialsUrl
+  viewCounts: null,      // cached after first fetch of content/views.json
   onThisDay: null,       // cached after first fetch of CONFIG.onThisDayUrl
   corrections: null,     // cached after first fetch of CONFIG.correctionsUrl
   marketIndex: null,     // cached after first fetch of CONFIG.marketIndexUrl
@@ -524,6 +528,17 @@ async function loadMostRead(){
   return state.mostRead;
 }
 
+/* content/views.json — the same file api/visit.php writes to and
+   hydrateViewCounts() reads for the per-article byline count — read once
+   more here so the Most Read widget can show an article's real total
+   rather than a number typed into most-read.json. */
+async function loadViewCounts(){
+  if(state.viewCounts) return state.viewCounts;
+  const data = await fetchJson('/content/views.json');
+  state.viewCounts = (data && typeof data === 'object') ? data : {};
+  return state.viewCounts;
+}
+
 /* Every sponsored deal across every section, flattened, each one counting
    as a single equally-weighted entry — a section with five deals is five
    times as likely to turn up as one with a single deal, deliberately, so
@@ -691,14 +706,21 @@ function onThisDayWidget(){
   '</aside>';
 }
 
+/* An entry's read count is its article's real total from content/views.json
+   whenever it has a storyId — the same count shown on the article page
+   itself. Only an entry with no storyId (nothing to look a real count up
+   against) falls back to a "reads" number written by hand in
+   most-read.json — that's the joke entry, not the norm. */
 function mostReadWidget(){
   const entries = state.mostRead || [];
   if(!entries.length) return '';
   const known = new Map(state.items.map(i => [i.id, i]));
+  const counts = state.viewCounts || {};
   const rows = entries.map(function(e){
     const item = e.storyId ? known.get(e.storyId) : null;
+    const reads = e.storyId ? Number(counts[e.storyId] || 0) : Number(e.reads || 0);
     const label = esc(e.title) + '<span class="mr-reads">' +
-      (e.reads === 1 ? '1 read' : Number(e.reads || 0).toLocaleString() + ' reads') + '</span>';
+      (reads === 1 ? '1 read' : reads.toLocaleString() + ' reads') + '</span>';
     return '<li>' + (item ? '<a href="' + pathFor('item', item.id) + '">' + label + '</a>' : '<span>' + label + '</span>') + '</li>';
   }).join('');
   return '<aside class="side-widget most-read" aria-label="Most read"><h2>Most Read</h2><ol>' + rows + '</ol></aside>';
@@ -710,23 +732,36 @@ function marketArrow(change){
     (up ? '&#9650;' : '&#9660;') + '</span>';
 }
 
+/* The ticker scrolls continuously right-to-left rather than sitting still
+   or requiring the reader to drag it. The track's own content is repeated
+   twice back-to-back and the CSS animation translates it by exactly -50%,
+   so the moment the first copy has scrolled fully offscreen the second
+   copy is sitting exactly where the first one started — a seamless loop
+   with no jump. Animation length scales with the number of items so the
+   scroll speed reads the same whether there are three prices or ten. */
 function buildMarketTicker(){
   const wrap = $('#marketTicker');
   if(!wrap) return;
   const entries = state.marketIndex || [];
   if(!entries.length){ wrap.hidden = true; return; }
   wrap.hidden = false;
-  const cells = entries.map(function(e){
-    const sign = Number(e.change) > 0 ? '+' : '';
-    return '<span class="mi-item">' +
-      '<span class="mi-name">' + esc(e.symbol || e.name) + '</span>' +
-      '<span class="mi-price">&pound;' + esc(Number(e.price).toFixed(2)) + '</span>' +
-      marketArrow(e.change) +
-      (typeof e.change === 'number' ? '<span class="mi-change">' + sign + esc(e.change) + '%</span>' : '') +
-      (e.note ? '<span class="mi-note">' + esc(e.note) + '</span>' : '') +
-    '</span>';
-  }).join('');
-  wrap.innerHTML = '<span class="mi-label">Fish Market Index</span><div class="mi-row">' + cells + '</div>';
+  function cellsHtml(hidden){
+    return entries.map(function(e){
+      const sign = Number(e.change) > 0 ? '+' : '';
+      return '<span class="mi-item"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
+        '<span class="mi-name">' + esc(e.symbol || e.name) + '</span>' +
+        '<span class="mi-price">&pound;' + esc(Number(e.price).toFixed(2)) + '</span>' +
+        marketArrow(e.change) +
+        (typeof e.change === 'number' ? '<span class="mi-change">' + sign + esc(e.change) + '%</span>' : '') +
+        (e.note ? '<span class="mi-note">' + esc(e.note) + '</span>' : '') +
+      '</span>';
+    }).join('');
+  }
+  const duration = Math.max(18, entries.length * 7);
+  wrap.innerHTML = '<span class="mi-label">Fish Market Index</span>' +
+    '<div class="mi-viewport"><div class="mi-track" style="animation-duration:' + duration + 's">' +
+      cellsHtml(false) + cellsHtml(true) +
+    '</div></div>';
 }
 
 function buildGovCommentBadge(){
@@ -1485,7 +1520,8 @@ function wirePage(){
     loadOnThisDay().catch(err => console.warn('On This Day unavailable: ' + err.message)),
     loadMarketIndex().catch(err => console.warn('Market index unavailable: ' + err.message)),
     loadGovCommentStatus().catch(err => console.warn('Gov comment status unavailable: ' + err.message)),
-    loadMostRead().catch(err => console.warn('Most read unavailable: ' + err.message))
+    loadMostRead().catch(err => console.warn('Most read unavailable: ' + err.message)),
+    loadViewCounts().catch(err => console.warn('View counts unavailable: ' + err.message))
   ]);
   state.ready = true;
   buildSponsors();
