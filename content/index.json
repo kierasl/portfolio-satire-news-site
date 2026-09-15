@@ -1,6 +1,18 @@
 {
-  "generated": "2026-09-13T21:24:42Z",
+  "generated": "2026-09-15T18:27:15Z",
   "items": [
+    {
+      "id": "fish-news-episode-1",
+      "type": "article",
+      "section": "video",
+      "headline": "Fish News - Episode 1",
+      "standfirst": "Chunce talks bombs, Minivan sinks",
+      "kicker": "Not Live from Fish News HQ",
+      "byline": "Chunce Whatney",
+      "published": "2026-09-15T19:26:07+01:00",
+      "tags": ["Fish News", "Chunce Whatney", "Minivan"],
+      "rank": "lead"
+    },
     {
       "id": "information-board-appears-at-waterfall",
       "type": "article",
@@ -10,7 +22,12 @@
       "kicker": "Mysterious Infrastructure",
       "byline": "Chunce Whatney",
       "published": "2026-09-13T22:21:14+01:00",
-      "tags": ["Development", "Council", "Landscape"]
+      "tags": ["Development", "Council", "Landscape"],
+      "rank": "lead",
+      "image": {
+        "src": "waterfallboard.png",
+        "alt": "Picture of the new information board"
+      }
     },
     {
       "id": "double-feature-in-tournament-grounds",
