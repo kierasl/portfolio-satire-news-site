@@ -1,107 +1,107 @@
 [
   {
-    "name": "Sgt. R. Dacted",
-    "role": "Records Clerk",
-    "quote": "I read Fish News every morning. I am not permitted to say why."
+    "quote": "I read Fish News every morning. I am not permitted to say why.",
+    "author": "Sgt. R. Dacted",
+    "role": "Records Clerk"
   },
   {
-    "name": "P. Remonition",
-    "role": "Personnel Officer",
-    "quote": "Fish News reported my promotion two days before I applied for it. I have since stopped applying for things."
+    "quote": "Fish News reported my promotion two days before I applied for it. I have since stopped applying for things.",
+    "author": "P. Remonition",
+    "role": "Personnel Officer"
   },
   {
-    "name": "Cpl. N. O'Comment",
-    "role": "Media Liaison",
-    "quote": "I was quoted accurately. I've asked them to stop."
+    "quote": "I was quoted accurately. I've asked them to stop.",
+    "author": "Cpl. N. O'Comment",
+    "role": "Media Liaison"
   },
   {
-    "name": "D. Brief",
-    "role": "Training Coordinator",
-    "quote": "The coverage of the training exercise was thorough, balanced, and filed before the exercise began."
+    "quote": "The coverage of the training exercise was thorough, balanced, and filed before the exercise began.",
+    "author": "D. Brief",
+    "role": "Training Coordinator"
   },
   {
-    "name": "E. Scape",
-    "role": "Custody Assistant",
-    "quote": "Mr Whatney interviewed me for four hours. I was only in the room for twenty minutes."
+    "quote": "Mr Whatney interviewed me for four hours. I was only in the room for twenty minutes.",
+    "author": "E. Scape",
+    "role": "Custody Assistant"
   },
   {
-    "name": "Wg Cdr. S. Pinn",
-    "role": "Head of Public Relations",
-    "quote": "I declined to comment on Fish News, and Fish News has already published it."
+    "quote": "I declined to comment on Fish News, and Fish News has already published it.",
+    "author": "Wg Cdr. S. Pinn",
+    "role": "Head of Public Relations"
   },
   {
-    "name": "D. Tained",
-    "role": "Awaiting Review",
-    "quote": "Mr Whatney told me he had covered the fall of Rome, and that my disciplinary hearing was comparable in scale. I found this reassuring, briefly."
+    "quote": "Mr Whatney told me he had covered the fall of Rome, and that my disciplinary hearing was comparable in scale. I found this reassuring, briefly.",
+    "author": "D. Tained",
+    "role": "Awaiting Review"
   },
   {
-    "name": "Gp Capt. B. Ias",
-    "role": "Editorial Standards Adviser",
-    "quote": "Genuinely balanced reporting. Both sides of the story were Chunce's."
+    "quote": "Genuinely balanced reporting. Both sides of the story were Chunce's.",
+    "author": "Gp Capt. B. Ias",
+    "role": "Editorial Standards Adviser"
   },
   {
-    "name": "A. Pology",
-    "role": "Complaints Department",
-    "quote": "I asked Fish News for a correction. They issued a longer version of the original."
+    "quote": "I asked Fish News for a correction. They issued a longer version of the original.",
+    "author": "A. Pology",
+    "role": "Complaints Department"
   },
   {
-    "name": "WO I. Gnored",
-    "role": "Deputy Spokesperson",
-    "quote": "Fish News has never once contacted my commanding officer for comment. My commanding officer has asked me to pass that on."
+    "quote": "Fish News has never once contacted my commanding officer for comment. My commanding officer has asked me to pass that on.",
+    "author": "WO I. Gnored",
+    "role": "Deputy Spokesperson"
   },
   {
-    "name": "H. Earsay",
-    "role": "Intelligence Analyst",
-    "quote": "I was described as a source close to the matter. I was the matter."
+    "quote": "I was described as a source close to the matter. I was the matter.",
+    "author": "H. Earsay",
+    "role": "Intelligence Analyst"
   },
   {
-    "name": "L. E. Gal",
-    "role": "Solicitor",
-    "quote": "Reliable, consistent, and legally distinct from defamation."
+    "quote": "Reliable, consistent, and legally distinct from defamation.",
+    "author": "L. E. Gal",
+    "role": "Solicitor"
   },
   {
-    "name": "U. R. Wrong",
-    "role": "Former Recruit",
-    "quote": "My mother reads it. She has not spoken to me since the March edition."
+    "quote": "My mother reads it. She has not spoken to me since the March edition.",
+    "author": "U. R. Wrong",
+    "role": "Former Recruit"
   },
   {
-    "name": "FS C. C. Teavee",
-    "role": "Surveillance Operator",
-    "quote": "Fish News arrived at the scene before the incident. We are still reviewing the footage."
+    "quote": "Fish News arrived at the scene before the incident. We are still reviewing the footage.",
+    "author": "FS C. C. Teavee",
+    "role": "Surveillance Operator"
   },
   {
-    "name": "I. N. Cognito",
-    "role": "Undercover Operative",
-    "quote": "I told Mr Whatney I'd rather not be named. He has addressed me by my initials ever since, loudly, in corridors."
+    "quote": "I told Mr Whatney I'd rather not be named. He has addressed me by my initials ever since, loudly, in corridors.",
+    "author": "I. N. Cognito",
+    "role": "Undercover Operative"
   },
   {
-    "name": "T. Ruth",
-    "role": "Former Fish News Fact-Checker",
-    "quote": "The article about me was largely accurate, which I have found to be the most upsetting part."
+    "quote": "The article about me was largely accurate, which I have found to be the most upsetting part.",
+    "author": "T. Ruth",
+    "role": "Former Fish News Fact-Checker"
   },
   {
-    "name": "Sqn Ldr. N. Quiry",
-    "role": "Board of Inquiry Chair",
-    "quote": "Mr Whatney assured me he was present at Agincourt. He then asked where the car park was."
+    "quote": "Mr Whatney assured me he was present at Agincourt. He then asked where the car park was.",
+    "author": "Sqn Ldr. N. Quiry",
+    "role": "Board of Inquiry Chair"
   },
   {
-    "name": "O. B. Fuscate",
-    "role": "Communications Director",
-    "quote": "I would describe their reporting as operationally adjacent to the truth."
+    "quote": "I would describe their reporting as operationally adjacent to the truth.",
+    "author": "O. B. Fuscate",
+    "role": "Communications Director"
   },
   {
-    "name": "E. Cho",
-    "role": "Sound Technician",
-    "quote": "An important voice. Frequently several important voices, all of them Chunce's."
+    "quote": "An important voice. Frequently several important voices, all of them Chunce's.",
+    "author": "E. Cho",
+    "role": "Sound Technician"
   },
   {
-    "name": "D. D. Bitt",
-    "role": "Subscriber (Disputed)",
-    "quote": "I have subscribed to Fish News three times. I have never subscribed to Fish News."
+    "quote": "I have subscribed to Fish News three times. I have never subscribed to Fish News.",
+    "author": "D. D. Bitt",
+    "role": "Subscriber (Disputed)"
   },
   {
-    "name": "C. W.",
-    "role": "Independent Reader, No Affiliation",
-    "quote": "The finest publication in human history, and I would know, I have read all of it. Some of it was on clay tablets. I CARVED THE TABLETS."
+    "quote": "The finest publication in human history, and I would know, I have read all of it. Some of it was on clay tablets. I CARVED THE TABLETS.",
+    "author": "C. W.",
+    "role": "Independent Reader, No Affiliation"
   }
 ]
