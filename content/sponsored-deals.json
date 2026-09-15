@@ -1,107 +1,14 @@
 [
   {
     "section": {
-      "name": "tacteam",
-      "logo": "tacteam-colour.png",
-      "url": "https://www.roblox.com/communities/33115459/tacteam"
-    },
-    "deals": [
-      {
-        "title": "tacplank",
-        "description": "The greatest (citation needed) plank game on Roblox.",
-        "image": "tacteam/tacplank.png",
-        "url": "https://www.roblox.com/games/70936273267700/tacplank",
-        "frontPage": false
-      },
-      {
-        "title": "Krottenkopf, Bavaria",
-        "description": "Milsim experience used for training.",
-        "image": "tacteam/Bavaria.png",
-        "url": "https://www.roblox.com/games/14832913941/Krottenkopf-Bavaria-Germany",
-        "frontPage": false
-      },
-      {
-        "title": "MoD Wattleburn",
-        "description": "General map used for conducting training.",
-        "image": "tacteam/Wattleburn.png",
-        "url": "https://www.roblox.com/games/138640140018829/MOD-Wattleburn",
-        "frontPage": false
-      }
-    ]
-  },
-  {
-    "section": {
-      "name": "slimestore",
-      "logo": "slimestore-slimeshop.png",
-      "url": "https://www.roblox.com/communities/15152355/slimestore"
-    },
-    "deals": [
-      {
-        "title": "Fish News Shirt",
-        "description": "Support everyone's favourite unbias news organisation with this shirt! (Sample size: 2)",
-        "image": "slimestore/FishNewsShirt.png",
-        "url": "https://www.roblox.com/catalog/78384735017384/SLIMESHOP-Fish-News-Jersey"
-      },
-      {
-        "title": "Pride Shirt 2026",
-        "description": "Show your colours with our 2026 Pride shirt!",
-        "image": "slimestore/PrideShirt.png",
-        "url": "https://www.roblox.com/catalog/85087879169066/SLIMESHOP-Pride-Shirt"
-      },
-      {
-        "title": "Royal Air Force Jersey",
-        "description": "Royal Air Force themed sports jersey.",
-        "image": "slimestore/RAF Jersey.png",
-        "url": "https://www.roblox.com/catalog/129702046628381/SLIMESHOP-RAF-Jersey"
-      },
-      {
-        "title": "1TPSS Supporters Jersey",
-        "description": "The Official supporters jersey for 1TPSS teams.",
-        "image": "slimestore/TPSS Jersey.png",
-        "url": "https://www.roblox.com/catalog/70441806275520/SLIMESHOP-1TPSS-Jersey"
-      },
-      {
-        "title": "1CD Supporters Jersey",
-        "description": "The Official supporters jersey for the 1CD Scrim Team.",
-        "image": "slimestore/1CD Jersey.png",
-        "url": "https://www.roblox.com/catalog/129101639432540/SLIMESHOP-RAF-1CD-Supporter-Jersey"
-      },
-      {
-        "title": "II Sqn Jersey",
-        "description": "The Official supporters jersey for the II Sqn Scrim Team.",
-        "image": "slimestore/II Sqn Jersey.png",
-        "url": "https://www.roblox.com/catalog/127205981943186/SLIMESHOP-II-Squadron-Jersey"
-      }
-    ]
-  },
-  {
-    "section": {
-      "name": "RhymeyStudios",
-      "logo": "rhymeystudios.png",
-      "url": "https://www.roblox.com/communities/7156667/RhymeyStudios"
-    },
-    "deals": [
-      {
-        "title": "Join the studio",
-        "description": "Our milsim development group, building the gear and maps you play on.",
-        "image": "rhymeystudios.png",
-        "url": "https://www.roblox.com/communities/7156667/RhymeyStudios",
-        "frontPage": false
-      }
-    ]
-  },
-  {
-    "section": {
       "name": "OSA Fried Chicken",
-      "logo": "osaFriedChicken/Chicken Coloured.png",
-      "url": "https://www.roblox.com/communities/33115459/tacteam"
+      "logo": "osaFriedChicken/Chicken Coloured.png"
     },
     "deals": [
       {
         "title": "OSA Fried Chicken",
         "description": "A Fish News sponsor. Ask them what that has to do with the sea.",
-        "image": "osaFriedChicken/osaFCChicken.png",
-        "url": "https://www.roblox.com/communities/33115459/tacteam"
+        "image": "osaFriedChicken/osaFCChicken.png"
       }
     ]
   }
