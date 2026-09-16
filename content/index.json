@@ -1,6 +1,17 @@
 {
-  "generated": "2026-09-15T20:08:30Z",
+  "generated": "2026-09-16T19:50:56Z",
   "items": [
+    {
+      "id": "rival-outlet-fails-to-capitalise-red-arrows-though-fish",
+      "type": "article",
+      "section": "news",
+      "headline": "Rival outlet fails to capitalise \"Red Arrows\", though Fish News cannot say which one",
+      "standfirst": "Proper Nouns? What are those!",
+      "kicker": "Dark Day in Journalism",
+      "byline": "Chunce Whatney",
+      "published": "2026-09-16T20:49:17+01:00",
+      "tags": ["Fish News", "Spelling", "Journalism"]
+    },
     {
       "id": "mystery-salmon-signal-continues",
       "type": "article",
@@ -11,7 +22,12 @@
       "byline": "Chunce Whatney",
       "published": "2026-09-15T21:06:23+01:00",
       "tags": ["Fish News", "Minivan", "Chunce Whatney"],
-      "rank": "lead"
+      "rank": "lead",
+      "image": {
+        "src": "salmon signal.png",
+        "alt": "Minivan being rescued",
+        "credit": "LPhot. G. Watson, Royal Navy"
+      }
     },
     {
       "id": "fish-news-episode-1",

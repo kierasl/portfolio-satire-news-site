@@ -1,0 +1,46 @@
+{
+  "id": "rival-outlet-fails-to-capitalise-red-arrows-though-fish",
+  "type": "article",
+  "section": "news",
+  "kicker": "Dark Day in Journalism",
+  "headline": "Rival outlet fails to capitalise \"Red Arrows\", though Fish News cannot say which one",
+  "standfirst": "Proper Nouns? What are those!",
+  "byline": "Chunce Whatney",
+  "location": "Fish News Headquarters",
+  "published": "2026-09-16T20:49:17+01:00",
+  "tags": ["Fish News", "Spelling", "Journalism"],
+  "image": {
+    "src": "forn.png",
+    "alt": "The outlet in question's colour scheme"
+  },
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "In what insiders are calling a dark day for the written word, an unidentified news organisation has published an article referring to the RAF display team as the \"red arrows\", entirely in lower case."
+    },
+    {
+      "type": "paragraph",
+      "text": "The organisation, which Fish News has chosen not to name, can be identified only by its blue and yellow colour scheme, its blue and yellow logo, and the blue and yellow building it broadcasts from."
+    },
+    {
+      "type": "paragraph",
+      "text": "\"It's a proper noun,\" said one anonymous source, who asked to be described only as a senior Fish News editor wearing a Fish News lanyard. \"You capitalise it. That's the job. Everything after that is optional.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "A spokesperson for the organisation declined to comment, though Fish News notes that they did so in lower case."
+    },
+    {
+      "type": "paragraph",
+      "text": "Chunce Whatney, reached for comment in his own office, was measured. \"I stood at Lindisfarne when the longships came ashore. The monks were fleeing for their lives, and they STILL capitalised. Standards are all we have.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "In completely unrelated news, Fish News has been unable to verify reports that a Red Arrows jet crashed during a training exercise. Our investigation continues, although early findings suggest the difficulty may stem from Fish News having invented the report at 11:40 this morning. The Red Arrows were unavailable for comment, being, by all available evidence, fine."
+    },
+    {
+      "type": "paragraph",
+      "text": "Fish News remains committed to the highest standards of accuracy, and would gently remind readers that we at least spelt it correctly."
+    }
+  ]
+}
